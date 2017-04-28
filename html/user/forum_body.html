@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title>问答</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+<link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+<style>
+     html{background: #f4f4f4;height: auto;}
+	.home{width: 100%;height: 46px;float: left;background: #efefef; position: relative;}
+	.home_eaer{width: 72%;margin: 10px 5%;background: #fff;height:28px;border-radius: 5px;}
+	.home_eaer i{display:block;height: 26px;;width: 28px;float: left;background: url("../../icon/seach.png")no-repeat center;
+	    background-size: 15px 15px;  margin-left: 5px;}
+	.home_eaer input{width: 75%;height: 100%;float: left;margin-left: 15px;font-size: 14px;border: none;
+    background: #fff;line-height: normal;outline:none;}
+    .item_bj{background: #fff;float: left;height: auto;width: 100%;}
+    .item_bj:last-child{margin-bottom: 50px;}
+    .item{height: 100%;float: left;width: 90%;margin: 5% 5% 0% 5%;border-bottom: 1px solid #e7e7e7;}
+    .person{width: 16px;height: 16px;float: left;border-radius: 8px;}
+    .person img{width: 16px;height: 16px;border-radius: 8px;}
+    .item li{font-size: 14px;color: #333;display: block;}
+    .item li:nth-child(1){font-size: 14px;color: #333;margin-bottom: 10px; overflow: hidden; text-overflow: ellipsis;
+        display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;line-clamp: 2;line-height: 16px;height: auto}
+    .item li:nth-child(2){font-size: 12px;color: #9296a3;width: 100%;min-width: 30%;float: left;
+                          margin-right: 20px;margin-bottom: 10px;height: auto;}
+    .item li:nth-child(3){font-size: 12px;color: #9296a3;width: 100%;float: left;text-align: left;margin-bottom: 15px;}
+    .item li span{font-size: 12px;color: #9296a3;display: block;float: left;padding-top: 2px;}
+    .position{width: 100%;height: 53px; position: fixed;left: 0;bottom: 0; }
+    .position li{width: 50%;height: 100%;text-align: center;float: left;line-height: 53px;;}
+    .position li:first-child{width: 49.5%;height: 100%;text-align: center;float: left;line-height: 53px;background: #fff;
+                  border: 1px solid #ccc; }
+    .position li:last-child{width: 49.2%;height: 100%;text-align: center;float: left;line-height: 53px;background: #eb3e2e;
+                  color: #fff;border: 1px solid #ccc;}
+    .msg{width: auto;float: left;margin-right: 5px;}
+    .home span{position: absolute;top: 9px;right: 10px; width: 50px;height: 28px;
+		text-align: center;line-height: 40px;background: #eb3e2e;color: #fff;
+		line-height: 28px;
+		font-size: 14px;
+		border-radius: 5px;
+	}
+	.item_bj .item .time{float: right;display: block;}
+</style>
+<body>
+    <div class="home header active">
+        <div class="home_eaer">
+            <i></i>
+            <input id="search" type="text" placeholder="搜索">
+            <span id="keys">搜索</span>
+        </div>
+    </div>
+	<div id="main">
+		
+	</div>
+    <div class="position">
+        <li onclick="answers()">我的问答</li>
+        <li onclick="openForum()">问题库</li>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/message.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script type="text/javascript" src="../../script/echo.min.js"></script>
+<script id="scriptDiv1" type="text/html">
+    <% for (var i = 0; i < list.length; i++) { %>
+    <div class="item_bj" onclick="clickList('<%=list[i].BoardId%>')">
+        <div class="item">
+        <li><%=list[i].Title%></li>
+            
+    <li >
+        <%for(var j = 0;j < list[i].MangerList.length;j++){%>
+        <div class="msg"><i class="person"><img src="<%=list[i].MangerList[j].ImgUrl%>" alt="" /></i><span><%=list[i].MangerList[j].Name%></span>
+            </div>
+        <%}%>
+
+    </li>
+    <li ><%=list[i].Count%>人提问 <%=list[i].ReplyCount%>人回答</li>
+    </div>
+    </div>
+    <%}%>
+
+</script>
+<script id="scriptDiv10" type="text/html">   
+    <% for (var i = 0; i < list.length; i++) { %>
+    <div class="item_bj" onclick="clickLists('<%=list[i].TopicId%>')">
+        <div class="item">
+            <li><%=list[i].Title%></li>
+            <li style="width: 100%;"><%=list[i].Author%></li>
+            <li><span class="anser" ><%=list[i].ReplyCount%>人回答</span>  <span class="time"><%=list[i].Time%></span></li>
+        </div>
+    </div>
+    <%}%>
+</script>
+<script>
+    var UILoading;
+   apiready = function(){
+       ajaxGet(getbbsboards,{},function(ret,err) {
+        if (ret) {
+           	if(isBlack(ret)){
+					toast("暂无数据！");
+					return;
+				}
+                addDataToHtml(ret);
+            } else {
+               toast("未知错误!")
+            }
+       });
+   };
+
+
+    function fnFlower(){
+        UILoading.flower({
+            center: {
+                x: api.winWidth/2,
+                y: api.winHeight/2
+            },
+            size: 30,
+            fixed: true
+        }, function(ret){
+            alert(JSON.stringify(ret));
+        });
+    }
+    function fnKeyFrame(){
+        UILoading.keyFrame({
+            rect: {
+                w: 80,
+                h: 100
+            },
+            styles: {
+//                bg: 'rgba(0,0,0,0.5)',
+                bg:"red",
+                corner: 5,
+                interval: 50,
+                frame:{
+                    w: 80,
+                    h: 80
+                }
+            }
+        }, function(ret){
+            alert(JSON.stringify(ret));
+        });
+    }
+
+   var allResult = {};
+   function addDataToHtml(results) {
+       for(var i = 0;i<results.length; i++){
+            allResult[results[i].BoardId] = results[i];
+       }
+       var data = {list: results};
+       var html = template('scriptDiv1',data);
+       document.getElementById('main').innerHTML = html;
+   }
+   
+    function clickList(id){
+   	   openNewWindow("forumtopic","./forumtopic.html",{BoardId:id});
+    };
+   
+
+  /*************点击我的回答*****************/
+    function answers(){
+   	    ajaxGet(IsInvitee,{},function(ret,err) {
+            if (ret.IsInvitee == 1) {
+	            openNewWindow("myAnswer","../shop/myAnswer.html");
+	        } else if (ret.IsInvitee == 0) {
+	        	openNewWindow("myAnswer_01","../shop/myAnswer_01.html");   
+	        }else{
+	        	toast("未知错误!")
+	        }
+	   });	  	
+	}
+
+  
+    function openForum(){
+        openNewWindow("forum","./forum.html");
+    }
+   
+    document.getElementById("keys").onclick=function (){
+	  	var obj = {};
+	  	obj.Key = document.getElementById("search").value;
+	  	ajaxGet(searchtopic,obj,function(ret,err) {
+	       	if (ret) {
+	       		if(isBlack(ret.Topics)){
+					toast("暂无数据！");
+					return;
+				}
+	         	addDataToHtmlsss(ret);				
+	       } else {
+	           toast("未知错误!")
+	       }
+		});
+	}
+ 	
+ 	function addDataToHtmlsss(results) {
+        var resultss = results.Topics;
+        var data = {list: resultss};
+          var k;
+        for( var j=0;j < data.list.length;j++){
+            for( var jj=0;jj<data.list.length-1;jj++ ) {
+                if (parseInt(data.list[jj].Time.replace(/\//g, "")) < parseInt(data.list[jj+1].Time.replace(/\//g, ""))) {
+
+                    k = data.list[jj];
+                    data.list[jj] = data.list[jj+1];
+                    data.list[jj+1] = k
+                }
+            }
+   		}
+        var html = template('scriptDiv10',data);
+        document.getElementById('main').innerHTML = html;
+    }
+   	 
+    function clickLists(id){
+   	    openNewWindow("forumdetails","./forumdetails.html",{TopicId:id});
+    }
+</script>
+</html>

@@ -1,0 +1,75 @@
+/* CSS Document */
+
+ /*导航树*/
+.qTree {
+   
+}
+.treeHeader {
+	line-height:46px;
+	font-size:14px;
+	height:46px;
+	min-width:100%;
+	box-shadow: 2px 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.treeHeader td{
+	/*display:inline-block;*/
+   white-space:nowrap;
+   color:#00F;
+}
+.treeHeader table,.treeHeader tbody,.treeHeader tr,.treeHeader td
+{
+	height:46px;
+}
+.treeHeader td{
+	/*display:inline-block;*/
+   white-space:nowrap;
+   color:white;
+}
+.treeHeader td span
+{
+	display:inline-block;
+	padding:5px 7px;
+	background:#d30830;
+	border-radius:8px;
+	font-size: 14px;
+}
+.treeHeader td img
+{
+	display:inline-block;
+	padding-top:6px;
+	padding-left:3px;
+	width:14px;
+	height:14px;
+}
+
+.qTree .horizontalScrollWrap {
+	position:relative;
+	transition:all ease-out 0.25s;
+	-webkit-transition:all ease-out 0.25s;  
+	white-space:nowrap;
+	height:-webkit-calc(100% - 50px);            
+}
+.qTree .horizontalScrollWrap>div {
+	height:100%;
+}
+.qTree .horizontalScrollWrap ul {
+	min-height:100%;
+}
+.qTree .horizontalScrollWrap li{
+	font-size:14px;
+	line-height:46px;
+	border-bottom:1px solid silver;
+	padding-left:20px;
+}
+.horizontalScrollWrap>* {
+	display:inline-block;  
+	vertical-align:top;        
+}
+.selected {
+	background-color:#7dcdf3;
+}
+.selected {
+	color:white;
+}
+/*树结束*/

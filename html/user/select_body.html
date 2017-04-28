@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title>知识库</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <style>
+        body{font-family:"黑体";} 
+        .nav{width: 100%;height: 45px;float: left;border-bottom: 2px solid #f3f3f3;display: none;}
+        .nav li{width: 32%;text-align:center;height: 100%;float: left;margin-left:1.3%;line-height: 45px;}
+        .nr::before{
+			content: "";
+			position: absolute;
+			top: -12px;
+			right: 15%;
+			border-bottom: 12px solid #ebebeb;
+			border-left: 7px solid transparent;
+			border-right: 7px solid transparent;
+		}
+        
+        .nav{width: 100%;height: 45px;float: left;border-bottom: 2px solid #f3f3f3;}
+        .nav li{width: 32%;text-align:center;height: 100%;float: left;margin-left:1.3%;line-height: 45px;}
+        .nr{width: 100%;height: auto;background: #efefef;float: left;}
+        .nr ul{height: auto;width: 100%;}
+        #nr3,#nr2,#nr1{float: left;}
+        #nr1 .tip{ height: 40px;line-height: 40px;width: 97%;margin-left: 3%;float: left;border-bottom: 1px solid red;}
+        #nr1 .main{ height:auto;line-height: 20px;width: 100%;padding: 3%;float: left;color: #9296a3;}
+        #nr2 li:first-child{height: 30px;width: 100%;float: left;padding-left: 3%;line-height: 30px;background: #e6e6e6;
+            border-bottom: none;margin-left: 0;color: #9296a3;}
+       
+        .nav1{width: 33.2%;height: auto;float: left;transition: all 3s;}
+        .con1{width: 65%;height: auto;min-height: 300px;float: left;}
+        .nav1 li{width: 100%;float: left;padding: 12px 0;text-align: center;background: #eeeeee;
+                border-bottom: 2px solid #f3f3f3;border-right: 2px solid #f3f3f3;}
+        .nav11 li{background: #fff;}
+    </style>
+</head>
+<body>
+	<div class="nr" id="nr">
+	    <ul id="nr1">
+	        <div class="nav1" id="nav1">
+
+            </div>
+	        <div class="nav1 nav11" id="nav2">
+	            
+	        </div>
+	        <div class="nav1 nav11" id="nav3">
+	         
+	        </div>
+	    </ul>   
+	</div>
+<script id="scriptDiv2" type="text/html">
+   <% for (var i = 0; i < list.length; i++) { %>
+   		<%if(list[i].ParentId == 0||list[i].ParentId == ""||list[i].ParentId == 'null'){%>
+   			<li onclick="choose1('<%=list[i].Id%>',this,'<%=list[i].Name%>')"><%=list[i].Name%></li>
+   		<%}%>
+	<%}%>  
+</script>
+<script id="scriptDiv3" type="text/html">
+   <% for (var i = 0; i < list.length; i++) { %>
+      <li onclick="choose2('<%=list[i].Id%>','<%=list[i].Name%>')"><%=list[i].Name%></li>  		          
+	<%}%>  
+</script>
+<script id="scriptDiv4" type="text/html">
+   <% for (var i = 0; i < list.length; i++) { %>
+   		<li onclick="chooseCousress('<%=list[i].Id%>','<%=list[i].Name%>')"><%=list[i].Name%></li>
+	<%}%>
+</script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script>
+	var results;
+    var res;	
+    var res1 = [];
+    var res2 = [];
+    var res3 = [];
+	apiready = function(){
+		api.showProgress();     
+        ajaxGet(listrepostitorycategory,{},function(ret,err) {
+            api.hideProgress();
+            if (ret) {
+            	res = ret;
+        		results = ret;
+            	if(isBlack(ret)){
+					toast("暂无数据！");
+					return;
+				}
+                addDataToHtmls(ret);
+                document.getElementById("nr").style.display = "block";
+            } else {
+             	toast("未知错误!")
+            }
+        })
+	};
+   
+	
+	function addDataToHtmls(resultss) {
+		for (var i = 0;i < resultss.length;i++ ) {
+			if (resultss[i].ParentId == 0||resultss[i].ParentId == ""||resultss[i].ParentId == "null") {
+				res1.push(resultss[i]);
+			}
+		}
+		var data = {list: res1};
+		var html = template('scriptDiv2',data);
+		document.getElementById('nav1').innerHTML = html;
+    };		
+      
+     
+	
+	
+	function choose1(id,self,titles){
+
+		var  ss = document.getElementById("nav1").querySelectorAll("li");
+		 for(var j = 0 ;j < ss.length;j++){
+			 ss[j].style.background = "#eeeeee"
+		 }
+		self.style.background = "#fff";
+
+
+		res2 = [];
+    	document.getElementById('nav3').innerHTML = "";
+		for (var i = 0;i < results.length;i++ ) {
+			if (id == results[i].ParentId) {
+				res2.push(results[i]);
+				
+			}
+		}
+		if (res2.length == 0) {
+			chooseCousress(id,titles);
+			return;
+		}
+		var data = {list: res2};
+		var html = template('scriptDiv3',data);
+		document.getElementById('nav2').innerHTML = html;
+	}
+	
+	function choose2(id,titles){
+		res3 = [];
+		for (var i = 0;i < results.length;i++ ) {
+			if (id == results[i].ParentId) {
+				res3.push(results[i]);				
+			}
+		}
+		if (res3.length == 0) {
+			chooseCousress(id,titles);
+			return;
+		}
+		var data = {list: res3};
+		var html = template('scriptDiv4',data);
+		document.getElementById('nav3').innerHTML = html;
+	}
+	
+	function chooseCousress(id,titles){
+		var parmas = {
+    		RepositoryCategoryId:id
+	    };
+	    ajaxGet(listrepository,parmas,function(ret,err) {
+	        if (ret) {
+	        	if(isBlack(ret)){
+					toast("暂无数据，请耐心等待管理员添加！");
+					return;
+				}
+	        	
+	        	for(var i = 0;i < ret.length;i++){
+	        		ret[i].Titles = titles
+	        	}
+	        	openNewWindow("knowledge","./knowledge.html",ret);
+	        } else {
+	         	toast("未知错误!")
+	        }
+	    })		 	   
+   };
+	
+	
+	function addDataToHtml(results) {
+		for (var i = 0;i < results.length;i++ ) {
+			results[i].keys =( results[i].Title).substr(0,1);
+		}
+		var data = {list: results};
+		var html = template('scriptDiv1',data);
+		document.getElementById('main').innerHTML = html;
+	};
+	
+	function detail(id){
+		openNewWindow("news","../user/news.html",{id:id});
+	};	
+</script>
+</body>
+</html>

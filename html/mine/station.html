@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>在线考试</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+    	.top{
+			background: #fff;
+			height: 44px;
+			width: 100%;
+			line-height: 44px;
+			color: #333;
+			font-size: 14px;
+			overflow: hidden;
+			border-bottom: 1px solid #ebebeb;
+		}
+		.top li{
+			float: left;
+			width: 33.3%;
+			text-align: center;
+		}
+		.topColor{
+			color: #fa331e;
+		}
+		.move{
+			width: 25%;
+			height: 2px;
+			position: absolute;
+			bottom: 1px;
+			left: 4%;
+			background: #fa331e;
+		}
+		input{width: 70%;height: 31px;
+	    	border-radius: 20px;
+	    	font-size: 16px;
+	    	border: none;background: #d43122;
+	    	background-size: 15px;
+	    	outline:none;text-indent: 10px;line-height: 30px;
+	    	color: #fff;
+    	}
+    	span{position: absolute;top: 0;right: 10px;font-size: 16px;}
+    	img{
+    		width: 15px;
+    		height: 15px;
+    	}
+    </style>
+</head>
+<body>
+	<div id="topbar" style="line-height: 44px;">
+	    <div id="leftButton" onclick="closeWin()">
+	        <img src="../../icon/GroupBack.png">
+	    </div>
+    	<div>岗位学习</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/login.js"></script>
+<script>
+	apiready = function () {
+		initFrameInWin(api.pageParam);
+	};
+</script>
+</html>

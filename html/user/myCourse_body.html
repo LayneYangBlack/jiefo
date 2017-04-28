@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>选课</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <style> 
+    	body,html{
+    		background: #efefef;
+    	} 		
+        .item_bj{width: 100%;background: #fff;height: 120px;display: flex;-webkit-box-align: center;
+		  /* 12版 */
+		  -webkit-align-items: center;
+		  -moz-align-items: center;
+		  -ms-align-items: center;
+		  -o-align-items: center;
+		  align-items: center;border-bottom: 1px solid #ebebeb;}
+        .mp_10{margin-top: 0;}
+        .item{width: 90%;margin:0 5%;height: 85px;display: block;}
+        .item div:first-child{height: 100%;width: 45%;float: left;}
+        .item div:last-child{height: 100%;width: 55%;float: right;}
+        .item img{height: 100%;width: 100%;;}
+        .mage{margin-left: auto;font-size: 14px;color: #9296a3;}
+        .mages{overflow: hidden;}
+        .mages span{width: 100%;height: auto;line-height: 1.2rem;float: left;padding: 0 0 0 10px;;}
+        .mages span:first-child{font-size: 14px;padding-bottom: 10px;width: auto;}
+        .mages span:nth-child(2){font-size: 12px;color: #9296a3;}
+        .mages span:nth-child(3){font-size: 12px;color: #9296a3;display: block;}
+        .mages span:nth-child(4){overflow: hidden; font-size: 12px;color: #9296a3;display: block;float: left;width: auto;margin-top: 3px;}
+       
+   		.mages .times{margin-right:5px;width: 13px;height: 13px;float: left;}
+    	.rightTop_01{
+	   		display: inline-block;
+			width: 95%;
+			overflow: hidden;/*溢出隐藏*/
+			text-overflow: ellipsis;/*文本溢出修剪,显示省略号*/
+			white-space: nowrap;/*使文字不换行*/
+	   	}
+    </style>
+</head>
+<body id="body" style="">
+	<div id="wrap">
+		<div id="main">
+
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/message.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script id="scriptDiv1" type="text/html">
+	<% for (var i = 0; i < list.length; i++) { %>
+		<%if (list[i].State == 0){%>
+			<div class="item_bj mp_10" id="newDiv">
+		        <div class="item">
+		            <div><img src="../../icon/images0.png"></div>
+		            <div class="mages">
+		                <span><%=list[i].Title%></span>
+		                <span>课程共计:1课</span>
+		                <span class="desc">达标分数:10分</span>	
+		                <span style="line-height: 13px;">
+		                	<img class="times" src="../../icon/money.png" alt="" />
+		                	已完成
+		                </span>
+		            </div>
+		        </div>
+	        </div>
+		<%}%>
+	<%}%>
+</div>
+</script>
+<script type="text/javascript">
+	apiready = function(){
+		api.showProgress();
+        var parmas = {};
+        var obj = {      	
+            Type : 1        
+        };       
+        ajaxGet(jieFoUrl,parmas,function(ret,err) {
+            api.hideProgress();
+            if (ret) {
+            	if(isBlack(ret)){
+					toast("暂无数据！");
+					return;
+				}
+                addDataToHtml(ret);
+                document.getElementById("body").style.display = "block";
+            } else {
+             	toast("网络出错了!")
+            }
+        })
+	};
+	
+	function addDataToHtml(results) {
+		var data = {list: results};
+		var html = template('scriptDiv1',data);
+		document.getElementById('main').innerHTML = html;
+
+	}
+</script>
+</html>

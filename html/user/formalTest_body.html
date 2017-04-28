@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>正式考试</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+    	.top{
+    		width: 100%;
+    		height: 56px;
+    		text-align: center;
+    		padding-top: 20px;
+    		padding-bottom: 5px;
+    		font-size: 16px;
+    	}
+    	.topspan{
+    		display: block;
+    		color: #666;
+    		margin-top: 10px;
+    		font-size: 12px;
+    	}
+    	.mid{
+    		width: 98%;
+    		margin: 0 auto;
+    		height: 10px;
+    		background: #efefef;
+    	}
+    	.con2,.con{
+    		width: 92%;
+    		margin: 0 auto;
+    		margin-top:10px;
+    		height: 115px;
+    		color: #666;
+    	}
+    	.con2 .uls .spans{
+    		display: inline-block;
+    	}
+    	.title_3,.title_2,.title{
+    		width: 100%;
+    		height: 46px;
+    		border-bottom: 1px solid #fa331e;
+    		background: url(../../icon/img_01.png) 0 22px no-repeat;
+    		background-size: 14px 18px;
+    		text-indent: 12px;
+    	}
+    	.title_2{  		
+    		background: url(../../icon/write.png) 0 20px no-repeat;
+    		background-size: 18px 20px;
+    	}
+    	
+    	.title_3{  		
+    		background: url(../../icon/money_02.png) 0 21px no-repeat;
+    		background-size: 18px 18px;
+    	}
+    	
+    	.title_3 span,.title_2 span,.title span{
+    		display: inline-block;
+    		margin-top: 23px;
+    		font-size: 14px;
+    		color: #fa331e;
+    	}	
+    	.uls{
+    		width: 100%;
+    		margin-top: 20px;
+    		line-height: 25px;
+    		color: #656565;
+    		font-size: 14px;
+    	}
+    	.uls .spans{
+    		display: inline-block;
+    		width: 100px;
+    	}
+    	
+    	#foot1,#foot{
+    		position: fixed;
+    		bottom: 5px;
+    		left: 4%;
+    		width: 92%;
+    		height: 44px;
+    		line-height: 44px;
+    		background: #fa331e;
+    		text-align: center;
+    		color: #fff;
+    		font-size: 18px;
+    		margin: 0 auto;
+    		border-radius: 5px;
+    	}
+    	#foot1{
+    		display: none;
+    	}
+    </style>
+</head>
+<body id="body" style="display:none;">
+	<div id="wrap">
+		<div id="main">
+			<div class="top">
+				<div id="Name">销售经理入职模拟考试</div>
+				<span class="topspan">您还有<span id="remains"></span>次考试机会</span>
+			</div>
+			<div class="mid"></div>
+			<div class="con">
+				<div class="title">
+					<img src="" alt="" />
+					<span class="spans">考试内容</span>
+				</div>
+				<ul class="uls">
+					<li>
+						<span class="spans">试题数量:</span>
+						<span id="QuestionCount">30题</span>
+					</li>
+					<li>
+						<span class="spans">考试时间:</span>
+						<span id="Time">45分钟</span>
+					</li>
+				</ul>
+			</div>
+			<div class="con2" style="margin-top: 0;">
+				<div class="items">
+					<div class="title_2">
+						<span class="spans" style="text-indent: 18px;">合格标准</span>
+					</div>
+				</div>
+				<ul class="uls">
+					<li>
+						<span class="spans" id="Score">100分满分</span>
+					</li>
+					<li>
+						<span class="spans" id="PassScore">90分及格</span>
+					</li>
+				</ul>
+			</div>
+			<div class="con2" style="margin-bottom: 80px;margin-top: 0;">
+				<div class="items">
+					<div class="title_3">
+						<span class="spans" style="text-indent: 20px;">开放时间</span>
+					</div>
+				</div>
+				<ul class="uls">
+					<li>
+						<span class="spans">开始时间:</span>
+						<span id="StartTime">2016.10.29</span>
+					</li>
+					<li>
+						<span class="spans">结束时间:</span>
+						<span id="EndTime">2016.11.31</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="foot" onclick="tests()">
+			进入考试
+		</div>
+		<div id="foot1" onclick="applications()">
+			立即报名
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/message.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script type="text/javascript">
+	var TestId;
+	var ress = {};
+	var res;
+	var dialogBox;
+	apiready = function(){
+		dialogBox = api.require('dialogBox');
+		res = api.pageParam;
+		if (res.Price) {
+			document.getElementById("foot1").style.display = "block";
+			document.getElementById("foot").style.display = "none";
+		}else{
+			document.getElementById("foot").style.display = "block";
+			document.getElementById("foot1").style.display = "none";
+		}
+		
+		TestId = res.TestId;
+		var obj = {
+			TestId : res.TestId
+		};
+
+		ajaxGet(GetExamInfo,obj,function(ret,err) {
+            api.hideProgress();
+            if (ret) {
+            	if(isBlack(ret)){
+					toast("暂无数据！");
+					return;
+				}
+				ress = ret;
+                showValues(ret);
+                document.getElementById("body").style.display = "block";
+            } else {
+             	toast("未知错误!")
+            }
+        })
+		
+	};
+	
+	
+	function showValues(results){
+		if (isBlack(results)) {
+			return;
+		}
+		document.getElementById("Name").innerHTML = results.Name;
+		document.getElementById("remains").innerHTML = results.LeftTimes;	 
+		document.getElementById("Time").innerHTML = results.ExamTime;	
+		document.getElementById("QuestionCount").innerHTML =results.QuestionCount+"题";
+		document.getElementById("Score").innerHTML = results.TotalScore + "分满分";
+		document.getElementById("PassScore").innerHTML = results.PassScore + "分及格";
+		document.getElementById("StartTime").innerHTML = results.BeginTime;
+		document.getElementById("EndTime").innerHTML = results.EndTime;	
+	}
+
+	
+	
+	/***************点击报名考试***********/
+	function applications(){
+        if (res.Status == 0) {
+        	if (res.Price > 0) {
+				showDialog("","温馨提示","该考试需要付费,是否前去购买?","取消","确定",function(){
+//			        openNewWindow("surePay","surePay.html")
+					addCart();
+		        });
+			} else{
+				signUp(TestId.TestId);
+			}		
+		}else{
+			dialogBox.alert ({
+            texts: {
+                title: '温馨提示',
+                content:'管理员正在审核中，请耐心等待。。。',
+                rightBtnTitle: '确定'
+            },
+            styles:{
+                bg: '#fff',
+                w: 300,
+                title:{
+                    marginT : 20,
+                    titleSize : 18,
+                    corner: 1,
+                    titleColor : '#eb3e2e'
+                },
+                content:{
+                    color: '#000',
+                    size: 16
+                },
+                right:{
+                    w: 300,
+                    h: 40,
+                    marginL: 0,
+                    marginB: 0,
+                    corner: 1,
+                    bg: '#eb3e2e',
+                    size: 18,
+                    color:'#ffffff'
+                }
+            }
+    },function(ret){
+    	if (ret.eventType == 'right') {
+            var dialogBox = api.require('dialogBox');                        	         		            
+                dialogBox.close ({
+                    dialogName: 'alert'
+                });	  
+           		closeWin();
+            }
+        });	
+		}
+	}
+	
+	function signUp(id){
+        var obj = {      	
+            Type : 1,
+           	TestId: id
+        };       
+		ajaxGet(applyexam,obj,function(ret,err) {
+            api.hideProgress();
+            if (ret) {
+                reloadHtml();
+            } else {
+             	toast("未知错误!")
+            }
+        })
+	}
+/***************点击报名考试**************/
+
+
+/*************点击进入考试*****************/
+	function tests(){
+		if(ress.LeftTimes <= 0){
+			toast("抱歉, 您的考试次数已经用完！");
+			return;
+		}
+		var begin = new Date(ress.BeginTime).getTime();
+		var ends = new Date(ress.EndTime).getTime();
+		var now = new Date();
+		var nowtime = now.getTime();
+		if(begin <= nowtime && nowtime < ends){
+			openNewWindow('researchRadio','./researchRadio.html',{TestId:TestId,title:ress.Name},{reload:true});
+		}else if(nowtime > ends){
+			toast("抱歉，您已经错过本次考试时间！")
+		}else{
+			toast("抱歉，您尚不能参加本次考试！")
+		}
+	}
+	
+	
+/***************点击加入购物车**************/
+	function addCart(){
+		var  Price = parseFloat(res.Price);
+		Price = Price.toFixed(2);
+		Price = Number(Price);
+		var objss = {      	
+	       	Id : res.TestId,
+	       	Type : 3,
+	       	Price : Price,
+	       	Name : res.Title		       	
+	   };     
+		ajaxGet(addshoppingcart,objss,function(ret,err) {
+			if(ret && ret.Result == 1){
+				toast("已加入购物车,请到购物车够购买!")
+			}
+	   })
+	};
+</script>
+</html>

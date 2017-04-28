@@ -1,0 +1,94 @@
+/* CSS Document */
+html,body {
+      width:100%;
+      height:100%;
+      margin:0;
+      padding:0;
+}
+#contentInfo
+{
+	margin:0px;
+	padding:0px;
+}
+
+ul, li {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+#mainFooter {
+    padding: 0px;
+    margin: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 10000;
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /*border-top: 2px solid #ccc;*/
+    border: none;
+}
+
+#mainFooter .ui-icon-shadow {
+    box-shadow: none;
+}
+
+#mainFooter li, #mainFooter a {
+    background-color: #B70F0F;
+}
+
+#mainFooter .ui-icon {
+    background-size: 24px 16px;
+    margin-left: -11px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    width: 24px;
+}
+
+#mainFooter li .ui-btn .ui-btn-inner {
+    padding-bottom: 5px;
+}
+
+#mainFooter li.ui-block-e .ui-btn {
+    margin-right: 0px;
+}
+
+#chat .ui-icon {
+    background: url(images/nva.png) 50% 50% no-repeat;
+}
+
+#email .ui-icon {
+    background: url(images/floter.png) 50% 50% no-repeat;
+}
+
+#skull .ui-icon {
+    background: url(images/21-skull.png) 50% 50% no-repeat;
+}
+
+#staticpage .ui-icon {
+    background: url(images/09-chat2.png) 50% 50% no-repeat;
+}
+
+#btnTopics .ui-icon {
+    background: url(images/zhuanti.png) 50% 50% no-repeat;
+}
+
+#setUplable .ui-icon {
+    background: url(images/options.png) 50% 50% no-repeat;
+}
+
+#mainFooter .ui-icon-shadow {
+    box-shadow: none;
+}
+
+
+.show{
+	display:block;
+}
+.hidden{
+	display:none;
+}
+.detail
+{
+	height:calc(100% - 31px);
+}
+
+

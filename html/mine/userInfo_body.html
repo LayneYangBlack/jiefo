@@ -1,0 +1,449 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>详细资料</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link href="../../css/mui.picker.all.css" rel="stylesheet" />
+    <link href="../../css/mui.poppicker.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css"/>
+    <style>
+		html,body{background: #efefef;width: 100%;height: 100%;}
+        .item{
+            height: 60px;
+            background-color: #fff;
+            line-height: 60px;
+            padding-left: 15px;
+            padding-right:10px;
+            border-bottom: 1px #f1f2f3 solid;
+            color: #000;
+            position: relative;
+        }
+       .inputs,.input{
+            text-align: right;
+            float: right;
+            color: #9e9e9e;
+            width: 60%;
+            outline: none;
+            margin-right: 20px;
+            margin-top: 20px;
+            line-height: normal;
+        }
+        .inputs{
+        	margin-right: 0;
+        }
+        .rightIcon{
+            width: 48px;
+            height: 48px;
+            margin-top:6px;
+            float: right;
+            border-radius: 100px;
+        }
+        .nextIcon{width:20px;float: right;margin-top:23px;}
+
+ 
+          /***************弹出框***********************************/
+         #bg_1{
+            display:none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1001;
+            -moz-opacity: 0.7;
+            opacity: .70;
+            filter: alpha(opacity=70);
+        }
+        #show_1{
+            display:none;
+            position: absolute;
+            top: 50px;
+            width: 100%;
+            height: 200px;
+            z-index: 1002;
+            overflow: auto;
+        }
+       #pop-up_input4,#pop-up_input2,#pop-up_input3,#pop-up_input{
+            display: block;
+            width: 80%;
+            height: 170px;
+            background-color: #FFFFFF;
+            border: none;
+            position: absolute;
+            top: 10px;
+            left: 10%;
+            border-radius: 6px;
+            z-index: 10003;
+        }
+        .input_title{
+            font-size: 16px;           
+            width: 86%;
+            height: 2.5rem;
+            display: block;
+            margin:23px auto;
+            border: 1px solid #eaeaea;
+            border-radius: 4px;
+            background: #ececec;
+            outline: none;
+            border: none;
+            line-height: 2.5rem;
+            text-indent: 5px;
+        }
+        .button_cancel{
+            width: 40%;
+            display: block;
+            text-align: center;
+            border: none;
+            height: 40px;
+            float: left;
+            position: absolute;
+            bottom: 9px;
+            left: 7%;
+            border: 1px solid #dde3e7;
+            border-radius: 6px;
+            color: #7e7e84;
+        }
+        .button_firm{
+            width: 40%;
+            background-color: #eb3e2e;
+            display: block;
+            text-align: center;
+            border: none;
+            height: 40px;
+            position: absolute;
+            bottom: 9px;
+            right: 7%;
+            color: #FFFFFF;
+            outline: none;
+            border-radius: 6px
+        }
+        .title{
+            display: block;
+            height: 2rem;
+            line-height: 2rem;
+            color: #7e7e84;
+            font-size: 16px;
+            background-color: #FFFFFF;
+            text-indent: 4%;
+            background: #f9f9f9;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body style="display: none" id="body">
+<div id="main">
+    <div style="width: 100%;height: 10px;"></div>
+    <div class="item" >
+    		<input  type="file" id="file" name="file" accept="image/*" multiple="multiple" style="border: 1px solid red; position: fixed;right: 0px;top: 0px;opacity: 0;  display:inline;width:100%;height:60PX;">
+        <span class="leftMsg">头像</span>
+        
+            <img class="nextIcon" src="../../icon/r_arrow1.png">
+            <img  id="icon" data-type="show-image" src="../../icon/userDefault@2x.png" class="rightIcon" >
+    </div>
+    <div class="item">
+        <span class="leftMsg">账号</span>
+        <input type="text" data-type="show-value" id="Name" class="input" value="15138079297"  readonly="readonly">
+    </div>
+    <div class="item" onclick="box1_Show()">
+        <span class="leftMsg">昵称</span>
+        <img class="nextIcon"  src="../../icon/r_arrow1.png">
+        <input type="text" data-type="show-value" class="inputs" value=""  id="name" readonly="readonly">
+    </div>
+    <div class="item" id="sexTab" onclick="chooseSex()">
+        <span class="leftMsg">性别</span>
+        <img class="nextIcon"  src="../../icon/r_arrow1.png">
+        <input type="text" data-type="show-value" class="inputs" placeholder="请选择" id="sex" readonly="readonly">
+    </div>
+    <div class="item" onclick="box2_Show()">
+        <span class="leftMsg" >联系方式</span>
+        <input type="text" data-type="show-value" id="phoneNumber" class="input" value="15138079297"  readonly="readonly">
+    </div>
+    <div class="item" onclick="box4_Show()">
+        <span class="leftMsg">邮箱</span>
+        <input type="text" data-type="show-value" id="emails" class="input" value="15138079297"  readonly="readonly">
+    </div>
+    <div class="item" onclick="box3_Show()">
+        <span class="leftMsg">地址</span>
+        <input type="text" data-type="show-value" id="address" class="input" value="15138079297"  readonly="readonly">
+    </div>    
+</div>
+<div id="bg_1"></div>
+<div id="show_1">
+    <div id="pop-up_input">
+        <span class="title">请输入昵称</span>
+        <textarea name="" id="nickNa"  rows="1" cols="12" class="input_title" maxlength="12" ></textarea><br />
+        <small style="position: absolute;color:#CCCCCC;right:4rem;font-size: 0.1rem;"><span id="in_num">12</span>/12</small>
+        <button class="button_cancel"  value="取消" onclick="hide()">取消</button>
+        <button class="button_firm" onclick="nickName()" value="确定">确定</button>
+    </div>
+    <div id="pop-up_input2">
+        <span class="title">请输入电话号码</span>
+        <input name="" id="input_age" type="number"  rows="1" cols="12" class="input_title" maxlength="12"/><br />
+        <button class="button_cancel" value="取消" onclick="hide()">取消</button>
+        <button class="button_firm" onclick="communicates()" value="确定">确定</button>
+    </div>
+   <div id="pop-up_input3">
+        <span class="title">请输入地址</span>
+        <textarea name="" id="input_signature" rows="1" style="height: 35px;" cols="12" class="input_title" maxlength="24"></textarea><br />
+        <button class="button_cancel"  value="取消" onclick="hide()">取消</button>
+        <button class="button_firm" onclick="ChangeAdress()" value="确定">确定</button>
+    </div>
+     <div id="pop-up_input4">
+        <span class="title">请输入邮箱</span>
+        <textarea name="" id="input_email" rows="1" style="height: 35px;" cols="12" class="input_title" maxlength="24"></textarea><br />
+        <button class="button_cancel"  value="取消" onclick="hide()">取消</button>
+        <button class="button_firm" onclick="ChangeEmail()" value="确定">确定</button>
+    </div>
+</div>
+<div id='work_select' class="ui-alert"></div>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/mui.picker.all.js"></script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/echo.min.js"></script>
+<script type="text/javascript" src="../../script/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script>
+	var index;
+	var arr = ["女","男"];
+	apiready = function(){
+		var userInfo = getUserInfo();
+		document.getElementById("icon").src = userInfo.ImgUrl;
+		document.getElementById("Name").value = userInfo.LoginName;
+		document.getElementById("name").value = userInfo.ActualName;
+		document.getElementById("emails").value = userInfo.Email;
+		document.getElementById("phoneNumber").value = userInfo.Mobile;
+		document.getElementById("address").value = userInfo.Address;
+		
+		if(userInfo.Sex==0||userInfo.Sex==1){
+			document.getElementById("sex").value = arr[userInfo.Sex];
+		}else{
+			document.getElementById("sex").value = userInfo.Sex;
+		}
+		document.getElementById("body").style.display = "block";
+	}
+	
+	function reloadHtmla(){
+		apiready();
+	}
+	function chooseSex(){
+		api.actionSheet({
+	   		 	title: '选择性别',
+	    		cancelTitle: '取消',
+	    		buttons: ["男","女"]
+			}, function(ret, err) {
+	    		index = ret.buttonIndex;
+	    		var values = arr[2-index]||"男";
+	    		document.getElementById("sex").value = values;
+			});
+		}
+		
+	
+	  var imgType = null;
+    var license  = null;
+    var icona;
+    var texta = document.querySelectorAll("textarea");
+    var pop_up_input = document.getElementById("pop-up_input");
+    var pop_up_input2 = document.getElementById("pop-up_input2");
+    var pop_up_input3 = document.getElementById("pop-up_input3");
+    var pop_up_input4 = document.getElementById("pop-up_input4");
+    var phoneNumber = document.getElementById("phoneNumber");
+    var input_age = document.getElementById("input_age");
+    var address = document.getElementById("address");
+    var input_signature = document.getElementById("input_signature");
+    var name = document.getElementById("name");
+    var nickNa = document.getElementById("nickNa");
+    var emails = document.getElementById("emails");
+    var input_email = document.getElementById("input_email");
+    var bg_1 = document.getElementById("bg_1");
+    var show_1 = document.getElementById("show_1");
+    var sexId = null;
+    var userInfo = null;
+    document.getElementById("bg_1").addEventListener("touchmove",function(e){
+        e.preventDefault();
+    });
+    document.getElementById("show_1").addEventListener("touchmove",function(e){
+        e.preventDefault();
+    });
+	
+	function box4_Show(){
+    	  hide();
+        bg_1.style.display="block";
+        pop_up_input4.style.display="block";
+        show_1.style.display="block";
+    }
+	
+	function box3_Show(){
+    	  hide();
+        bg_1.style.display="block";
+        pop_up_input3.style.display="block";
+        show_1.style.display="block";
+    }
+	
+	function box2_Show(){
+    	  hide();
+        bg_1.style.display="block";
+        pop_up_input2.style.display="block";
+        show_1.style.display="block";
+    }
+	
+    function box1_Show(){
+    	  hide();
+        bg_1.style.display="block";
+        pop_up_input.style.display="block";
+        show_1.style.display="block";
+    }
+    
+    function hide(){
+    	bg_1.style.display="none";
+        pop_up_input.style.display="none";
+        pop_up_input2.style.display="none";
+        pop_up_input3.style.display="none";
+        pop_up_input4.style.display="none";
+        show_1.style.display="none";
+        for (var i = 0;i < texta.length;i++) {
+        	texta[i].value="";
+        }
+    }
+    
+    function nickName(){
+        returnTop();
+        if(isBlack(nickNa.value)){
+            toast("请输入昵称");
+            return;
+        }else {
+        	var name = document.getElementById("name");
+            name.value = nickNa.value;
+            hide();
+        }
+    }   
+
+	function communicates(){
+        returnTop();
+        if(!checkMobileNum(input_age.value)){
+            toast("请输入正确的电话号码！");
+            return;
+        }else {
+            phoneNumber.value = input_age.value;
+            hide();
+        }
+    }  
+	
+	function ChangeAdress(){
+        returnTop();
+        if(isBlack(input_signature.value)){
+            toast("请输入正确的地址！");
+            return;
+        }else {
+            address.value = input_signature.value;
+            hide();
+        }
+    }  
+    
+    function ChangeEmail(){
+        returnTop();
+        if(isBlack(input_email.value)){
+            toast("请输入正确的邮箱！");
+            return;
+        }else {
+            emails.value = input_email.value;
+            hide();
+        }
+    }
+	
+    function openIDAuth(){
+        openNewWindow("IDAuth","./IDAuth.html",userInfo);
+    }
+
+		function commitPersonInfo(){
+			api.showProgress();
+			var name = document.getElementById("name");
+			var obj = getUserInfo();
+			if(index){
+				 obj.Sex = 2-index;
+			}else if(obj.Sex == "男"){
+				obj.Sex = 1;
+			}else{
+				obj.Sex = 0;
+			}
+			obj.Email = emails.value;
+			obj.ActualName = name.value;
+			obj.Mobile = phoneNumber.value;
+			obj.Address = address.value;
+			ajaxGet(upDatePersonInfo,obj,function(ret,err){
+            if(ret){
+            	  api.hideProgress();
+                toast("提交成功！");
+                setUserInfo(obj);
+                setTimeout(function(){
+                	api.execScript({
+	            		name:'main',
+	//          		frameName:'home',
+		                script: 'reloads()'
+		           	});
+	                api.execScript({
+	            		name:'main',
+		                frameName:'user',
+		                script: 'reloadHtml_01()'
+		           	});
+                })   
+            }else{
+                toast("未知错误！");
+            }
+        })	 
+		}
+		
+		
+		
+		window.onload = function() {
+        var input = document.getElementById("file");
+        input.addEventListener('change', readFile, false);
+
+        function readFile() {
+            for (var i = 0; i < this.files.length; i++) {
+                if (!input['value'].match(/.jpg|.gif|.png|.bmp/i)) {//判断上传文件格式
+                    return alert("上传的图片格式不正确，请重新选择")
+                }
+                var reader = new FileReader();
+                reader.readAsDataURL(this.files[i]);
+
+                reader.onload = function (e) {
+                   commit(this.result);
+                }
+            }
+        }
+    }
+///****************提交信息**************/
+	function commit(result){
+		api.showProgress();
+ 		var parms = {};
+ 		parms.ImgData = result;
+ 		ajaxGet(uploadstudentimg,parms,function(rets,err){
+ 		if(rets){
+			    api.hideProgress();
+	        toast("上传成功！");	
+	        setTimeout(function(){
+	           	window.location.reload();
+	        },500)
+	        api.execScript({
+	          name:'main',
+		        frameName:'user',
+		        script: 'reloadHtml()'
+		    });
+	        }else{
+             toast("未知错误");
+          }
+	    })               
+   }
+</script>
+</body>
+</html>

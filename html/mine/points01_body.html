@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>学习任务</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <style> 
+    	body,html{background: #efefef;}
+        .item_bj{width: 100%;background: #fff;height: 100px;display: flex;align-items: center;border-bottom: 1px solid #ebebeb;}
+        .mp_10{margin-top: 0;}
+        .item{width: 90%;margin:0 5%;height: 85px;display: block;}
+        .item div{height: 100%;width: 40%;float: left;}
+        .item div:last-child{height: 100%;width: 60%;float: right;}
+        .item img{height: 100%;width: 100%;}
+        .mage{margin-left: auto;font-size: 14px;color: #9296a3;}
+        .mages{overflow: hidden;}
+        .mages span{width: 100%;height: auto;line-height: 1.2rem;float: left;padding: 0 0 0 10px;;}
+        .mages span:first-child{font-size: 14px;padding-bottom: 10px;width: auto;}
+        .mages span:nth-child(2){font-size: 12px;color: #9296a3;}
+        .mages span:nth-child(3){font-size: 12px;color: #9296a3;display: block;}
+        .mages span:nth-child(4){font-size: 12px;color: #9296a3;display: block;float: left;width: auto;}
+        .mages span:nth-child(5){font-size: 12px;color: #9296a3;display: block;float: left;}
+    	.title{font-size: 14px;color: #666;padding: 0 15px;height: 44px;line-height: 44px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;}
+    	.right{float: right;color: #919191;}
+    	.state{width: 100%;height: 65px;}
+    	.state div{width: 101px;height: 35px;border-radius: 8px;
+	    	float: right;border: 1px solid #d8d8d8;text-align: center;
+	    	color: #666; line-height: 35px;
+	    	margin-right: 10px;margin-top: 14px;font-size: 14px;
+	    	}
+	    #main .pay{background: #fa331e;color: #fff;}
+	    .delete{position: absolute;top: 98px;right: 35px;width: 12px;}
+    </style>
+</head>
+<body id="body" style="display: none;">
+	<div id="wrap">
+		<div id="main">
+			
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/message.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script id="scriptDiv1" type="text/html">
+	<% for (var i = 0; i < list.length; i++) { %>
+		<div class="item_bj mp_10" id="newDiv">
+	        <div class="item">
+	            <div><img src="<%=list[i].ImgStr%>"></div>
+	            <div class="mages">
+	                <span><%=list[i].Title%></span>
+	                <span>礼品名称:<%=list[i].Name%></span>
+	                <span class="desc">所需积分:<%=list[i].Price%>积分</span>		                   
+	            </div>
+	        </div>
+	   </div>
+	<%}%>
+</script>
+<script type="text/javascript">
+	var 
+	apiready = function(){
+		api.showProgress();	
+        ajaxGet(allGiftList,{},function(ret,err) {
+	        if (ret) {
+	        	api.hideProgress();
+	        	if(isBlack(ret)){
+					toast("暂无数据！");
+					return;
+				}
+	            addDataToHtml(ret);
+	            document.getElementById("body").style.display = "block";
+	        } else {
+	         	toast("未知错误!")
+	        }
+	    })	 	
+	}
+	
+	function addDataToHtml(results) {
+		var data = {list: results};
+		var html = template('scriptDiv1',data);
+		document.getElementById('main').innerHTML = html;
+	}
+</script>
+</html>

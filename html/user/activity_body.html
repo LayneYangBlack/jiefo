@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>培训活动</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <style> 
+    	body,html{
+    		background: #efefef;
+    	} 		
+        .item_bj{width: 100%;background: #fff;height: 120px;display: flex;align-items: center;border-bottom: 1px solid #ebebeb;}
+        .mp_10{margin-top: 0;}
+        .item{width: 90%;margin:0 5%;height: 85px;display: block;}
+        .item div:first-child{height: 100%;width: 25%;float: left;}
+        .item div:last-child{height: 100%;width: 74%;float: right;}
+        .item img{height: 100%;width: 100%;;}
+        .mage{margin-left: auto;font-size: 14px;color: #9296a3;}
+        .mages{overflow: hidden;}
+        .mages span{width: 100%;height: auto;line-height: 1.2rem;float: left;padding: 0 0 0 10px;display: block;}
+        .mages span:first-child{font-size: 14px;padding-bottom: 7px;width: auto;}
+        .mages span:nth-child(2){font-size: 12px;color: #9296a3;}
+        .mages span:nth-child(3){font-size: 12px;color: #9296a3;display: block;}
+        .mages span:nth-child(4){overflow: hidden;color: #9296a3;font-size: 12px;display: block;float: left;width: auto;}
+        
+   		.mages .times{margin-right:5px;width: 13px;height: 13px;float: left;}
+   		.color{
+	   		color: #fff;
+	   		font-size: 35px;
+	   		width: 100%;
+	   		height: 100%;
+	   		line-height: 85px;
+	   		text-align: center;
+	   		display: block;
+	   		background: #fc4e4f;
+	   	}
+	   	.icon1{   		
+    		background: #fcb44e;
+    	}
+    	.icon2{   		
+    		background: #00bafc;
+    	}
+    	#name{
+    		width: 70%;
+    		display: inline-block;
+			overflow: hidden;/*溢出隐藏*/
+			text-overflow: ellipsis;/*文本溢出修剪,显示省略号*/
+			white-space: nowrap;/*使文字不换行*/
+    	}
+    	.mages .show{display: block;height: auto;  overflow: hidden; text-overflow: ellipsis;display: -webkit-box;
+            -webkit-line-clamp: 3;-webkit-box-orient: vertical;line-clamp: 3;}
+    </style>
+</head>
+<body style="" id="body" style="display: none;">
+	<div id="wrap">
+		<div id="main">			
+			
+		</div>
+	</div>
+</body>
+<script id="scriptDiv1" type="text/html">
+	<%if(list.Description){%>
+		<div class="item_bj mp_10" id="newDiv" onclick="detail('<%=list.CourseId%>')">
+	        <div class="item">
+	            <div><span class="color">学</span></div>
+	            <div class="mages">
+	                <span class="rightTop_01">学员须知</span>
+	                <span class="show"><%=list.Description%></span>	                	               
+	            </div>
+	        </div>
+	    </div>	
+	<%}%>
+	<%if(list.PreCourseList != null && list.PreCourseList != ""){%>
+		<div class="item_bj mp_10" id="newDiv" onclick="clickList('<%=list.StudyClassId%>')">
+	        <div class="item">
+	            <div><span class="color icon1">预</span></div>
+	            <div class="mages">
+	                <span class="rightTop_01">预习课程</span>
+	                <span>课程总计:<%=list.PreCourseCount%>门</span>
+	                <span class="desc">已选课程:<%=list.PreCourseSelectedCount%>门</span>	               
+	            </div>
+	        </div>
+	   </div>	 
+	    <%}%>
+		<%if(list.RevCourseCount != null && list.RevCourseCount != ""){%>
+		<div class="item_bj mp_10" id="newDiv" onclick="clickLists('<%=list.StudyClassId%>')">
+	        <div class="item">
+	            <div><span class="color icon2">复</span></div>
+	            <div class="mages">
+	                <span class="rightTop_01">复习课程</span>
+	                <span>课程总计:<%=list.RevCourseCount%>门</span>
+	                <span class="desc">已选课程:<%=list.RevCourseSelectedCount%>门</span>	               
+	            </div>
+	        </div>
+	    </div>
+	    <%}%>
+	    <%if(list.InvestId&&list.InvestId != 0){%>
+	    	<%if(list.InvestJoinTimes < list.InvestTotalTimes){%>
+	    	 <div class="item_bj mp_10" id="newDiv" onclick="radios('<%=list.InvestId%>')">
+		        <div class="item">
+		            <div><span class="color">考</span></div>
+		            <div class="mages">
+		                <span class="rightTop_01"><%=list.InvestTitle%></span>
+		                <span>最大调查次数:<%=list.InvestTotalTimes%>次</span>
+		                <span class="desc">已调查次数:<%=list.InvestJoinTimes%>次</span>	               
+		            </div>
+		        </div>
+		    </div>	
+		    <%}else{%>
+		    	<div class="item_bj mp_10" id="newDiv" onclick="gradeDeatail3()">
+			        <div class="item">
+			            <div><span class="color">考</span></div>
+			            <div class="mages">
+			                <span class="rightTop_01"><%=list.InvestTitle%></span>
+			                <span>最大调查次数:<%=list.InvestTotalTimes%>次</span>
+			                <span class="desc">已调查次数:<%=list.InvestJoinTimes%>次</span>	               
+			            </div>
+			        </div>
+			    </div>	
+		    <%}%>
+	    <%}%>	   
+	    <%if(list.ExamId&&list.ExamId != 0){%>
+	    	<%if(list.ExamJoinTimes < list.ExamTotalTimes){%>
+	    		<div class="item_bj mp_10" id="newDiv" onclick="gradeDeatail('<%=list.ExamId%>')">
+			        <div class="item">
+			            <div><span class="color icon1">考</span></div>
+			            <div class="mages">
+			                <span class="rightTop_01"><%=list.ExamTitle%></span>
+			                <span>最大考试次数:<%=list.ExamTotalTimes%>次</span>
+			                <span class="desc">已参加次数:<%=list.ExamJoinTimes%>次</span>	               
+			            </div>
+			        </div>
+			    </div>	
+	    	<%}else{%>
+	    		<div class="item_bj mp_10" id="newDiv" onclick="gradeDeatail2()">
+			        <div class="item">
+			            <div><span class="color icon1">考</span></div>
+			            <div class="mages">
+			                <span class="rightTop_01"><%=list.ExamTitle%></span>
+			                <span>最大考试次数:<%=list.ExamTotalTimes%>次</span>
+			                <span class="desc">已参加次数:<%=list.ExamJoinTimes%>次</span>	               
+			            </div>
+			        </div>
+			    </div>	
+	    	<%}%>
+	    <%}%>
+	    <% for (var i = 0; i < list1.length; i++) { %>
+		<div class="item_bj mp_10" id="newDiv" onclick="face('<%=list1[i].Id%>','<%=list1[i].Name%>')">
+	        <div class="item">
+	             <div>
+	            	<%if(i%3 == 0){%>
+						<span class="color icon2"><%=list1[i].keys%></span>
+					<%}else if(i%3==1){%>
+						<span class="color"><%=list1[i].keys%></span>
+					<%}else if(i%3==2){%>
+						<span class="color icon1"><%=list1[i].keys%></span>
+					<%}%>	
+				</div>
+	            <div class="mages">
+	                <span class="rightTop_01"><%=list1[i].Name%></span>
+	                <span>开始时间:<%=list1[i].BeginDate%></span>
+	                <span class="desc">结束时间:<%=list1[i].EndDate%></span>	               
+	            </div>
+	        </div>
+	    </div>		   
+	    <%}%>
+</script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/message.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script type="text/javascript">
+	var DescriptionS;
+	apiready = function(){
+		rets = api.pageParam;	
+		api.showProgress();   
+        var obj = {  
+        	StudyClassId : rets.StudyClassId
+        };
+        DescriptionS = obj;
+        ajaxGet(GetPlanDetail,obj,function(ret,err) {
+            api.hideProgress();
+            if (ret) {
+            	if(isBlack(ret)){
+					toast("暂无数据！");
+					return;
+				}
+            	addDataToHtml(ret);
+            	document.getElementById("body").style.display = "block";
+            } else {
+             	toast("未知错误!");
+            }
+        })       
+	};
+
+	function addDataToHtml(results) {
+		results.exam = (results.ExamTitle).substr(0,1);
+		results.invest = (results.InvestTitle).substr(0,1);
+		var res = results.PreCourseList;
+		var reb = results.OffTrainList;
+		for(var i = 0;i < reb.length;i++){
+			reb[i].keys = "面"+(i+1);
+		}
+		var rec = results.RevCourseList;
+		results.yuxiNum = res.length;
+		results.fuxiNum = rec.length;
+		var data = {list:results,list1:reb};	
+		var html = template('scriptDiv1',data);
+		document.getElementById('main').innerHTML = html;
+	};
+	
+	
+	/****点击进入预习***********/
+	function clickList(id){
+		openNewWindow("studyCourse1","./studyCourse1.html",{id:id,notice:"yuxi"});
+	};
+	
+	/****点击进入复习***********/
+	function clickLists(id){
+		openNewWindow("studyCourse1","./studyCourse1.html",{id:id,notice:"fuxi"});
+	};
+	
+	/**********点击进入学员须知******************/
+	function detail(id){
+		openNewWindow("studentNotice","../mine/studentNotice.html",DescriptionS);
+	};
+	
+	/******点击进入调查考试界面**************/
+	function radios(id){
+		openNewWindow("researchRadio","./researchRadio.html",{TestId:id});
+	};
+	
+	
+	/**************进入正式考试**************/
+	function gradeDeatail(id){		
+		openNewWindow('formalTest','./formalTest.html',{TestId:id},{reload:true});
+	}
+	
+	
+	/****考试次数已经用完的   再次点击提示***/
+	function gradeDeatail2(){
+		toast("抱歉,您的考试次数已经用完！")
+	}
+	
+	
+	/****考试次数已经用完的   再次点击提示***/
+	function gradeDeatail3(){
+		toast("抱歉,您的调查次数已经用完！")
+	}
+	/**************点击进入面授课程**************/
+	function face(id,titles){	
+		openNewWindow('signin','./signin.html',{id:id,Titles:titles},{reload:true});
+	}
+</script>
+</html>

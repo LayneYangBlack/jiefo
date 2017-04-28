@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<title>学习任务</title>
+	<link rel="stylesheet" href="../../css/commonWindow.css">
+	<link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+	<style>
+		.top{
+			background: #fff;
+			height: 44px;
+			width: 100%;
+			line-height: 44px;
+			color: #333;
+			font-size: 14px;
+			overflow: hidden;
+			border-bottom: 1px solid #ebebeb;
+		}
+		.top li{
+			float: left;
+			width: 33.3%;
+			text-align: center;
+		}
+		.topColor{
+			color: #fa331e;
+		}
+		.move{
+			width: 25%;
+			height: 2px;
+			position: absolute;
+			bottom: 1px;
+			left: 4%;
+			background: #fa331e;
+		}
+	</style>
+</head>
+<body>
+<div id="topbar">
+	<div id="leftButton" onclick="closeWin()">
+		<img src="../../icon/GroupBack.png">
+	</div>
+	<div>我的问答</div>
+</div>
+<div style="position: relative;">
+	<ul class="top">
+		<li class="topColor" onclick="switchFrameGroupIndex(0)">我的提问</li>
+		<li onclick="switchFrameGroupIndex(1)">我的回答</li>
+		<li onclick="switchFrameGroupIndex(2)">待答复</li>
+	</ul>
+	<div class="move"></div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/login.js"></script>
+<script>
+	var window_width;
+	apiready = function(){
+		window_width = api.winWidth;
+		var user = api.pageParam.user;
+		api.openFrameGroup ({
+			name: 'myAnswer',
+			background:'#fff',
+			scrollEnabled:true,
+			rect : {
+				x : 0,
+				y : 95,
+				w : 'auto',
+				h : api.winHeight-95
+			},
+			index:0,
+			frames: [{
+				name: 'answer1',
+				url: './myAnswer_body.html',
+				bgColor :'rgba(246,246,246,1)',
+				pageParam:{type:0}
+			},{
+				name: 'answer2',
+				url: './myAnswer_body.html',
+				bgColor :'rgba(246,246,246,1)',
+				pageParam:{type:1}
+			},{
+				name: 'answer3',
+				url: './myAnswer_body.html',
+				bgColor :'rgba(246,246,246,1)',
+				pageParam:{type:2}
+			}
+			]
+		}, function(ret, err){
+			switchFrameCallback(ret.index);
+		});
+	};
+	function switchFrameGroupIndex(index){
+		_index=index;
+		api.setFrameGroupIndex({
+			name : "myAnswer",
+			index : index,
+			scroll : true
+		});
+	}
+	function switchFrameCallback(index){
+		var width = (window_width / 3) * index;
+		var spans=document.querySelector(".top").querySelectorAll("li");
+		$api.css(document.getElementsByClassName("move")[0], "-webkit-transform:translate(" + width + "px,0)");
+		for(var i = 0;i < spans.length;i++){
+			if(i == index){
+				spans[i].style.color="#fa331e";
+
+			}else{
+				spans[i].style.color="#333";
+			}
+		}
+	}
+</script>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>通知公告</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+    	.top{
+    		height: 50px;
+    		padding: 0 15px;
+    		line-height: 50px;
+    		color:#909090;
+    		font-size: 16px;
+    		border-bottom: 1px solid #ebebeb;
+    	}
+    	.con{
+    		width: 100%;    
+    		font-size: 16px;
+    		color:#666;
+    	}
+    	.con img{
+    		display: block;
+    		width: 90%;
+    		height: 150px;
+    		margin: 10px auto;
+    	}
+    </style>
+</head>
+<body id="body">
+	<div id="main">
+
+	</div>		
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script type="text/javascript">   
+	var playModule;
+	var result;
+	var browser;
+	apiready = function(){
+		ajaxGet(getjnplan,{},function(ret,err) {
+	        if (ret) {
+	        	result = ret;
+	        	if(isBlack(ret)){
+					toast("暂无数据！请耐心等待管理员添加!");
+					return;
+				}
+	        	browser = api.require('webBrowser');
+			
+	        	playModule = api.require('playModule');
+				playModule.init({
+					buffering: "加载中",
+					logo: "widget://res/cklogo.png",
+					fullBtnPlan: 2
+				},function(ret){
+					openPlay(result)
+				})
+	        } else {
+	         	toast("未知错误!")
+	        }
+	   })     
+	};
+	
+
+
+//	var videoString = "mp4,flv,wmv,rmvb";
+	var pdfString = "pdf";
+	var PDFString = "PDF";
+	var playIndex = 0;
+	
+	
+	function  openPlay(result){
+		var suffix = result.Url.substring(result.Url.lastIndexOf(".")+1);
+	    if(pdfString.indexOf(suffix) != -1||PDFString.indexOf(suffix) != -1){
+	       	if(api.systemType == 'ios') {	
+			    browser.open({
+				    url: encodeURI(result.Url)
+				});	
+				//pdf闪退的问题   修改计划   都用上面的这个方法试试
+			setTimeout(function(){
+				closeWin();
+			},300)
+	        }else{
+				var pdfReader = api.require('pdfReader');
+	            pdfReader.open({
+	                path: encodeURI(result.Url)
+	            });
+	            setTimeout(function(){
+					closeWin();
+				},300)
+	        } 
+        }	
+	}	
+</script>
+</html>

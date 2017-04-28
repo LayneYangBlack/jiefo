@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>确认支付</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>	       
+        .down{width: 15px;height: 20px;float: right; margin-right: 9%; background:url("../../icon/class/down.png")no-repeat;background-size: 15px 20px;margin-top: 17.5px;}
+        .nub{position: relative; padding: 15px 0 10px 0;line-height: 25px; float: left;width: 97%;margin-left: 3%;
+                  color: #9296a3;border-bottom: dashed 1px #ccc;  }
+       
+        .head{height: 80px;width: 90%;float: left;padding:5% 5% 10px 5%;}
+        .img{width: 60px;height: 60px;float: left;background: url("../../icon/class/jiefo.png");border-radius: 50%;background-size: 60px 60px;}
+        .list{width: 70%;height: 80px;float: left;padding: 5px 0 15px 15px;}
+        .list li{width: 100%;height:50%;float: left;background: none;color: #9296a3;}
+    	.color{
+    		float: left;
+    		border-radius: 100%;
+	   		color: #fff;
+	   		font-size:14px;
+	   		width: 25px;
+	   		height: 25px;
+	   		line-height: 27px;
+	   		text-align: center;
+	   		display: block;
+	   		background: #f1f2f3;
+	   		margin-right: 5px;
+	   	}
+    	.processcontainer{  
+    		display: none;
+    	    position: absolute;
+    	    top: 21px;
+    	    right: 10px;
+		    width:20%;  
+		    border:1px solid #6C9C2C;  
+		    height:10px;  
+		    border-radius: 5px;
+		 } 
+		.processbar{  
+		   background:#95CA0D;  
+		   float:left; 
+		   height:100%;  
+		   text-align:center;  
+		   line-height:95%;
+		   font-size: 12px; 
+		   border-radius: 5px;
+		 } 
+        .textindent{text-indent: 10px;}
+        .rightTop_01{
+	   		display: inline-block;
+			overflow: hidden;/*溢出隐藏*/
+			text-overflow: ellipsis;/*文本溢出修剪,显示省略号*/
+			white-space: nowrap;/*使文字不换行*/
+			margin-left: 5px;width: 60%;
+	   	}
+	   	.nub img{width: 80%;margin-top: 1px;}
+    </style>
+</head>
+<body id="body" style="">
+	<div id="wrap">
+		<div id="main">
+			
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/login.js"></script>
+<script type="text/html" id="scriptDiv">
+	<ul id="nr2" style="">
+		<%for(var i = 0;i< list.length;i++){%>
+			<li class="nub" onclick="openPlay('<%=i%>','<%=list[i].CoursewareId%>',this)">
+				<%if(i%3 == 0){%>
+				<%if(list[i].Status == 1){%>
+					<span class="color"><img src="../../icon/selected.png" alt="" /></span>
+				<%}else{%>
+					<span class="color"><%=list[i].keys%></span>
+				<%}%>
+				
+				<%}else if(i%3==1){%>
+					<%if(list[i].Status == 1){%>
+					    <span class="color  icon1"><%=list[i].keys%></span>
+					<%}else{%>
+						<span class="color  icon1"><%=list[i].keys%></span>
+					<%}%>
+				<%}else if(i%3==2){%>
+					<%if(list[i].Status == 1){%>
+						<span class="color icon2"><%=list[i].keys%></span>
+					<%}else{%>
+						<span class="color icon2"><%=list[i].keys%></span>
+					<%}%>
+				<%}%>
+				<span class="rightTop_01" style=""><%=list[i].Title%></span>
+				<%if(list[i].DownloadSrc){%>
+					<%if(list[i].downloadType == 1){%>
+						<i class="down" style="display: none" onclick="downloadFile('<%=list[i].CoursewareId%>',this)"></i>
+						 <div class="processcontainer" style="display: block;">
+							<div class="processbar" style="width:100%;">100%</div>
+						 </div>
+					<%}else{%>
+						<i class="down"  onclick="downloadFile('<%=list[i].CoursewareId%>',this)"></i>
+						<div class="processcontainer" >
+							<div class="processbar" style="width:0%;"></div>
+						</div>
+					<%}%>
+				<%}%>
+			</li>
+		<%}%>		
+	</ul>
+</script>
+<script>
+	var allResult = {};
+	apiready = function(){
+		var ress = api.pageParam;
+		var res = ress.param;
+		for (var i = 0;i < res.length;i++ ) {
+			res[i] = downloadFileToShow(res[i],"CoursewareId");
+			allResult[res[i].CoursewareId] = res[i];
+		}
+		var data = {list:res,Title:ress.Name};
+		var html = template('scriptDiv',data);
+		document.getElementById('main').innerHTML = html;
+	};
+
+
+
+		function downloadFileToShow(obj,id){
+			var download = $api.getStorage(jiefokey+"_"+obj[id]);
+			if(download){
+
+				//todo 判断是否存在当前文件
+				var fs = api.require('fs');
+				var ret = fs.existSync({
+					path:download.downloadUrl
+				});
+				if (ret.exist) {
+					obj.PlaySrc = download.downloadUrl;
+					obj.downloadType = 1;
+				} else {
+					$api.rmStorage(jiefokey+"_"+obj[id]);
+					//删除id列表中的
+					var downloadIdList = $api.getStorage(jiefokey);
+					if(downloadIdList){
+						for(var i = 0;i< downloadIdList.length;i++){
+							if(downloadIdList[i] == obj[id]){
+								downloadIdList.removeValue(obj[id])
+							}
+						}
+					}
+				}
+			}
+			return obj;
+		}
+
+	function openPlay(id,ids,type){
+		var nubs = document.getElementById("nr2").querySelectorAll(".color");
+		for (var i = 0;i < nubs.length;i++) {
+			nubs[i].style.background = "#f1f2f3"
+		}
+	    type.querySelector(".color").style.background = "#00bafc";	
+		api.execScript({
+			name: 'news',
+			script: "openPlay("+id+",'"+ids+"')"
+		});
+	}
+	
+	function sto(even) {
+		var event=even||window.event;
+		if (event.stopPropagation) {
+			event.stopPropagation()
+		} else{
+			event.cancelBubble=true;
+		}
+	}
+	
+	function downloadFile(id,type){
+		sto();
+//		todo 播放视频和下载都要检测一下网络
+		var suffix = allResult[id].PlaySrc.substring(allResult[id].PlaySrc.lastIndexOf("."));
+		api.download({
+			url: encodeURI(allResult[id].DownloadSrc),
+			savePath: 'fs://'+allResult[id].Title+suffix,
+			report: true,
+			cache: true,
+			allowResume: true
+		}, function(ret, err) {				
+			if (ret.state == 0) {
+				type.style.display = "none";
+				type.parentNode.querySelector(".processcontainer").style.display = "block";
+				type.parentNode.querySelector(".processbar").style.width = parseInt(ret.percent )+  "%";
+				type.parentNode.querySelector(".processbar").innerHTML = type.parentNode.querySelector(".processbar").style.width;
+			}else if (ret.state == 1) {		
+				
+				//下载成功,
+				var obj = {};
+				obj.id = id;
+				obj.downloadUrl = 'fs://'+allResult[id].Title+suffix;
+				obj.name = allResult[id].Title;
+				obj.suffix = suffix;
+				saveDownloadFile(obj);
+				type.parentNode.querySelector(".processbar").innerHTML = "100%"
+				toast("温馨提示：已经下载完毕！");
+			}else{
+				toast("下载失败！")
+			}
+		});
+	}
+
+	function saveDownloadFile(obj){
+		$api.setStorage(jiefokey+"_"+obj.id,obj);
+//		alert(jiefokey+"_"+obj.id)
+		//todo 保存列表
+		var downloadIdList = $api.getStorage(jiefokey);
+
+		if(downloadIdList){
+			downloadIdList[obj.id] = obj;
+		}else{
+			downloadIdList = {};
+			downloadIdList[obj.id] = obj;
+		}
+		$api.setStorage(jiefokey,downloadIdList);
+	}
+</script>
+</html>

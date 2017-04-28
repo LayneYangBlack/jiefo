@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>讲师评价</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+     <link rel="stylesheet" type="text/css" href="../../css/xing-css/application.css"/>
+  <style>	
+	    .top{
+	    	padding: 40px 15px 0 15px;
+	    }
+    	.top li{
+    		overflow: hidden;
+    		width: 80%;
+    		margin: 0 auto;
+    		line-height: 25px;
+    		color: #909090;
+    		padding-top: 20px;
+    	}
+    	.top li span{
+    		float: left;
+    	}
+    	.right{
+    		float: right;
+    		overflow: hidden;
+    		margin-left: 15px;
+    	}
+    	
+    	.top .list2{
+    		margin-top: 36px;
+    	}
+    	.buttons{
+    		width: 70%;
+    		margin:73px auto;
+    		position: relative;
+    	}
+    	.buttons span{
+    		width: 97px;
+    		height: 35px;
+    		background: #fc4e4f;
+    		border-radius: 5px;
+    		text-align: center;
+    		line-height: 35px;
+    		color: #fff;
+    		float: right;
+    	}
+    	.buttons .left{
+    		color: #909090;
+    		float: left;
+    	}
+    	.right div{
+    		display: none;
+    	}
+    	.buttons .cansel{
+    		display: none;
+    		position: absolute;
+    		top: 0;
+    		left: 0;
+    		width: 100%;
+    		height: 35px;
+    		line-height: 35px;
+    		text-align: center;
+    		background: #fc4e4f;
+    		color: #fff;
+    		font-size: 16px;
+    		border-radius: 5px;
+    	}
+    </style>
+</head>
+<body id="body" style="display: none;">
+	<div id="main">
+		<ul class="top" id="top">
+			
+		</ul>
+		<div  class="buttons">
+			<span class="left" onclick="cancels()">取消</span> 
+			<span class="right1" onclick="confirms()">确定</span>
+			<div class="cansel" onclick="cancels()">
+				确定
+			</div>
+		</div>
+	</div>		
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script src="../../script/dist/js/swiper.min.js"></script>
+<script type="text/javascript" src="../../script/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="../../script/jquery.raty.js"></script>
+<script src="../../script/mui.min.js"></script>
+<script id="scriptDiv1" type="text/html">
+	<% for (var i = 0; i < list.length; i++) { %>
+		<li>
+			<span style="display: inline-block;"><%=list[i].RemarkWay%></span>
+			<div class="right">					
+				<span id="star_<%=i%>"></span>
+				<div id="hint_<%=i%>"></div>
+			</div>
+		</li>
+	<%}%>
+</div>
+</script>
+<script type="text/javascript">	
+	var cons;
+	var arr = [];/****用来保存评价星级*/
+	var res;
+	var conss = cons;
+	apiready = function(){
+		res = api.pageParam;
+		cons = res.ListRemarkInfo;
+		arr = new Array(cons.length);
+		addDataToHtml(cons);
+		document.getElementById("body").style.display = "block";
+	}
+ 
+	function addDataToHtml(results) {
+		var data = {list: results};
+		var html = template('scriptDiv1',data);
+		document.getElementById('top').innerHTML = html;
+		for(var i = 0;i < results.length;i++){
+			if (results[i].RemarkLevel >= 1) {
+				document.getElementsByClassName("right1")[0].style.display = "none";
+				document.getElementsByClassName("left")[0].style.display = "none";
+				document.getElementsByClassName("cansel")[0].style.display = "block";
+				coms2(results);
+			}else{
+				coms1(results);
+			}
+		}
+	};
+ 
+ /************第一次进来评价，可以参与评价*************/
+ 	function coms1(results){
+ 		for(var i = 0;i < cons.length;i++){
+	        $('#star_'+i).raty({
+	            starOff  : '../../image/xing-img/star-off.png',
+	            starOn   : '../../image/xing-img/star-on.png',
+	            target    : '#hint_'+i,
+				targetType: 'number',
+				score   : results[i].RemarkLevel,
+				click : function(){
+					for(var i = 0;i < cons.length;i++){						
+						if ($('#hint_'+i).text() != "") {
+							arr[i] = $('#hint_'+i).text();
+						}  					
+	  				};
+				}
+	        });
+	    };
+ 	}
+ 	
+ 	/********不能再次评价***************/
+ 	function coms2(results){
+ 		for(var i = 0;i < cons.length;i++){
+	        $('#star_'+i).raty({
+	            starOff  : '../../image/xing-img/star-off.png',
+	            starOn   : '../../image/xing-img/star-on.png',
+				score   : results[i].RemarkLevel,
+				readOnly: true
+	        });
+	    };
+ 	}
+    /********取消评价***********/
+	function cancels(){
+		closeWin();
+	}
+	
+	/**************确认提交评价**************/
+	function confirms(){
+		for(var i = 0;i < conss.length;i++){
+			if(conss[i].RemarkLevel >= 1){
+				cancels();
+			}else{
+				confirm1();
+			}
+		}
+	}
+	function confirm1(){
+		for (var i = 0;i < cons.length;i++) {				
+			cons[i].RemarkLevel =  arr[i];
+		}
+
+		var obj = {
+			OffTrainId : res.id,
+			LectuerId : res.LectuerId,
+			ListRemarkInfo : cons
+		}
+ 
+		ajaxGet(RemarkOffTrainLector,obj,function(ret,err) {
+            if (ret&&ret.Result == 1) {
+                toast(ret.Message);
+               	setTimeout(function(){
+               		 openNewWindow("./signin.html",{id:res.id})
+               	},1000)
+            } else if (ret&&ret.Result == 0) {
+            	toast("亲~你还没评价完额~")
+             	
+            }else{
+            	toast("未知错误!")
+            }
+        })
+	}
+</script>
+</html>

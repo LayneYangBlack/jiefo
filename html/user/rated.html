@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title>评论</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/xing-css/application.css"/>
+    <style>
+        body{font-family:"黑体";}
+        html{height: auto;width: 100%;background: #fff;}
+        .top{height: auto;float: left;width: 100%;border-bottom: 1px solid #eaeaea;margin:5px 0 15px 0;}
+        .top li {height: auto;float: left; width: 90%;margin:0 5% 5px 5%;;display: block;}
+        .xing{display: block;background: url("../../icon/00.png")no-repeat;width: 13px;height: 13px;float: left;
+              background-size: cover;}
+        .xing1{display: block;background: url("../../icon/class/path1.png")no-repeat;width: 13px;height: 13px;float: left;
+            background-size: cover;}
+        .tilte span:first-child{float: left;display: block;width: 50%;letter-spacing: 0.5px;}
+        .tilte span:last-child{float: right;display: block;width: 50%;text-align: right;color: #9296a3;}
+        .ping{display:block;float: left;}
+        .main{color: #9296a3;letter-spacing: 0.5px;font-size: 14px;width: 100%;}
+        .level{font-size: 14px;color: #9296a3;}
+        .font_w{font-weight: 600;color: #000;font-size: 18px;}
+        .tilte_1 p{float: left;width:auto;display: block;height: 1rem;}
+        .answer{display: block;width: auto;height: 0.8rem;border: 1px solid red;font-size: 14px;border-radius: 5px;}
+        .hh{margin-right: 5px;;width: 20px;height: 20px;float: left;background:url("../../icon/class/path1.png")no-repeat;background-size: 20px 20px}
+        .hh1{margin-right: 5px;;width: 20px;height: 20px;float: left;background:url("../../icon/00.png")no-repeat;background-size: 20px 20px}
+        .item{width: 100%;height:170px;float: left; }
+        .item li{width: 100%;float: left;height: auto;margin: 10px 0;}
+        .fis span:first-child{float: left;padding-left: 5%;}
+        .fis span:last-child{float: right;padding-right: 5%;color: #9296a3;}
+        .nth2 span{width:125px;display: block;margin: 0 auto; }
+        .hth3 a{display: block;height: 30px;width:70px;line-height: 30px;text-align: center;background: #fc4e4f;float: right;
+            font-size: 14px;color: #fff; margin-right: 5%; }
+        span{
+            font-size: 14px;
+        }
+        .item .hth{text-align: right;font-size: 12px;text-indent: -10px;width: 98%;color: #969696;}
+        .tips{height: 10px;width: 90%;text-align: right;padding-right:10%;font-size: 12px;color: #9296a3;margin-top: 10px;}
+    </style>
+    </style>
+</head>
+<body>
+    <div id="main">
+        
+    </div>
+<script type="text/javascript"  src="../../script/mui.min.js"></script>
+<script type="text/javascript"  src="../../script/mui.picker.all.js"></script>
+<script type="text/javascript"  src="../../script/api.js"></script>
+<script type="text/javascript"  src="../../script/template-native.js"></script>
+<script type="text/javascript"  src="../../script/kv.js"></script>
+<script type="text/javascript"  src="../../script/user.js"></script>
+<script type="text/javascript"  src="../../script/data.js"></script>
+<script type="text/javascript"  src="../../script/apiCloud.js"></script>
+<script type="text/javascript"  src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="../../script/jquery.raty.js"></script>
+<script type="text/html" id="scriptDiv">
+    <div class="item">
+        <li class="fis"><span>综合评分:<%=list.AverageLevel%></span> <span>评价人数<%=list.RemarkCount%></span></li>
+        <li class="nth2">
+            <span>
+               <span id="star"></span>
+            </span>
+        </li>
+        <%if(comments.Level == 0){%>
+        	<li class="hth" >温馨提示:评价之后自动生成学分。</li>
+            <li class="hth3" onclick="openComment()"><a style="border-radius: 5px;">我要评价</a></li>
+            <div class="tips">请在课程完成后参与评价</div>
+        <%}else{%>
+        	<li class="hth" >温馨提示:评价之后自动生成学分。</li>
+            <li class="hth3"><a style="background: #999;border-radius: 5px;">我要评价</a></li>
+            <div class="tips">请在课程完成后参与评价</div>
+        <%}%>
+    </div>
+
+    <%for(var i = 0;i< list.ListCourseRemark.length;i++){%>
+    <div class="top" style="margin-top: 25px;">
+        <li class="tilte"><span><%=list.ListCourseRemark[i].ActualName%></span><span><%=list.ListCourseRemark[i].CreateTime%></span></li>
+        <li class="level"><span class="ping">评分：</span>
+            <span id="star_<%=i%>"></span>
+        </li>
+        <li class="main" style="word-wrap:break-word;"><%=list.ListCourseRemark[i].Context%> </li>
+    </div>
+    <%}%>
+</script>
+<script>
+    var objs ={};
+    apiready = function(){
+        var res = api.pageParam;
+        objs = {
+            CourseId : res.id
+        };
+        /**
+         * {
+Level：int//我的评分 //如果没有评价过而可以进行评价完成课程了则评分为0  ，如果课程还没有完成学时和课件以及考试 则为-1表示课程还不能进行评价。
+UserCount:"" int//共计参与用户数量
+Average:"" string//平均得分
+}
+         */
+        var comments = {};
+        
+        ajaxGetWithProgress(listcoursevaluate,objs,function(rets,err) {
+            if (rets) {
+            	ajaxGet(getmyevaluate,objs,function(ret,err){
+			        if(ret){
+		                comments = ret;
+		                var data = {list:rets,comments:comments};
+		                var html = template('scriptDiv',data);
+		                document.getElementById('main').innerHTML = html;
+		                $('#star').raty({
+		                    half     : true,
+		                    size     : 24,
+		                    starHalf : '../../image/xing-img/star-half-big.png',
+		                    starOff  : '../../image/xing-img/star-off-big.png',
+		                    starOn   : '../../image/xing-img/star-on-big.png',
+		                    score   : rets.AverageLevel,
+		                    readOnly: true
+		                });
+		                for(var i = 0;i < rets.ListCourseRemark.length;i++){
+		                    $('#star_'+i).raty({
+		                        half     : true,
+		                        size     : 24,
+		                        starHalf : '../../image/xing-img/star-half.png',
+		                        starOff  : '../../image/xing-img/star-off.png',
+		                        starOn   : '../../image/xing-img/star-on.png',
+		                        score   :  rets.ListCourseRemark[i].StarLevel,
+		                        readOnly: true
+		                    });
+		                }
+		            }else{
+		            	toast("未知错误!")
+		            }
+		        });
+            } else {
+                toast("未知错误!")
+            }
+        })
+    }
+	
+	function reloadHtml(){
+		apiready();
+	}
+	
+    function openComment(){
+        openNewWindow("critical","./critical.html",objs);
+        setTimeout(function(){
+        	api.closeWin({
+	        	name: 'news'
+	    	});
+        },800)
+    }
+</script>
+</body>
+</html>

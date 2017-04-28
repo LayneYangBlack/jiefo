@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title>问答详情</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+<link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+<style>
+    html{background: ;height: auto;}
+    .tip{width: 90%;float: left;padding: 10px 5%;font-size: 16px;color: #333;font-weight: 600;}
+    .user{width: 100%;height: 40px;float: left;margin: 5px 0;}
+    .user div{height: auto;float: left;}
+    .user img{width: 100%;height: 100%;float: left;border-radius: 50%;}
+    .user div:first-child{float: left;width: 36px;height: 36px;margin-top: 5px;margin-left: 5%;margin-right: 1%;}
+    .user div:last-child{float: left;height: 40px;width: 80%;}
+    .font li{width: 100%;height: 50%;line-height: 20px;float: left;font-size: 14px;}
+    .font li:last-child{color: #9296a3;}
+    .conter{width: 90%;height: auto;line-height: 1rem;float: left;margin: 15px 5%;font-size: 15px;padding-bottom: 3px;border-bottom: 1px solid #eaeaea;}
+    .zan{width: 18px;height: 20px;float: right;background: url("../../icon/good.png")no-repeat;background-size: 18px 20px;
+          display: block; margin-top: 10px;margin-right: 3px;}
+    .zan11{width: 18px;height: 20px;float: right;background: url("../../icon/cai.png")no-repeat;background-size: 18px 20px;
+        display: block; margin-top: 10px;margin-right: 3px;}
+    .zan13{width: 18px;height: 20px;float: right;background: url("../../icon/cai1.png")no-repeat;background-size: 18px 20px;
+        display: block; margin-top: 10px;margin-right: 3px;}
+    .zan1{width: 18px;height: 20px;float: right;background: url("../../icon/good_1.png")no-repeat;background-size: 18px 20px;
+        display: block; margin-top: 10px;margin-right: 3px;}
+    .font span{display: block;float: right;line-height: 40px;font-size: 14px;color: #3f679a;}
+    .main{width: 90%;margin: 0 5%;float: left;font-size: 14px;}
+    .item{width: 100%;float: left;position: relative;padding-bottom: 3px;position: relative;}
+    .usrsLine{background: #E4E6EA;height: 1px;width: 90%;position: absolute;left: 5%;bottom: 0;}
+    .hui{font-size: 14px;color: #9296a3;margin-top: 10px;}
+    .img{width:30px;height: 30px; }
+
+    .jing{width:26px;height: 18px;display: block;border-radius: 3px;border: 1px solid #dd2726;line-height: 18px;text-align: center;
+         float: left;    font-size: 12px; margin-top: 6px; color: #dd2726;}
+    .foot{width: 100%;height: 56px;position: fixed;bottom: 53px;left: 0;}
+    .foot div:first-child{width: 20%;float: left;height: 100%; background: url("../../icon/forum.jpg")no-repeat;background-size: cover}
+    .foot div:nth-child(2){width: 60%;float: left;height: 100%;background: #f4f5f7;}
+    /*.foot div:last-child{width: 20%;float: left;height: 100%; background: url("../../icon/plus.jpg")no-repeat;background-size: cover}*/
+    .position{width: 100%;height: 53px; position: fixed;left: 0;bottom: 50px }
+    .foot div:last-child{width: 20%;float: left;height: 100%;line-height: 56px;text-align: center;background: #f4f5f7;}
+    .position li{width: 50%;height: 100%;text-align: center;float: left;line-height: 53px;;}
+    .position li:first-child{width: 49.5%;height: 100%;text-align: center;float: left;line-height: 53px;background: #fff;
+        border: 1px solid #ccc; }
+    .position li:last-child{width: 49.2%;height: 100%;text-align: center;float: left;line-height: 53px;background: red;
+        color: white;border: 1px solid #ccc; }
+    .center input{width: 100%;height: 35px;border-radius: 15px;;background: #fff;margin-top: 12px;text-indent: 5px;outline: none;line-height: normal;}
+
+    .iconImg{
+        vertical-align:top;
+        width: 15px;
+        height: 15px;
+    }
+   #imgs img{width: 100%;height: 150px;}
+    #foot{position: fixed;bottom: 0;left: 3%;width: 100%;overflow: hidden;}
+    #foot button{color: #333;float: right;height: 38px; width: 15%;background: #f1f2f3;margin-right:6%;line-height: 24px;border-radius: 5px;text-align: center;}
+    #Content{width: 75%;height: 38px;float: left;border-radius: 5px;margin-bottom: 5px;
+    background: #f1f2f3;border: 1px solid #ebebeb;color: #666;text-indent: 2%;line-height: normal;}
+    .buttons{width: 95px;height: 22px;line-height: 22px;text-align: center; position: absolute;right: 10px;bottom: 2px;background: #eb3e2e;border-radius: 5px;color: #fff;font-size: 14px;}
+</style>
+<body>
+	<div id="main1"  style="overflow: hidden;">
+	   
+	</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script type="text/javascript" src="../../script/chatBoxHelp.js"></script>
+<script type="text/html" id="scriptDiv1">
+    <div class="tip"><%=list.Title%></div>
+    <div class="user">
+        <div style="margin-top: 2px;">
+            <img   src="<%=list.CreatorImgUrl%>" onerror="this.src='../../icon/user.png'">
+        </div>
+        <div class="font">
+            <li><%=list.Creator%></li>
+            <li><%=list.CreateTime%></li>
+        </div>
+    </div>
+
+    <div class="conter" id="imgs">
+        <%=list.Content%>
+    </div>
+
+    <div id="reply" style="margin-bottom: 30px;">
+    <%if(list.Data && list.Data.length>0){%>
+    <% for (var i = 0; i < list.Data.length; i++) { %>
+        <div class="item" >
+            <div class="user">
+                <div class="img">
+                    <img  style="width: 30px; height: 30px;" src="<%=list.Data[i].ReplyorImgUrl%>" src="../../image/ForumList.png">
+                </div>
+                <div class="font">
+                    <li style="width: 100%;height: 100%;"><span style="display: block;float: left;margin-right: 5px;"><%=list.Data[i].UserName%></span>
+                        <%if(list.Data[i].IsBest == 1){%>
+                        <a class="jing">最佳</a>
+                        <%}%>
+                        <%if(list.Data[i].CanDown == 1){%>
+                            <i  onclick="addNoLike('<%=list.Data[i].ContentId%>',this)"  class="zan11"></i><span style="margin-right: 3px;" ><%=list.Data[i].DownNumber%></span>
+                        <%}else{%>
+                        <i   class="zan13"></i><span style="margin-right: 3px;" ><%=list.Data[i].DownNumber%></span>
+                        <%}%>
+                        <%if(list.Data[i].CanUp == 1){%>
+                            <i  onclick="addLike('<%=list.Data[i].ContentId%>',this)" id="zan" class="zan"></i><span style="margin-right: 3px;" ><%=list.Data[i].UpNumber%></span>
+                        <%}else{%>
+                        <i id="zan" class="zan1"></i><span style="margin-right: 3px;" ><%=list.Data[i].UpNumber%></span>
+                        <%}%>
+                    </li>
+                </div>
+            </div>
+            <div class="main"><%=list.Data[i].Content%>
+                <div class="hui"><%=list.Data[i].ReplayTime%> </div>
+                <%if (list.LoginId == list.CreatorId){%>
+                	<%if (list.IsBesta != 0){%>
+                	<span class="buttons" onclick="setbestreplys('<%=list.Data[i].ContentId%>')">设为最佳回复</span>
+                	<%}%>
+                <%}%>
+                
+            </div>
+            <div class="usrsLine"></div>
+        </div>
+        <div id="item">
+        </div>
+    <%}%>
+    <%}%>
+    　</div>
+</script>
+<script type="text/html" id="scriptDiv2">
+    <div class="item" >
+        <div class="user">
+            <div class="img">
+                <img  style="width: 30px; height: 30px;" src="<%=list.ReplyorImgUrl%>" src="../../image/ForumList.png">
+            </div>
+            <div class="font">
+                <li style="width: 100%;height: 100%;"><span style="display: block;float: left;margin-right: 5px;"><%=list.UserName%></span>
+
+            </div>
+        </div>
+        <div class="main"><%=list.Content%>
+            <div class="hui"><%=list.ReplayTime%> </div>
+        </div>
+    </div>
+</script>
+<script>
+	 /*************点击我的回答*****************/
+	function answers(){
+	    openNewWindow("myAnswer","../shop/myAnswer.html",{});
+	}
+	
+	function openForum(){
+	    openNewWindow("forum","./forum.html");
+	}
+	 var params = {};
+	 var chatBox;
+	 var userInfo = getUserInfo();
+ 	apiready =function(){
+        params = api.pageParam;
+	        ajaxGet(gettopicdetail,{"TopicId":params.TopicId},function(ret,err){           
+	        if(ret){
+	        	for(var i = 0;i < ret.Data.length;i++){
+	        		if (ret.Data[i].IsBest == 1) {
+	        			ret.IsBesta = 0;
+	        		}
+	        	}
+	            ret.LoginId = userInfo.LoginID;
+	            addDataToHtml(ret);
+	            initCheckBox();
+	        }
+	    })
+    };
+
+
+	function addDataToHtml(results) {
+        for(var i= 0 ;i<results.Data.length;i++){
+            results.Data[i].Content = getContent(results.Data[i].Content);
+        }
+        var data = {list: results};
+        var html = template('scriptDiv1',data);
+        document.getElementById('main1').innerHTML = html;
+    };
+
+  
+
+  function addLike(contentId,self){
+        if(self.className.indexOf("zan1") != -1){
+            return;
+        }
+        ajaxGetWithProgress(upreplyUrl,{ReplyId:contentId},function(ret,err){
+            if(ret && ret.Result == 1){
+                //点赞之后怎么处理
+                reloadHtml();
+            }else{
+                toast(ret.Message);
+            }
+        })
+  }
+
+ function addNoLike(contentId,self){
+     if(self.className.indexOf("zan13") != -1){
+         return;
+     }
+     ajaxGetWithProgress(downReplyUrl,{ReplyId:contentId},function(ret,err){
+         if(ret && ret.Result == 1){
+             //点赞之后怎么处理
+             reloadHtml();
+         }else{
+             toast(ret.Message);
+         }
+     })
+ }
+
+
+
+function initCheckBox(){
+    chatBox = api.require('UIChatBox');
+    chatBox.open({
+        placeholder: '回复',
+        maxRows: 4,
+        emotionPath: 'widget://image/emotion',
+        styles: {
+            inputBar: {
+                borderColor: '#F0F0F0',
+                bgColor: '#FFFFFF'
+            },
+            inputBox: {
+                borderColor: '#F5F6FA',
+                bgColor: '#F5F6FA'
+            },
+            emotionBtn: {
+                normalImg: 'widget://image/chatBox_face1.png'
+            },
+            extrasBtn: {
+                normalImg: 'widget://image/chatBox_add1.png'
+            },
+            keyboardBtn: {
+                normalImg: 'widget://image/chatBox_key1.png'
+            },
+            indicator: {
+                target: 'both',
+                color: '#c4c4c4',
+                activeColor: '#9e9e9e'
+            },
+            sendBtn: {                         //（可选项）JSON对象；发送按钮样式，本参数对 IOS 平台上的键盘内发送按钮无效
+                bg:'#ffffff',                 //（可选项）字符串类型；发送按钮背景颜色，支持rgb、rgba、#、img；默认：#4cc518
+                titleColor: '#F88125',          //（可选项）字符串类型；发送按钮标题颜色；默认：#ffffff
+                activeBg: '#ffffff',            //（可选项）字符串类型；发送按钮背景颜色，支持rgb、rgba、#、img；默认：无
+                titleSize: 14                    //（可选项）数字类型；发送按钮标题字体大小；默认：13
+            }
+        }
+       ,extras: {
+            titleSize: 10,
+            titleColor: '#a3a3a3',
+            btns: [{
+                title: '图片',
+                normalImg: 'widget://image/chatBox_album1.png',
+                activeImg: 'widget://image/chatBox_album2.png'
+            }, {
+                title: '拍照',
+                normalImg: 'widget://image/chatBox_cam1.png',
+                activeImg: 'widget://image/chatBox_cam2.png'
+            }]
+           }
+     }, function (ret, err) {
+//   	alert(JSON.stringify(ret))
+         //点击发送按钮
+         if (ret.eventType == 'send') {
+             if ($api.trimAll(ret.msg).length != 0) {
+
+                 sendComment(ret.msg,1);
+                 chatBox.closeKeyboard();
+             } else {
+                 api.toast({
+                     msg: '回复不能为空',
+                     duration: 2000,
+                     location: "top"
+                 });
+             }
+         }
+
+         /* 此回调会在两种情况下触发:
+          * 1. 用户输入文字或表情
+          * 2. 用户 点击了 添加界面 的自定义按钮.
+          */
+         /* 用户点击了 添加界面的 自定义按钮. */
+         if (ret.eventType == 'clickExtras') {
+             /* 用户点击 相机 图标 */
+             //alert(JSON.stringify(ret));
+             if (0 == ret.index) {
+                 selectT("album");
+             }
+             if (1 == ret.index) {
+                 selectT("camera");
+             }
+             return;
+         }
+     });
+
+     //监听弹出事件
+     chatBox.addEventListener({
+         target: 'inputBar',
+         name: 'move'
+     }, function (ret, err) {
+
+     });
+
+     chatBox.addEventListener({
+         target: 'inputBar',
+         name: 'showEmotion'
+     }, function (ret, err) {
+
+     });
+
+ }
+
+function selectT(sourceType) {
+    if(sourceType=='camera'){
+        publicAddImage(sourceType,600,function(ret,err){
+            if(ret.status){
+                var img={url:ret.filePath,thumbUrl:ret.filePath,size:0};
+                getImgWh(img.thumbUrl,function(w,h){
+                    img.w=w;
+                    img.h=h;
+                    sendComment({picture:ret.base64,img:img},2);
+                });
+            }
+        });
+    }else{
+    	publicAddImage(sourceType,600,function(ret,err){
+            if(ret.status){
+                var img={url:ret.filePath,thumbUrl:ret.filePath,size:0};
+                getImgWh(img.thumbUrl,function(w,h){
+                    img.w=w;
+                    img.h=h;
+                    sendComment({picture:ret.base64,img:img},2);
+                });
+            }
+       });
+    }
+}
+
+function sendComment(data,type){
+    if(type == 1 && isBlack(data)){
+        api.toast({msg:"亲，还没输入内容。"});
+        return;
+    }
+    var user =getUserInfo();
+    var result = {
+        UserName:user.ActualName,
+        ReplyorImgUrl:user.ImgUrl,
+        ReplayTime: new Date().format("yyyy-MM-dd hh:mm:ss")
+    };
+    var paramsData = {
+        Time:new Date().format("yyyy-MM-dd hh:mm:ss"),
+        TopicId:params.TopicId
+    };
+    if(type == 1){
+        result.Content = data;
+        paramsData.Content = data;
+    }else{
+		var arr = [];
+		var obj = {
+			picture : data.picture
+		}
+		arr.push(obj);
+        paramsData.Pics = arr;
+    }
+    
+       var height = api.frameWidth*0.9*0.14;
+       var list = {list: result,height:height};
+       var html = template('scriptDiv2', list);
+    ajaxGet(replyUploadTopic,paramsData,function(ret,err){
+        if(ret && ret.Result == 1){
+            $api.byId('reply').innerHTML = $api.byId('reply').innerHTML+html;
+             //滚动顶部
+            reloadHtml();
+        }else{
+            api.toast({msg:"网络不佳,请稍后重试"});
+        }
+    });
+    chatBox.setPlaceholder({placeholder:"评论"});
+}
+	
+	
+	/***********设置最佳回复**********/
+	function setbestreplys(id){
+		var obj = {
+			ReplyId:id
+		}		
+		ajaxGet(setbestreply,obj,function(ret,err){			
+	        if(ret && ret.Result == 1){         
+	            toast("温馨提示:已经设为最佳回复!")
+	            setTimeout(function(){
+	            	reloadHtml();
+	            },600)
+	        }else{
+	            toast({msg:"网络不佳,请稍后重试"});
+	        }
+	    });
+	}
+</script>
+</html>

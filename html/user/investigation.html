@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>单选题</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+    	.radio{
+    		position: absolute;
+    		right: 15px;
+    		top: 10px;
+    		background: #fff;
+    		width: 45px;
+    		height: 28px;
+    		line-height: 30px;
+    		font-size: 16px;
+    		text-align: center;
+    		border-radius: 6px;
+    		color: #fa4331;
+    	}
+    </style>
+</head>
+<body>
+	<div id="topbar" style="position: relative;">
+	    <div id="leftButton" onclick="closeWin()">
+	        <img src="../../icon/GroupBack.png">
+	    </div>
+    	<div id="titles">单选题</div>
+    	<!--<span class="radio">交卷</span>-->
+	</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/login.js"></script>
+<script>
+	apiready = function () {
+		document.getElementById("titles").innerHTML = api.pageParam.Title; 
+		initFrameInWin(api.pageParam);
+	};
+</script>
+</html>

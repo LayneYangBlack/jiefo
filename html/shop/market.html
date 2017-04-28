@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>通知公告</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+    	.top{
+    		height: 50px;
+    		padding: 0 15px;
+    		line-height: 50px;
+    		color:#909090;
+    		font-size: 16px;
+    		border-bottom: 1px solid #ebebeb;
+    	}
+    	.con{
+    		width: 100%;
+    		font-size: 16px;
+    		color:#666;
+    	}
+    	.con img{
+    		display: block;
+    		width: 90%;
+    		height: 150px;
+    		margin: 10px auto;
+    	}
+    </style>
+</head>
+<body id="body">
+		
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script type="text/javascript" src="../../script/echo.min.js"></script>
+<script type="text/javascript">
+	var playModule;
+	var browser;
+	apiready = function(){
+		browser = api.require('webBrowser');
+		var result = api.pageParam;
+		playModule = api.require('playModule');
+		playModule.init({
+			buffering: "加载中",
+			logo: "widget://res/cklogo.png",
+			fullBtnPlan: 2
+		},function(ret){
+			openPlay(result)
+		})
+	};
+	
+
+	function openReturnVideo(){
+		var xValue = 8;
+		api.openFrame({
+			name : "returnVideo",
+			url : "../user/returnVideo.html",
+			pageParam : {},
+			rect : {
+				x : xValue,
+				y : 13,
+				w : 36,
+				h :36
+			},
+
+			bounces : false,
+			opaque : false,
+			//bgColor:'#EDEDED',
+			bgColor : 'rgba(0 , 0, 0, 0)',
+			allowEdit : true,
+			vScrollBarEnabled : true,
+			showProgress : false,
+			hScrollBarEnabled : false,
+			reload:true
+		});
+	}
+
+	var videoString = "mp4,flv,wmv,rmvb";
+	var pdfString = "pdf";
+	var PDFString = "PDF";
+	var playIndex = 0;
+	var flag = true;
+	function  openPlay(result){
+
+		if(isNotBlack(result)){
+            var suffix = result.PlaySrc.substring(result.PlaySrc.lastIndexOf(".")+1);
+            if(videoString.indexOf(suffix) != -1){
+			//打开视频播放
+			if(flag){
+				playModule.play({
+					pageType:'Window',
+					rect:
+					{    x: 0,
+						y : 0,
+						w : api.winWidth,
+						h: 250
+					},
+					fixedOn: api.frameName,
+					title: result.Title,
+					url: encodeURI(result.PlaySrc),
+					defaultBtn: true,
+					enableFull : false,
+					isTopView : false
+				}, function(ret, err) {
+					openReturnVideo();
+				});
+				flag = false;
+			}else{
+				playModule.playUrl({
+					title: result.Title,
+					url: encodeURI(result.PlaySrc),
+					defaultBtn: true
+				}, function(ret, err) {
+				});
+			}
+		}else if(pdfString.indexOf(suffix) != -1||PDFString.indexOf(suffix) != -1){
+			if(api.systemType == 'ios') {	
+	        	browser.open({
+				    url: encodeURI(result.PlaySrc)
+				});
+				//pdf闪退的问题   修改计划   都用上面的这个方法试试
+	       }else{
+				var pdfReader = api.require('pdfReader');
+	                pdfReader.open({
+	                    path: encodeURI(result.PlaySrc)
+	                });
+	            }
+			}
+        }
+	}
+</script>
+</html>

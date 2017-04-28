@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title>签到</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+<link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/swiper-3.3.1.min.css"/>
+<style>
+    body,html{background: #f4f4f4;width: 100%;height: 100%;}
+    .img{width: 100%;height: 100%;float: left;}
+    .top_bj{height: 120px;width: 99.5%;float: left;margin: 10px 0;border: 1px dashed #000000;background: #fff;}
+    .top{width: 94%;margin: 20px 3%;height: 60%;float: left;}
+    .pic{width: 25%;height: 100%;float: left;text-align: center;}
+    .pic img{width: 55px;height: 45px;}
+    .pic span{width: 100%;text-align: center;margin-top: 10px;}
+    .main{width:75%;height: 100%;float: left;overflow: scroll; margin-top: 5px;}
+    .main li{width:50%;
+	    font-size: 14px;
+	    float: left;line-height: 20px;
+    }
+	.main li span{display: block;}
+    .main li span i{border-bottom: 1px solid #000;font-style: normal;font-size: 13px;color: #686868;}
+    .main .color{color: #fb3721}
+    .list{width: 100%;height: 50px;float: left;background: #fff;}
+    .list span{width: auto;height: 15px;float: left;display: block;margin-top: 20px;
+              margin-left: 20px;  line-height: 15px;padding-left: 10px;   border-left: 3px solid #000;}
+    .item{width: 100%;height:auto;float: left;background: #fff;}
+    .item li{width: 100%;height: 59px;border-bottom: 1px solid #eaeaea;float: left;}
+    .item li span{display: block;height: 59px;line-height: 59px;float: left;font-size: 14px;}
+    .item li span:nth-child(1){float: left;margin-left: 3%;}
+    .item li span:nth-child(2){float: left;margin-left: 20px;}
+    .item li span:nth-child(3){float: right;margin-right: 3%;display: block;width: 60px;height: 25px;margin-top: 17px;
+                  background: #dd2726;border-radius: 5px;line-height: 27px;text-align: center;color: #fff;}
+    .conten{width: 100%;height: auto;float: left;background: #fff;}
+    .contendiv{margin-left:3%; width: 97%;height: 70px;padding: 10px 0;float: left;background: #fff;border-bottom: 1px solid #eaeaea;}
+    .conten .contendiv div:first-child{width: 20%;height: 100%;float: left;padding: 0;}
+    .conten .contendiv div:last-child{width: 80%;height: 100%;float: left;padding: 0;border:none; }
+    .img{width: 100%;height: 100%;float: left;}
+    .font li{width: 100%;height: 70px;line-height: 70px;text-align: left;text-indent: 20px;color: #9296a3;}
+	.onpauses{position: absolute;top: 30px;right: 15px;width: 30px;}
+</style>
+<body id="body" style="display: none;">
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/message.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script src="../../script/swiper-3.3.1.min.js" type="text/javascript" ></script>
+<script id="scriptDiv2" type="text/html">
+<div class="top_bj">
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<% for (var i = 0; i < list.length; i++) { %>
+			<div class="swiper-slide">
+            	<div class="top" style="overflow: hidden;">
+				     <div class="pic">
+				     	<%if(list[i].IsToday == 0){%>
+				     		<img src="../../icon/qiandao.png" onclick="signLast()">
+				     	<%}else if(list[i].IsToday == 1){%>
+				     		<img src="../../icon/photo.png" onclick="signins()">
+				     	<%}%>
+				         <span class="">点击签到</span>
+				     </div>
+				     <li style="width: 100%;"><%=list[i].SignDate%>签到记录</li>
+				     <div class="main" id="top">
+				 		<ul id="clientwidth" style="width: 100%;overflow: hidden;">
+				 			<% for (var j = 0; j <  list[i].ListSingleSignInfo.length; j++) { %>
+								<li>
+									<%if( list[i].ListSingleSignInfo[j].IsSign == 0){%>
+										<span><%= list[i].ListSingleSignInfo[j].BeginTime%>-<%= list[i].ListSingleSignInfo[j].EndTime%><i>未签到</i></span>
+									<%}else if( list[i].ListSingleSignInfo[j].IsSign == 1){%>
+										<span><%= list[i].ListSingleSignInfo[j].BeginTime%>-<%= list[i].ListSingleSignInfo[j].EndTime%><i class="color">已签到</i></span>
+									<%}%>
+									
+								</li>
+							<%}%>    	
+				 		</ul>							   	
+				    </div>
+				</div>
+			</div>			
+			<%}%> 
+		</div>
+	</div>	   
+</div>
+   <div class="list">
+       <span>讲师评价</span>
+   </div>
+   <div class="item">
+   <% for (var i = 0; i < list3.length; i++) { %>
+        <li><span><%=list3[i].LectorName%></span>
+	        <span><%=list3[i].AverageRemark%>分</span>
+	        <%if(list3[i].IsRemark == 1){%>
+	        <span onclick="comments('<%=list3[i].LectuerId%>')">已评</span>
+	        <%}else if(list3[i].IsRemark == 0){%>
+	        <span onclick="comments('<%=list3[i].LectuerId%>')">未评</span>
+	        <%}%>
+        </li>
+    <%}%>    
+   </div>
+   <div class="list" style="border-bottom: 1px solid #eaeaea;">
+       <span>附件</span>
+   </div>
+   <div class="conten">
+   	<% for (var i = 0; i < list2.length; i++) { %>
+       <div class="contendiv" style="position: relative;" onclick="details('<%=list2[i].Url%>')">
+           <div>
+           	<%if(list2[i].types == "pdf"||list2[i].types == "PDF"){%>
+           		<img class="img" src="../../icon/signin/pdf.png">
+           	<%}else if (list2[i].types == "xls"){%>
+           		<img class="img" src="../../icon/signin/exlce.png">
+           	<%}else if (list2[i].types == "txt"){%>
+           		<img class="img" src="../../icon/signin/word.png">
+           	<%}else if (list2[i].types == "mp4"){%>
+           		<img class="img" src="../../icon/signin/mp4.jpg">
+           	<%}else if (list2[i].types == "mp3"){%>
+           		<img class="img" src="../../icon/signin/mp3.jpg">
+           	<%}%>
+	           	</div>
+	           <div class="font">
+               <li><%=list2[i].Name%></li>
+           </div>
+           <%if(list2[i].types == "mp3"){%>
+           		<img class="onpauses" style="display: none;" onclick="openPlayMp3('<%=list2[i].Url%>')" src="../../icon/signin/pause.png">	
+           		<img class="onpauses" onclick="openPlayMp3('<%=list2[i].Url%>')" src="../../icon/signin/on.png">
+           	<%}%>
+       </div>
+      <%}%> 
+   </div>
+   <audio controls="controls" id="audio" style="display: none;" width="100%" height="auto"></audio>
+</script>
+<script>
+    var res;
+    var FNScanner;
+    var allResult = {};
+    apiready = function(){
+   	    res = api.pageParam;
+   	   	FNScanner = api.require('FNScanner');
+		api.showProgress();
+        var obj = {      	
+            OffTrainId :res.id       
+        };       
+
+        ajaxGet(GetOffTrainDetail,obj,function(ret,err) {
+            api.hideProgress();
+            if (ret) {
+            	if(isBlack(ret)){
+					toast("暂无数据！");                                                                                      
+					return;
+				}
+                addDataToHtml(ret);
+                document.getElementById("body").style.display = "block";
+            } else {
+             	toast("未知错误!")
+            }
+        })		
+	};
+	
+	function reloadHtml(){
+		apiready();
+	}
+	
+	
+	function addDataToHtml(results) {
+		var flags = [];
+		var today = new Date().format("yyyy-MM-dd"); 
+		var rec = results.ListDaySignInfo;
+		for (var i = 0;i < rec.length;i++) {
+			flags.push(rec[i].SignDate)	
+		}
+
+		for (var i = 0;i < flags.length;i++) {
+			if (today == flags[i]) {
+				var flagToday = i;
+			}
+		}
+		var flagMax = flags.length;
+		var fujian = results.ListOffTrainFile;
+		result = fujian;
+		var comments = results.ListLectuerRemarkInfo;
+		
+		for (var i = 0;i < comments.length;i++) {
+			comments[i].id = res.id;
+			allResult[comments[i].LectuerId] = comments[i];			
+		}
+		
+		for (var i = 0;i < fujian.length;i++) {
+			fujian[i].types = (fujian[i].Url).substring((fujian[i].Url).lastIndexOf(".")+1);	
+		}
+		
+		var data = {list:rec,list2:fujian,list3:comments};
+		var html = template('scriptDiv2',data);
+		document.getElementById('body').innerHTML = html;
+		var flagInit = flagToday||flagMax;
+		
+		if (flagToday === 0) {
+			flagInit = 0;
+		}
+		setTimeout(function(){
+			var swiper = new Swiper('.swiper-container', {
+            	initialSlide :flagInit//***默认显示当前这一天的签到信息*/
+        	});
+		},100)
+	};
+
+		
+	function comments(id){
+		openNewWindow("comment","comment.html",allResult[id]);
+	};
+	
+	function sto(even) {
+		var event=even||window.event;
+		if (event.stopPropagation) {
+			event.stopPropagation()
+		} else{
+			event.cancelBubble=true;
+		}
+	};
+	
+	/************前去播放pdf和视频文件************/
+	function details(id){
+   	    openNewWindow("market","../shop/market.html",{PlaySrc:id});
+    }
+	
+	function relaodHtml(){
+		apiready();
+	}
+	/*********点击签到  扫面二维码*************/
+	function signins(){
+		var flag = true;
+		FNScanner.openScanner({
+		    autorotation: true
+		}, function(ret,err) {
+		    if (ret.eventType == "success"&&flag) {
+		    	flag = false;
+		    	var user = getUserInfo();
+		       	var arr = (ret.content).split("=");
+		       	var obj = {	       		
+		       		OffTrainId : arr[1],
+		       		LoginId : user.LoginID
+		       	}
+		       	ajaxGet(signin,obj,function(ret,err) {
+		            api.hideProgress();
+		            if (ret.Result == 1) {
+		          		toast("签到成功!")
+		          		relaodHtml();
+		            } else if(ret.Result == 0){
+		             	toast(ret.Message)
+		            }else{
+		            	toast("未知错误！")
+		            }
+		        })	
+		    } else {
+
+		    }
+		});
+	}
+	
+	/****错过签到时间或者未到签到时间**************/
+	function signLast(){
+		toast("不是正确签到时间！")
+	}
+</script>
+</html>

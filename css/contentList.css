@@ -1,0 +1,118 @@
+/* CSS Document */
+ html,body {
+      width:100%;
+      height:100%;
+      margin:0;
+      padding:0;
+}
+.ui-content
+{
+	 margin:0px;
+	 padding:0px;
+     font-family:"Microsoft Yahei",Verdana,Simsun,"Segoe UI Web Light","Segoe UI Light","Segoe UI Web Regular","Segoe UI","Segoe UI Symbol","Helvetica Neue",Arial;
+		 
+}
+
+
+.ui-mobile, .ui-mobile body
+{
+	height:100%;
+}
+/*头尾区域*/	
+#contentIndexHeader
+{
+	background:#880000 !important;
+	height:70px;
+	border:none;
+	box-sizing:border-box;
+	text-shadow:none;
+}
+/*内容区域*/		
+#contentIndexContent
+{
+	/*background:#efeff4;*/
+	border-top:#b2b2b2 1px solid;
+	border-bottom:#b2b2b2 1px solid;
+	box-sizing:border-box;
+}
+
+
+#lessonscontentList ul
+{
+	min-height:100%;
+}
+/*头部样式*/
+
+#contentIndexHeader > div
+{
+	display:inline-block;
+	width:-webkit-calc(100% -  610px);
+	padding:28px 0 5px 0px;
+	font-size:18px;
+	text-align:center;
+	color:#333;
+}
+#contentIndexHeader img
+{
+	display:inline-block;
+	height:25px;
+	width:25px;
+	vertical-align:middle;
+	margin:0 5px;
+	
+}
+
+#contentIndexHeader > div:first-child
+{
+	display:inline-block;
+	padding:28px 10px 5px 10px;
+	text-align:left;
+	color:#4ca1ff;
+	font-weight:200;
+	width:30%;
+	border:none;
+	/*border-right:1px solid #b2b2b2;*/
+	box-sizing:border-box;
+}
+[data-role="header"] > div:first-child img
+{
+	height:35px;
+	width:35px;
+	margin-top:-10px;
+}
+#contentIndexHeader > div:first-child span
+{
+	display:inline-block;
+	width:33%;
+	/*width:-webkit-calc(100% -  141px);*/
+	text-align:center;
+	color:#333;
+}
+#contentIndexHeader > div:first-child span:first-child
+{
+	text-align:left;
+	width:60px;
+	color:#4ca1ff;
+}
+#contentIndexHeader > div:first-child span:last-child
+{
+	text-align:left;
+	color:#4ca1ff;
+}
+#contentIndexHeader > div:last-child
+{
+	width:33%;
+	display:inline-block;
+	border:none;
+	float:right;
+}
+
+/*[data-role="header"] > div:last-child span
+{
+	display:inline-block;
+	vertical-align:middle;
+	color:#4ca1ff;
+	font-weight:200;
+	text-align:right;
+}*/
+

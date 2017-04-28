@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>学员须知</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <style> 
+    	body,html{
+    		background: #efefef;
+    	} 		
+        .top1,.top{
+        	padding:20px 15px;
+        	width: auto;
+        	height:auto;
+        	line-height: 25px;
+        	color: #909090;
+        	font-size: 14px;
+        }     
+        .top span{
+			width: 100%;
+			text-align: center;
+        	display: block;
+        	font-size: 16px;
+        }
+        .top1{
+        	padding: 0;
+        	padding-top: 10px;
+        }  
+    </style>
+</head>
+<body>
+	<div id="wrap">
+		<div id="main">
+			<div class="top" id="top">
+				<span>你再嫁谁都奥</span>
+				<div class="top1">
+					本赛季马刺队已在主场输了2场，上赛季他们一共只输了1个主场。不过这两场失利，对手的投篮命中率非常高，爵士队和快船队在禁区外的命中率分别是54%和47%。马刺队的进攻也没有完全打开，原因与伤病和球员轮换有关本赛季马刺队已在主场输了2场，上赛季他们一共只输了1个主场。不过这两场失利，对手的投篮命中率非常高，爵士队和快船队在禁区外的命中率分别是54%和47%。马刺队的进攻也没有完全打开，原因与伤病和球员轮换有关本赛季马刺队已在主场输了2场，上赛季他们一共只输了1个主场。不过这两场失利，对手的投篮命中率非常高，爵士队和快船队在禁区外的命中率分别是54%和47%。马刺队的进攻也没有完全打开，原因与伤病和球员轮换有关
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/message.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script type="text/javascript">
+	apiready = function(){
+		api.showProgress();
+        Description = api.pageParam;
+        ajaxGet(GetPlanDescription,Description,function(ret,err) {
+        	api.hideProgress();
+	        if (ret) {
+	        	if(isBlack(ret)){
+					toast("暂无数据！");
+					return;
+				}
+	        	document.getElementById("top").innerHTML = ret.Description;
+	        } else {
+	         	toast("未知错误!")
+	        }
+	    })     
+	};  	
+</script>
+</script>
+</html>

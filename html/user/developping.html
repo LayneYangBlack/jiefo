@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>开发中</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+    	.top{
+    		height: 50px;
+    		padding: 0 15px;
+    		line-height: 50px;
+    		color:#909090;
+    		font-size: 16px;
+    		border-bottom: 1px solid #ebebeb;
+    	}
+    	.con{
+    		width: 100%;   
+    		font-size: 16px;
+    		color:#666;
+    	}
+    	.con img{
+    		display: block;
+    		width: 90%;
+    		height: 150px;
+    		margin: 10px auto;
+    	}
+    </style>
+</head>
+<body id="body">
+	<div id="main">
+
+	</div>		
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script id="scriptDiv1" type="text/html">
+	<div id="topbar">
+	    <div id="leftButton" onclick="closeWin()">
+	        <img src="../../icon/GroupBack.png">
+	    </div>
+    	<div id="title"><%=list.Title%></div>
+	</div>
+</script>
+<script>
+	apiready = function (){
+		dialogBox = api.require('dialogBox');
+		dialogBox.alert ({
+            texts: {
+                title: '温馨提示',
+                content:'功能正在火热开发中。。。',
+                rightBtnTitle: '确定'
+            },
+            styles:{
+                bg: '#fff',
+                w: 300,
+                title:{
+                    marginT : 20,
+                    titleSize : 18,
+                    corner: 1,
+                    titleColor : '#eb3e2e'
+                },
+                content:{
+                    color: '#000',
+                    size: 16
+                },
+                right:{
+                    w: 300,
+                    h: 40,
+                    marginL: 0,
+                    marginB: 0,
+                    corner: 1,
+                    bg: '#eb3e2e',
+                    size: 18,
+                    color:'#ffffff'
+                }
+            }
+    },function(ret){
+    	if (ret.eventType == 'right') {
+            var dialogBox = api.require('dialogBox');                        	         		            
+                dialogBox.close ({
+                    dialogName: 'alert'
+                });	  
+           		closeWin();
+            }
+        });		  	
+	}
+</script>
+</html>

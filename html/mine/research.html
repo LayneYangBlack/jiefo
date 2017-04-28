@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>我的调查</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+    	.menu{height: 44px;line-height: 44px;width: 100%;color: #323232;font-size: 14px;position: relative;}
+    	.colors{color: #fa331e;}
+    	span{float: left;width: 50%;height: 100%;text-align: center;}
+    	.move{position: absolute;bottom: 0;left: 9.2%;width: 31.6%;background: red;height: 2px;}
+    	.grays{width:100%;height: 10px;background: #efefef;}
+    </style>
+</head>
+<body>
+	<div id="topbar">
+	    <div id="leftButton" onclick="closeWin()">
+	        <img src="../../icon/GroupBack.png">
+	    </div>
+	    <!--<img class="share" src="../image/Group7.png" alt="" />-->
+    	<div>我的调查</div>
+	</div>
+	<div class="menu">
+		<span  onclick="switchFrameGroupIndex(0)">未调查</span>
+		<span class="colors"  onclick="switchFrameGroupIndex(1)">已调查</span>
+		<div class="move"></div>
+	</div>
+	<div class="grays"></div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/login.js"></script>
+<script>
+	 var window_width;
+    apiready = function(){
+        window_width = api.winWidth;
+        var user = api.pageParam.user;
+        api.openFrameGroup ({
+            name: 'HomeWorkDetailGroup',
+            background:'#fff',
+            scrollEnabled:true,
+            rect : {
+                x : 0,
+                y :95,
+                w : 'auto',
+                h : api.winHeight-95
+            },
+            index:0,
+            frames: [{
+                name: 'research_body',
+                url: './research_body.html', 
+                bgColor :'rgba(246,246,246,1)',
+                pageParam:{type:0,user:user}
+            },{
+            	name: 'researched_body',
+                url: './researched_body.html',      
+                bgColor :'rgba(246,246,246,1)',
+                pageParam:{type:1,user:user}
+            }
+            ]
+        }, function(ret, err){
+        	setDataItem("taskAlert",0);
+            switchFrameCallback(ret.index);
+        });
+    };
+    function switchFrameGroupIndex(index){
+    	setDataItem("taskAlert",index);
+        _index=index;
+        api.setFrameGroupIndex({
+            name : "HomeWorkDetailGroup",
+            index : index,
+            scroll : true,
+            reload : true
+        });
+    };
+    
+    function switchFrameCallback(index){
+        var width = (window_width / 2) * index;
+        var spans=document.querySelector(".menu").querySelectorAll("span");
+        $api.css(document.getElementsByClassName("move")[0], "-webkit-transform:translate(" + width + "px,0)");
+        for(var i = 0;i < spans.length;i++){
+            if(i == index){
+            	spans[i].style.color="#fa331e";
+                
+            }else{
+                spans[i].style.color="#333";
+            }
+        }
+    };
+    
+    function reloadHtml(){
+		apiready();
+	}
+</script>
+</html>

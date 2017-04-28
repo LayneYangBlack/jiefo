@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title>我的</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <style>
+        html,body{font-family:"黑体";background: #fff;width: 100%;height: 100%;}  
+        .border{width: 95%;margin-left: 5%;border-bottom: 1px solid #f4f4f4;}
+        .r_icon_u{background: url("../../icon/r_arrow1.png")no-repeat;background-size: cover;}
+        .l_icon_1{background: url("../../icon/user/time.png")no-repeat;background-size:cover;}
+        .l_icon_2{background: url("../../icon/user/money.png")no-repeat;background-size:cover;}
+        .l_icon_3{background: url("../../icon/user/time1.png")no-repeat;background-size:cover;}
+        .l_icon_4{background: url("../../icon/user/money1.png")no-repeat;background-size:cover;}
+        .l_icon_5{background: url("../../icon/user/collect.png")no-repeat;background-size:cover;}
+        .l_icon_6{background: url("../../icon/user/collect1.png")no-repeat;background-size:cover;}
+        .mage{line-height:60px;margin-right: auto;text-align: left;margin-left: 5%;}
+        .xian{width: 15%;float: left;height: 1px;background: #fff;}
+        .size{width: 25px;height: 25px;float: left;margin-bottom: 3px;margin-top: 17px;}
+        .border_b{border-bottom: none;}
+        #body{display: block;}
+        #imgUrl{width: 70px;height: 70px;border-radius: 100%;}
+       .li_01{float: none;}
+       .r_icon_u{margin-top: 15px;}
+        #exitss{width: 90%;text-align: center;line-height:44px;margin: 10px auto 0;background: #eb3e2e;border-radius:10px;color: #fff;font-size: 16px;}
+    	#mine{
+    		width: 100%;
+    		height: 96px;
+    		background:  #eb3e2e;
+    	}
+    	.mineright,.mineLeft{
+    		float: left;
+    		margin-left: 15px;
+    		color: #fff;
+    	}
+    	.mineLeft{
+    		margin-left: 20px;
+    	}
+    	.mineright{
+    		line-height: 25px;
+    		padding-top: 6px;
+    	}
+    	#numScorces{float: right;font-size: 14px;line-height: 60px;color: #999;}
+    </style>
+</head>
+<body id="body" style="display: none;">
+    <div style="width: 100%;height: 49px;background:#eb3e2e;"></div>
+    <div id="updeta" onclick="userInfo()">
+        <div id="mine" style="overflow: hidden;">
+            <div class="mineLeft">
+	            <div>
+	                <img src="../../icon/userDefault@2x.png" id="imgUrl">
+	            </div>
+	        </div>
+            <div class="mineright">
+                <li><span id="name"></span>
+                   <img style="width: 14px;margin-left: 20px;" src="../../icon/pen.png" alt="" />
+                </li>
+                <li id="phone"></li>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+   		 
+   </div>
+    <div id="exitss">
+    	退出登录
+    </div>
+<script id="scriptDiv1" type="text/html">
+	<% for (var i = 0; i < list.length; i++) { %>
+		<%if(list[i].Name == "我的课程"){%>
+			<div class="li_53 li_01" onclick="chooseCourse()">
+		        <div class="border border_b">
+		            <i class="l_icon_2 size"></i>
+		            <span class="mage"><%=list[i].Name%></span>
+		            <!--<span id="lostCount"></span>-->
+		            <i class="r_icon_u"></i>
+		        </div>
+	   		</div>	
+		<%}else if(list[i].Name == "我的下载"){%>
+			<div class="li_53 li_01" onclick="myDownload()">
+		        <div class="border border_b">
+		            <i class="l_icon_5 size"></i>
+		            <span class="mage"><%=list[i].Name%></span>
+		            <!--<span id="lostCount"></span>-->
+		            <i class="r_icon_u"></i>
+		        </div>
+	   		</div>	
+		<%}else if(list[i].Name == "我的订单"){%>
+			<div class="li_53 li_01"  onclick="management()">
+		        <div class="border border_b">
+		            <i class="l_icon_1 size"></i>
+		            <span class="mage"><%=list[i].Name%></span>
+		            <!--<span id="lostCount"></span>-->
+		            <i class="r_icon_u"></i>
+		        </div>
+	   		</div>	
+		<%}else if(list[i].Name == "我的考试"){%>
+			<div class="li_53 li_01" onclick="myTest()">
+		        <div class="border border_b">
+		            <i class="l_icon_3 size"></i>
+		            <span class="mage"><%=list[i].Name%></span>
+		            <!--<span id="lostCount"></span>-->
+		            <i class="r_icon_u"></i>
+		        </div>
+	   		</div>	
+		<%}else if(list[i].Name == "统计报表"){%>
+			<div class="li_53 li_01" onclick="formss()">
+		        <div class="border border_b">
+		            <i class="l_icon_4 size"></i>
+		            <span class="mage"><%=list[i].Name%></span>
+		            <!--<span id="lostCount"></span>-->
+		            <i class="r_icon_u"></i>
+		        </div>
+	   		</div>	
+		<%}else if(list[i].Name == "积分兑换"){%>
+		<div class="li_53 li_01" onclick="myPoints()">
+	        <div class="border border_b">
+	            <i class="l_icon_6 size"></i>
+	            <span class="mage"><%=list[i].Name%></span>
+	            
+	            <i class="r_icon_u"></i>
+	            <span id="numScorces"></span>
+	        </div>
+	   	</div>			
+		<%}%>		
+	<%}%>
+</script>
+<script src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script>
+	var numScorce = 0;	
+	var result;
+	apiready = function (){
+		var obj = getUserInfo();
+		if(obj.ImgUrl){
+			document.getElementById("imgUrl").src = obj.ImgUrl;
+		}
+		document.getElementById("phone").innerHTML = obj.ActualName;
+		document.getElementById("name").innerHTML = obj.LoginName;
+		api.showProgress();    
+		
+        ajaxGet(getmymenu,{},function(ret,err) {
+            api.hideProgress();
+            if (ret) {
+            	if(isBlack(ret)){
+					toast("暂无数据！");
+					return;
+				}
+            	result = ret;
+            	var res = ret;
+                addDataToHtml(ret);
+                
+                ajaxGet(pointsList,{},function(ret,err) {
+			        if (ret&&ret.PointsBalance) {			        	
+			        	numScorce = ret.PointsBalance;
+			        	for(var i = 0;i < result.length;i++){
+			        		if (result[i].Name == "积分兑换") {
+			        			var resIndex = true;
+			        		}
+			        	}
+			        	if(resIndex){
+			        		document.getElementById("numScorces").innerHTML = numScorce+"积分";
+			        	}
+			        	
+			        }
+			    })
+                document.getElementById("body").style.display = "block";
+            } else {
+             	toast("未知错误!")
+            }
+        })	
+	}
+
+	
+	function reloadHtml_01(){
+		var obj = getUserInfo();
+		document.getElementById("imgUrl").src = obj.ImgUrl;
+		document.getElementById("phone").innerHTML = obj.ActualName;
+		document.getElementById("name").innerHTML = obj.LoginName;
+	}
+	
+	function reloadHtml1(){
+		ajaxGet(pointsList,{},function(ret,err) {
+	        if (ret) {
+	        	numScorce = ret.PointsBalance;
+	        	for(var i = 0;i < result.length;i++){
+	        		if (result[i].Name == "积分兑换") {
+	        			var resIndex = true;
+	        		}
+	        	}
+	        	if(resIndex){
+	        		document.getElementById("numScorces").innerHTML = numScorce+"积分";
+	        	}
+	        }
+	    })
+	}
+	
+	function addDataToHtml(results) {	
+		var res = results.ListMyMenu;	
+		var data = {list: res};	
+		var html = template('scriptDiv1',data);
+		document.getElementById('main').innerHTML = html;
+	};
+	
+
+	/**************打开我的统计报表*******************/
+	function formss(){
+	    openNewWindow("formss","../mine/formss.html")
+	};
+	
+	/*********打开我的订单**************/
+	function management(){
+	    openNewWindow("management","../mine/management.html")
+	};
+	
+/******打开我的下载**************/
+	function myDownload(){
+		openNewWindow("myDownload","../mine/myDownload.html",{});
+	};
+
+/***********打开我的考试**************/
+  	function myTest(){ 
+  		setDataItem("checkGradeIn",true)
+		openNewWindow("onLineGrades","onLineGrades.html")
+	};
+
+	/***********打开我的积分兑换**************/
+  	function myPoints(){
+		openNewWindow("points","../mine/points.html")
+	};
+
+
+/***********************打开我的课程***************/
+	function chooseCourse(){
+		openNewWindow("chooseCourse_01","../shop/chooseCourse_01.html")
+	};
+	
+		/***********退出登录**********/
+	document.getElementById("exitss").onclick = function (){
+    	setUserInfo("");
+    	$api.clearStorage();
+    	openNewWindow("login","../login/login.html");
+    	setTimeout(function(){
+    		api.closeWin({
+				name: "main"
+			});
+    	},600)
+    }
+	
+	
+	/************打开我的个人信息详情**************/
+	function userInfo(){
+	    openNewWindow("userInfo","../mine/userInfo.html")
+	};
+</script>
+</body>
+</html>

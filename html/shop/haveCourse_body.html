@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>学习任务</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <style> 
+    	body,html{
+    		background: #efefef;
+    	} 		
+        .item_bj{width: 100%;background: #fff;padding-top: 15px;height: 105px;border-bottom: 1px solid #ebebeb;}
+        .mp_10{margin-top: 0;}
+        .item{width: 90%;margin:0 5%;height: 85px;display: block;}
+        .item div:first-child{height: 100%;width: 25%;float: left;}
+        .item div:last-child{height: 100%;width: 74%;float: right;}
+        .item img{height: 100%;width: 100%;;}
+        .mage{margin-left: auto;font-size: 14px;color: #9296a3;}
+        .mages{overflow: hidden;}
+        .mages span{width: 98%;height: auto;line-height: 18px;float: left;padding: 0 0 0 10px;;}
+        .mages span:first-child{font-size: 14px;padding-bottom: 10px;}
+        .mages span:nth-child(2){font-size: 12px;color: #9296a3;}
+        .mages span:nth-child(3){font-size: 12px;color: #9296a3;display: block;}
+        .mages span:nth-child(4){overflow: hidden; font-size: 12px;color: #9296a3;display: block;float: left;width: auto;}
+        
+   		.mages .times{margin-right:5px;width: 13px;height: 13px;float: left;}
+    	.rightTop_01{
+	   		display: inline-block;
+			width: 95%;
+			overflow: hidden;/*溢出隐藏*/
+			text-overflow: ellipsis;/*文本溢出修剪,显示省略号*/
+			white-space: nowrap;/*使文字不换行*/
+	   	}
+	   	.color{
+	   		color: #fff;
+	   		font-size: 35px;
+	   		width: 100%;
+	   		height: 100%;
+	   		line-height: 85px;
+	   		text-align: center;
+	   		display: block;
+	   		background: #fc4e4f;
+	   	}
+	   	.icon1{   		
+    		background: #fcb44e;
+    	}
+    	.icon2{   		
+    		background: #00bafc;
+    	}
+    </style>
+</head>
+<body id="body" style="display: none;">
+	<div id="wrap">
+		<div id="main">
+			
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/message.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script id="scriptDiv1" type="text/html"> 
+	<% for (var i = 0; i < list.length; i++) { %>
+		<div class="item_bj mp_10" id="newDiv" onclick="detail('<%=list[i].CourseId%>')">
+	        <div class="item">
+	           	<div>
+	            	<%if(i%3 == 0){%>
+						<span class="color"><%=list[i].keys%></span>
+					<%}else if(i%3==1){%>
+						<span class="color icon1"><%=list[i].keys%></span>
+					<%}else if(i%3==2){%>
+						<span class="color icon2"><%=list[i].keys%></span>
+					<%}%>	
+	            </div>
+	            <div class="mages">
+	                <span class="rightTop_01"><%=list[i].Title%></span>
+	                <span>学习时长:<%=list[i].StudyTime%>分钟/<%=list[i].StandardTime%>分钟</span>
+	                <span class="desc">课程学分:<%=list[i].Credithour%>分</span>	
+	                <span class="desc">主讲人:<%=list[i].Lector%></span>
+	            </div>
+	        </div>
+	   </div>
+	<%}%>
+</div>
+</script>
+<script type="text/javascript">
+	apiready = function(){
+		var taskAlert = getItemData("taskAlert");
+		api.showProgress();
+        var parmas = {};
+        var obj = {      	
+            Type : 2        
+        };   
+        ajaxGet(listmyselectcourse,obj,function(ret,err) {
+            api.hideProgress();
+            if (ret) {
+            	if (taskAlert == 1) {
+            		if(isBlack(ret)){
+	            		toast("暂无数据！")
+	            	}
+            	}
+                addDataToHtml(ret);
+                document.getElementById("body").style.display = "block";
+            } else {
+//           	toast("未知错误!")
+            }
+        })
+	};
+	
+	
+	function addDataToHtml(results) {
+		var reg= /^[A-Za-z]+$/;
+		for (var i = 0;i < results.length;i++ ) {
+			if((/[\u4e00-\u9fa5]+/).test((results[i].Title).substr(0,1))){
+				results[i].keys =(results[i].Title).substr(0,1);
+			}else if(!isNaN((results[i].Title).substr(0,1))||reg.test((results[i].Title).substr(0,1))){
+				results[i].keys =(results[i].Title).substr(0,1);
+			}else{
+				results[i].keys =(results[i].Title).substr(1,1);
+			}
+		}	
+		var data = {list: results};
+		var html = template('scriptDiv1',data);
+		document.getElementById('main').innerHTML = html;
+	};
+	
+	function detail(id){
+		openNewWindow("news","../user/news.html",{id:id});
+	}
+</script>
+</html>

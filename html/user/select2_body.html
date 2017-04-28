@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title>消息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <style>
+        body{font-family:"黑体";}
+        .side li i {float: left; }
+        .side li{height: 30px;width: 100%;float: left;padding-left: 20px;line-height: 30px;}
+        .side li:nth-child(2){display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;justify-content: flex-start;align-items: center;}
+        .side li:nth-child(3){border-bottom: 1px solid #eaeaea;}
+        .nav{width: 100%;height: 45px;float: left;border-bottom: 2px solid #f3f3f3;}
+        .nav li{width: 32%;text-align:center;height: 100%;float: left;margin-left:1.3%;line-height: 45px;}
+        .nr{width: 100%;height: auto;min-height: 250px;background: #efefef;float: left;}
+        .nr ul{height: auto;width: 100%;min-height: 250px;}
+        #nr1 .tip{ height: 40px;line-height: 40px;width: 97%;margin-left: 3%;float: left;border-bottom: 1px solid red;}
+        #nr1 .main{ height:auto;line-height: 20px;width: 100%;padding: 3%;float: left;color: #9296a3;}
+        #nr2 li:first-child{height: 30px;width: 100%;float: left;padding-left: 3%;line-height: 30px;background: #e6e6e6;
+            border-bottom: none;margin-left: 0;color: #9296a3;}
+        .list li{width: 100%;height:50%;float: left;background: none;color: #9296a3;}
+        .list li span{display: block;float: left;}
+        .conter li{height: 40px;width: 100%;float: left;text-align: center;line-height: 40px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;
+            align-items: center;  justify-content: center;}
+        .conter li span i{margin-left: 5px;}
+        .nav1{width: 33.2%;height: auto;float: left;max-height: 400px;overflow: scroll;transition: all 3s;}
+        .con1{width: 65%;height: auto;min-height: 300px;float: left;}
+        .nav1 li{width: 100%;float: left;height: 50px;line-height: 50px;text-align: center;background: #eeeeee;
+                border-bottom: 2px solid #f3f3f3;border-right: 2px solid #f3f3f3}
+
+        .nav11 li{background: #fff;}
+    </style>
+</head>
+<body>
+<!--<div class="nav" id="bq">
+    <li class="jian" onClick="changeSelect(this,'bp1')">我要选课</li>
+    <li class="mu" onClick="changeSelect(this,'bp2')">在修课程</li>
+    <li class="ping" onClick="changeSelect(this,'bp3')">已选修</li>
+</div>-->
+<div class="nr" id="nr">
+    <ul id="nr1">
+        <div class="nav1">
+            <li>公共知识</li>
+            <li>管理课程</li>
+            <li>企业管理</li>
+            <li>培新课程</li>
+            <li>医疗类课程</li>
+            <li>基础制度培训</li>
+            <li>销售渠道培训</li>
+            <li>培新课程</li>
+            <li>医疗类课程</li>
+            <li>基础制度培训</li>
+            <li>销售渠道培训</li>
+        </div>
+      
+    </ul>   
+</div>
+<script id="scriptDiv1" type="text/html">
+	<ul id="nr1">
+        <div class="nav1">
+        	<% for (var i = 0; i < list.length; i++) { %>
+            <li onclick="detail('<%=list[i].Id%>')"><%=list[i].Title%></li>
+            <%}%>
+        </div>
+    </ul>	
+</div>
+</script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script>	
+	apiready = function(){
+		api.showProgress();     
+        ajaxGet(listmyCourseCategory,{},function(ret,err) {
+            api.hideProgress();
+            if (ret) {
+            	if(isBlack(ret)){
+					toast("暂无数据！");
+					return;
+				}
+                addDataToHtml(ret);
+            } else {
+             	toast("未知错误!")
+            }
+        })
+	};
+	
+	function addDataToHtml(results) {
+		var data = {list: results};
+		var html = template('scriptDiv1',data);
+		document.getElementById('nr').innerHTML = html;
+    };	
+    
+    function detail(id){
+   	    openNewWindow("chooseCourse","../shop/chooseCourse.html",{id:id});
+    };
+</script>
+
+</body>
+
+</html>

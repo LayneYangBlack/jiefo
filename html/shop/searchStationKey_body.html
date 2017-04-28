@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>学习任务</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css"/>
+    <style>
+    	body,html{background: #efefef;height: 100%;width: 100%;}
+        .item_bj{width: 100%;background: #fff;height: 120px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;  -webkit-box-align: center;
+		  /* 12版 */
+		  -webkit-align-items: center;
+		  -moz-align-items: center;
+		  -ms-align-items: center;
+		  -o-align-items: center;
+		  align-items: center;
+        border-bottom: 1px solid #ebebeb;}
+        .item_bj:first-child{margin-top: 10px;}
+        .mp_10{margin-top: 0;}
+        .item{width: 90%;margin:0 5%;height: 85px;display: block;}
+        .item div:first-child{height: 100%;width: 25%;float: left;}
+        .item div:last-child{height: 100%;width: 74%;float: right;}
+        .item img{height: 100%;width: 100%;;}
+        .mage{margin-left: auto;font-size: 14px;color: #9296a3;}
+        .mages{overflow: hidden;}
+        .mages span{width: 98%;height: auto;line-height: 1.2rem;float: left;padding: 0 0 0 10px;;}
+        .mages span:first-child{font-size: 14px;padding-bottom: 10px;}
+        .mages span:nth-child(2){font-size: 12px;color: #9296a3;}
+        .mages span:nth-child(3){font-size: 12px;color: #9296a3;display: block;}
+        .mages span:nth-child(4){overflow: hidden; font-size: 12px;color: #9296a3;display: block;float: left;width: auto;}
+       
+   		.mages .times{margin-right:5px;width: 13px;height: 13px;float: left;}
+    	.rightTop_01{
+	   		display: inline-block;
+			width: 95%;
+			overflow: hidden;/*溢出隐藏*/
+			text-overflow: ellipsis;/*文本溢出修剪,显示省略号*/
+			white-space: nowrap;/*使文字不换行*/
+	   	}
+	   	#main .color{
+	   		color: #fff;
+	   		font-size: 35px;
+	   		width: 100%;
+	   		height: 100%;
+	   		line-height: 85px;
+	   		text-align: center;
+	   		display: block;
+	   		background: #fc4e4f;
+	   	}
+	   	#main .icon1{   		
+    		background: #fcb44e;
+    	}
+    	#main .icon2{   		
+    		background: #00bafc;
+    	}
+    	.items{
+    		width: 100%;
+    		height: 90px;
+    		background: #fff;
+    		overflow: hidden;
+    		border-bottom: 1px solid #ebebeb;
+    	}	
+    	.items img{
+    		width: 60px;
+    		height: 60px;
+    		display: block;
+    		float: left;
+    		margin-left: 15px;
+    		margin-top: 15px;
+    	}
+    	.items div{
+    		line-height: 20px;
+    		float: left;
+    		width: 75%;
+    	}
+    	.items div span{
+    		display: block;
+    		padding-top: 25px;
+    		margin-left: 5%;
+    	}
+    	.title{
+    		line-height: 44px;
+    		margin-left: 15px;
+    		color: #8f8f8f;
+    		font-size: 14px;
+    	}
+    	#main .color{
+	   		color: #fff;
+	   		font-size: 25px;
+	   		line-height: 60px;
+	   		text-align: center;
+	   		background: #fc4e4f;
+	   		width: 60px;
+    		height: 60px;
+    		float: left;
+    		margin-left: 15px;
+    		margin-top: 15px;
+	   	}
+	   	#main .icon1{   		
+    		background: #fcb44e;
+    	}
+    	#main .icon2{   		
+    		background: #00bafc;
+    	}
+    	#research{
+    		width: 100%;
+    		height: 28px;
+    	}
+    	.lines{
+    		width: 100%;
+    		height: 10px;
+    		background: #efefef;
+    	}
+    	.share{
+    		position: absolute;
+    		right: 0;
+    		top: 1px;
+    		font-size: 14px;
+    		width: 80px;
+    		height: 40px;
+    		text-align: center;
+    	}
+    	.item_bj{width: 100%;background: #fff;height: 120px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align: center;
+		  /* 12版 */
+		  -webkit-align-items: center;
+		  -moz-align-items: center;
+		  -ms-align-items: center;
+		  -o-align-items: center;
+		  align-items: center;border-bottom: 1px solid #ebebeb;}
+        .mp_10{margin-top: 0;}
+        .item{width: 90%;margin:0 5%;height: 85px;display: block;}
+        .item div:first-child{height: 100%;width: 25%;float: left;}
+        .item div:last-child{height: 100%;width: 74%;float: right;}
+        .item img{height: 100%;width: 100%;;}
+        .mage{margin-left: auto;font-size: 14px;color: #9296a3;}
+        .mages{overflow: hidden;position: relative;}
+        .mages span{width: 100%;height: auto;line-height: 1.2rem;float: left;padding: 0 0 0 10px;}
+        .mages span:first-child{font-size: 14px;padding-bottom: 10px;width: auto;}
+        .mages span:nth-child(2){font-size: 12px;color: #9296a3;}
+        .mages span:nth-child(3){font-size: 12px;color: #9296a3;display: block;}
+        .mages span:nth-child(4){overflow: hidden;color:#9296a3;font-size: 12px;display: block;float: left;width: auto;}
+        
+   		.mages .times{width: 20px;height:20px;position: absolute;right: 0;bottom: 0;}
+   		#main .mages .rightTop_01{
+	   		display: inline-block;
+			width: 95%;
+			overflow: hidden;/*溢出隐藏*/
+			text-overflow: ellipsis;/*文本溢出修剪,显示省略号*/
+			white-space: nowrap;/*使文字不换行*/
+	   	}    	  
+      
+        .nr{position: absolute;top: 0px;left: 0;width: 100%;height: auto;min-height: 250px;background: #efefef;float: left;}
+        .nr::before{
+			content: "";
+			position: absolute;
+			top: -11px;
+			right: 15%;
+			border-bottom: 12px solid #ebebeb;
+			border-left: 7px solid transparent;
+			border-right: 7px solid transparent;
+		}
+      
+        .nav{width: 100%;height: 45px;float: left;border-bottom: 2px solid #f3f3f3;}
+        .nav li{width: 32%;text-align:center;height: 100%;float: left;margin-left:1.3%;line-height: 45px;}
+        .nr{width: 100%;height: auto;min-height: 250px;background: #efefef;float: left;}
+        .nr ul{height: auto;width: 100%;min-height: 250px;}
+        #nr3,#nr2,#nr1{float: left;}
+        #nr1 .tip{ height: 40px;line-height: 40px;width: 97%;margin-left: 3%;float: left;border-bottom: 1px solid red;}
+        #nr1 .main{ height:auto;line-height: 20px;width: 100%;padding: 3%;float: left;color: #9296a3;}
+        #nr2 li:first-child{height: 30px;width: 100%;float: left;padding-left: 3%;line-height: 30px;background: #e6e6e6;
+            border-bottom: none;margin-left: 0;color: #9296a3;}
+       
+        .nav1{width: 33.1%;height: auto;float: left;transition: all 3s;}
+        .con1{width: 65%;height: auto;min-height: 300px;float: left;}
+        .nav1 li{width: 100%;float: left;padding: 12px 0;text-align: center;background: #eeeeee;
+                border: 1px solid #f3f3f3;}
+        .nav11 li{background: #fff;}
+        
+		.nav13{border-left:1px solid #eaeaea;}
+		#nav2 li{
+			border-left: 1px solid #f3f3f3;
+		}
+    </style>
+</head>
+<body id="body" style="display: none;">
+	<div id="wrap">
+		<div id="main">
+			
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script id="scriptDiv03" type="text/html">
+	<% for (var i = 0; i < list.length; i++) { %>
+	<div class="items" onclick="Next('<%=list[i].Id%>')">
+		<%if(i%3 == 0){%>
+			<span class="color"><%=list[i].keys%></span>
+		<%}else if(i%3==1){%>
+			<span class="color icon1"><%=list[i].keys%></span>
+		<%}else if(i%3==2){%>
+			<span class="color icon2"><%=list[i].keys%></span>
+		<%}%>	
+		<div>
+			<span><%=list[i].Name%></span>
+		</div>
+	</div>
+	<%}%>
+</div>
+</script>
+<script type="text/javascript">
+	var allResult = {};
+	apiready = function(){
+		searchResults = api.pageParam;
+		addDataToHtml(searchResults);
+	}
+	function addDataToHtml(results) {
+		var reg= /^[A-Za-z]+$/;
+		for (var i = 0;i < results.length;i++ ) {
+			allResult[results[i].Id] = results[i];
+			if((/[\u4e00-\u9fa5]+/).test((results[i].Name).substr(0,1))){
+				results[i].keys =(results[i].Name).substr(0,1);
+			}else if(!isNaN((results[i].Name).substr(0,1))||reg.test((results[i].Name).substr(0,1))){
+				results[i].keys =(results[i].Name).substr(0,1);
+			}else{
+				results[i].keys =(results[i].Name).substr(1,1);
+			}
+		}
+		var data = {list: results};
+		var html = template('scriptDiv03',data);
+		document.getElementById('main').innerHTML = html;
+		document.getElementById("body").style.display = "block";
+	}	
+
+	function Next(id){
+		openNewWindow("station","../mine/station.html",allResult[id]);
+	};
+	
+
+	/*******需要报名的课程****/
+	function courseDetail(id){
+		openNewWindow("courseDetails","../user/courseDetails.html",{id:id});
+	}
+</script>
+</html>

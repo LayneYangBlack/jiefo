@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分类</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/commonWindow.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <style>
+        body{font-family:"黑体";background: #ebebeb;;}
+        html{background: #fff;height: auto;}
+        /*.l_icon{background: url("../icon/map_1.png")no-repeat;background-size:cover;}*/
+        .conter_bj{background: #fff;width: 100%;height: auto;float: left;}
+        .conter{width: 95%;;height:185px;;float: left; margin-left: 2.5%;background: #fff;}
+        .conter div{width: 20%;height: 49%;float: left;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;justify-content: center;flex-direction: column; -webkit-box-align: center;
+		  /* 12版 */
+		  -webkit-align-items: center;
+		  -moz-align-items: center;
+		  -ms-align-items: center;
+		  -o-align-items: center;
+		  align-items: center;}
+        .conter div a{display: block;height: 1.5rem;font-size: 12px;font-weight: 300;padding-top: 5px;color: #333;}
+        .icon1{width: 40px;height: 40px;display: block;
+              background: url("../../icon/key.png")no-repeat;background-size: 40px 40px;}
+        .item_bj{width: 100%;background: #fff;height: 120px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex; -webkit-box-align: center;
+		  /* 12版 */
+		  -webkit-align-items: center;
+		  -moz-align-items: center;
+		  -ms-align-items: center;
+		  -o-align-items: center;
+		  align-items: center;}
+        .mp_10{margin-top: 0;}
+        .item{width: 90%;margin:0 5%;height: 85px;display: block;}
+        .item div:first-child{height: 100%;width: 45%;float: left;}
+        .item div:last-child{height: 100%;width: 55%;float: right;}
+        .item img{height: 100%;width: 100%;;}
+        .mage{margin-left: auto;font-size: 14px;color: #9296a3;}
+        .mages{overflow: hidden;}
+        .mages span{width: 100%;height: auto;line-height: 1.2rem;float: left;padding: 0 0 0 10px;;}
+        .mages span:first-child{font-size: 14px;padding-bottom: 10px;width: auto;}
+        .mages span:nth-child(2){font-size: 12px;color: #9296a3;}
+        .mages span:nth-child(3){font-size: 12px;color: #9296a3;display: block;}
+        .mages span:nth-child(4){font-size: 12px;color: #9296a3;display: block;float: left;width: auto;}
+        .mages span:nth-child(5){font-size: 12px;color: #9296a3;display: block;float: left;}
+        /*.desc{display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;*/
+            /*height:57px !important;margin-top: 5px;color:#8f8f94;font-size:14px;}*/
+        .l_icon0{font-style: normal;margin-left: 17px;font-size: 14px;}
+        .r_icon{background: url("../../icon/r_arrow1.png")no-repeat;background-size: cover;}
+        .write{float: left;display: block;width: 18px;height: 18px;margin-top: -3px;}
+        .write img{width: 100%;height: 100%;}
+        .write1{float: right;display: block;width: 30px;height: 30px;margin-top: -12px;}
+        .write1 img{width: 100%;height: 100%;}
+        .xuan{background: url("../../icon/home/choice.png")no-repeat;background-size: cover;}
+        .xue{background: url("../../icon/home/stutask.png")no-repeat;background-size: cover;}
+        .kao{background: url("../../icon/home/olexam.png")no-repeat;background-size: cover;}
+        .mo{background: url("../../icon/home/analogexam.png")no-repeat;background-size: cover;}
+        .tong{background: url("../../icon/home/notice.png")no-repeat;background-size: cover;}
+        .lian{background: url("../../icon/home/olexercise.png")no-repeat;background-size: cover;}
+        .zhi{background: url("../../icon/home/knowledge.png")no-repeat;background-size: cover;}
+        .wei{background: url("../../icon/home/forum.png")no-repeat;background-size: cover;}
+        .wen{background: url("../../icon/home/question.png")no-repeat;background-size: cover;}
+        .gang{background: url("../../icon/home/stupost.png")no-repeat;background-size: cover;}
+    	    
+	    #ul{
+	    	width: 100%;
+	    }
+	    #ul li{
+	    	width: 100%;
+	    	height: 65px;
+	    	border-bottom: 1px solid #f2f2f2;
+	    	background-size:40px 40px;
+	    }
+	
+									  
+        /**========底部菜单（开始）=====**/
+        #nav {
+            background-color: rgb(248,248,248);
+            /*border-top: 1px solid #DADDE0;*/
+            width: 100%;
+            text-align: center;
+            position: relative;
+            font-size: 10px;
+            height:49px;
+        }
+
+        #nav ul {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-flex-direction: row;
+            flex-direction: row;
+        }
+
+        #nav ul li {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+        }
+
+        #nav li a {
+            -webkit-background-size:23px 23px !important;
+            background-size: 23px 23px !important;
+            color: #707070;
+            display: block;
+            padding-top: 34px;
+            line-height: 14px;
+            font-size: 10px;
+        }
+
+        #nav li.active a, #nav a.active {
+            color: #eb3e2e;
+        }
+        /**========底部菜单（结束）=====**/
+		 #header .header {
+            display: none;
+            position: relative;
+
+        }
+
+        #header .active {
+            display: block;
+        }
+
+        /**========底部菜单各个按钮详细的菜单图片样式（开始）=====**/
+
+        #nav .home {
+            background: url(../../icon/Group31-1.png) no-repeat center 10px;
+        }
+
+        #nav .home.active, #nav li.active .home {
+            background: url(../../icon/Group31.png) no-repeat center 10px;
+        }
+
+
+
+        #nav .action {
+            background: url(../../icon/Group4-1.png) no-repeat center 10px;
+        }
+
+        #nav .action.active, #nav li.active .action {
+            background: url(../../icon/Group4.png) no-repeat center 10px;
+        }
+
+
+
+        #nav .task {
+            background: url(../../icon/group11.png) no-repeat center 10px;
+        }
+
+        #nav .task.active, #nav li.active .task {
+            background: url(../../icon/group_11.png) no-repeat center 10px;
+        }
+
+
+        #nav .choice {
+            background: url(../../icon/chose.png) no-repeat center 10px;
+        }
+
+        #nav .forum {
+            background: url(../../icon/Group4-1.png) no-repeat center 10px;
+        }
+
+        #nav .choice.active, #nav li.active .choice {
+            background: url(../../icon/chose_1.png) no-repeat center 10px;
+        }
+
+
+        #nav .user {
+            background: url(../../icon/me_1.png) no-repeat center 10px;
+        }
+
+        #nav .user.active, #nav li.active .user {
+            background: url(../../icon/Group32.png) no-repeat center 10px;
+        }
+		
+		#nav .forum {
+            background: url(../../icon/Group-1.png) no-repeat center 10px;
+        }
+
+        #nav .forum.active, #nav li.active .forum {
+            background: url(../../icon/Group3.png) no-repeat center 10px;
+        }
+
+
+        #nav .shopping {
+            background: url(../../icon/Group4-1.png) no-repeat center 10px;
+        }
+
+        #nav .shopping.active, #nav li.active .shopping {
+            background: url(../../icon/Group4.png) no-repeat center 10px;
+        }
+        /**========底部菜单各个按钮详细的菜单图片样式（借宿）=====**/
+        .set{width: 25px; height: 24px;float: right;display: block;background: #eb3e2e;;
+             margin-top: 13px;margin-right: 13px;    background-size: cover;}
+        /*background: url("./icon/home/set.png")no-repeat;*/
+        .head_bj{width: 100%;height: auto;float: left;background: #eb3e2e; color: #fff;border-bottom: 25px solid #eb3e2e;}
+        .head{height: 80px;width: 90%;float: left;padding:5% 5% 10px 5%;background: #eb3e2e;}
+        .img{height: 70px;width: 70px;float: left;border-radius: 50%;overflow: hidden;background: #fff;}
+
+        .img_0{width: 50px;height: 50px;float: left;margin: 10px;background: red;border-radius: 50%;}
+        .list{width: 70%;height: 60px;float: left;;padding: 0 0 15px 15px;}
+        .list li{width: 100%;height:50%;float: left;line-height: 30px;}
+        #qualification{display: block;width: 18px;height: 18px;line-height: 22px; background:url("./icon/pen.png") no-repeat;
+            background-size:18px 18px ;float: left;margin-left:10px;text-align: center;color: #fff;margin-top:2px}
+        .list li span{display: block;float: left;}
+        .top{
+            background: #fff;
+            height: 44px;
+            width: 100%;
+            line-height: 44px;
+            color: #333;
+            font-size: 14px;
+            overflow: hidden;
+            border-bottom: 1px solid #ebebeb;
+        }
+        .top li{
+            float: left;
+            width: 33.3%;
+            text-align: center;
+        }
+        .top11{
+            background: #fff;
+            height: 44px;
+            width: 100%;
+            line-height: 44px;
+            color: #333;
+            font-size: 14px;
+            overflow: hidden;
+            border-bottom: 1px solid #ebebeb;
+        }
+        .top11 li{
+            float: left;
+            width: 33.3%;
+            text-align: center;
+        }
+        .topColor{
+            color: #fa331e;
+        }
+        .move1,.move{
+            width: 25%;
+            height: 2px;
+            position: absolute;
+            bottom: 1px;
+            left: 4%;
+            background: #fa331e;
+        }
+    </style>
+</head>
+<body id="header" style="display: none;">
+
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+    <script>
+        function switchFrameGroupIndex(index){
+            _index=index;
+            api.setFrameGroupIndex({
+                name : "task",
+                index : index,
+                scroll : true
+            });
+        }
+
+
+//        document.getElementById("setting").onclick = function(){
+//            openNewWindow("userInfo","./html/mine/userInfo.html",{})
+//        }
+
+    </script>
+
+    <script type="text/html" id="homeScript">
+        <%for(var i = 0;i< list.length;i++){%>
+            <%=list[i].topHtml%>
+        <%}%>
+
+        <div id="nav" style="position: fixed; bottom: 0;">
+            <ul>
+                <%for(var i = 0;i< list.length;i++){%>
+                    <%=list[i].bottomHtml%>
+                <%}%>
+            </ul>
+        </div>
+
+    </script>
+<script>
+    var user;
+    var tabs;
+    var window_width;
+    var homeAction;//底部菜单栏
+    var bottomAction = {};
+    apiready = function (){
+    	setDataItem("taskAlert",0);
+    	setDataItem("taskAlertBottom",0);
+    	var userInfo = getUserInfo();
+	   
+        systemInit(function(){
+        	ajaxGetWithProgress(getmainpage,{},function(ret,err){
+	            if(ret){
+	                $api.setStorage("homeInfo",ret);
+	            }
+	        });
+            //获取首页信息
+            var homeAction;
+            window_width = api.winWidth;
+                var ret = $api.getStorage("homeInfo");
+                if(isNotBlack(ret)) {
+                    $api.setStorage("menuConfig",ret);
+                    homeAction = ret.ButtomMenu;
+                    //显示底部按钮
+                    var bottomList = [];
+                    tabs = {};
+                    if (homeAction && homeAction.length > 0) {
+                        for (var i = 0; i < homeAction.length; i++) {
+                            var action = bottomAction[homeAction[i].Id];
+                            action.name = homeAction[i].Name;
+                            bottomList.push(action);
+                            var obj = {};
+                            obj.isGroup = action.isGroup;
+                            if (action.isGroup) {
+                                obj.group = action.group;
+                                obj.groupCallBack = action.groupCallBack;
+                            } else {
+                                obj.frame = {
+                                    name: action.winName,
+                                    url: action.url,
+                                    rect: {
+                                        x: 0,
+                                        y: 45,
+                                        w: api.frameWidth,
+                                        h: api.frameHeight - headHeight - bottomHeight + 17
+                                    },
+                                    bounces: false,
+                                    opaque: false,
+                                    bgColor: '#f6f6f6',
+                                    allowEdit: true,
+                                    vScrollBarEnabled: true,
+                                    showProgress: false,
+                                    hScrollBarEnabled: false
+//                                  reload: true
+                                }
+                                if(action.winName == "user"){
+                                    obj.frame.rect ={
+                                        x: 0,
+                                        y: 0,
+                                        w: api.frameWidth,
+                                        h: api.frameHeight - bottomHeight+7
+                                    }
+                                }
+                            }
+                            tabs[action.winName] = obj;
+                        }
+                        var data = {list: bottomList};
+                        var html = template("homeScript", data);
+                        document.getElementById("header").innerHTML = html;
+                        document.getElementById("header").style.display = "block";
+                        openTab('home');
+                        /*******通知公告的小红点消息提示***********/
+                        document.getElementById("first").innerHTML = "<span style='float:right;margin-right:15px;'>"+userInfo.ActualName+"</span>" + "<span style='float:right;margin-right:10px;'>"+"欢迎"+"</span>" ;
+                    }
+
+                }
+        });
+//      setLocationValue();
+        //添加安卓退出按钮事件
+        api.addEventListener({
+            name: 'keyback'
+        }, function (ret, err) {
+            closeOnKeyBack();
+        });
+        
+        /*****判断是不是第一次进入首页   否则出发下拉刷新************/
+        var flag = false;
+    	api.addEventListener({
+		    name:'viewappear'
+		}, function(ret, err){  
+			if (flag) {
+				api.execScript({
+		            frameName:'home',
+		            script: 'reloadHtmls()'
+		       	});
+			}else{
+				flag = true;
+			}			  	
+		});
+        
+        
+        
+        if(api.systemType == 'ios') {
+            api.setStatusBarStyle({
+                style: 'light'
+                //style : 'dark'
+            });
+        }
+        
+        api.execScript({
+	        name: 'main',
+	        frameName:'task',
+	        script: 'reloadHtml()'
+	    });
+    };
+	
+	
+	/************首页右上角的欢迎某某某*****/
+	function reloads(){
+		var userInfo = getUserInfo();
+		document.getElementById("first").innerHTML = "<span style='float:right;margin-right:15px;'>"+userInfo.ActualName+"</span>" + "<span style='float:right;margin-right:10px;'>"+"欢迎"+"</span>" ;
+	}
+	
+    var backButtonPress = 0;
+    function closeOnKeyBack() {
+        backButtonPress++;
+        if (backButtonPress > 1) {
+            closeApp();
+        } else {
+            api.toast({msg: '再按一次退出应用'});
+        }
+        setTimeout(function () {
+            backButtonPress = 0;
+        }, 1000);
+    }
+
+  function switchFrameCallback(index){
+        var spans=document.querySelector(".scrollbar").querySelectorAll("li");
+        for(var i = 0;i < spans.length;i++){
+            if(i == index){
+                spans[i].style.color="#19a4ff";
+            }else{
+                spans[i].style.color="#333";
+            }
+        }
+    }
+
+
+</script>
+</body>
+</html>

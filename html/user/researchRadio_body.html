@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+      <!--//上面是针对ios-->
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>考试</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css"/>
+    <style>
+        html,body{
+    		background: #efefef;
+    	}
+    	li{
+    		list-style: none;
+    	}
+    	.top{    		
+    		width: 100%;
+    		text-align: center;
+    		font-size: 12px;
+    		color: #323232;
+    		padding: 11px 0;
+    		border-bottom: 1px solid #ebebeb;
+    		background: #fff;
+    	}
+    	.num{
+    		display: inline-block;
+    		width: 20px;
+    		height: 20px;
+    		background: red;
+    		border-radius: 5px;
+    		text-align: center;
+    		line-height: 20px;
+    	}	
+    	.con{
+    		padding: 15px;
+    		border-bottom: 1px solid #ebebeb;
+    		overflow: hidden;
+    		background: #fff;
+    		color:#939393;
+    	}
+    	.imgs{
+    		float: left;
+    		width: 22px;
+    		height: 22px;
+    		display: inline-block;
+    		margin-left: 5px;
+    	}
+    	.left{
+    		float: left;
+    		display: inline-block;
+    		width: 90%;
+    	}
+    	.choose{
+    		padding:15px 30px;
+    		line-height: 40px;   		
+    	}
+    	.choose li{
+    		width: 100%;
+    		overflow: hidden;
+    		color: #909090;
+    		line-height: normal;
+    		padding-top: 10px;
+    	}   	
+    	.circle{
+    		display: inline-block;
+    		width: 21px;
+    		height: 21px;
+    		border-radius: 100%;
+    		background: #676060;
+    		float: left;
+    		margin-top: 1px;
+    	}
+    	.square{
+    		width: 18px;
+    		height: 18px;
+    		margin-top: 3px;
+    		border-radius: 0;
+    	}
+    	.seclect{
+    		float: left;
+    		margin-left: 10px;
+    		width: 85%;
+    	}
+    	.bottom{
+    		width: 100%;
+    		height: 56px;   		
+    		overflow: hidden; 
+    		background: #fff;	
+    		line-height: 56px;
+    		text-align: center;
+    		border-bottom: 1px solid #ebebeb;
+    	}
+    	.bottom img{
+    		width: 25px;
+    		height: 25px;
+    		position: absolute;
+    		right: 6px;
+    		top: 15px;
+    	}
+    	.bottom .left{
+    		left: 6px;
+    	}
+    	.bottomspan{
+    		display: inline-block;
+    		line-height: 25px;
+    		height: 25px;
+    		width: 31.5%;
+    		margin-top: 15px;
+    		text-align: center;
+    	}
+    	.bottom .mid{
+    		display: inline-block;
+    		border-right: 1px solid #ebebeb;
+    		color: #909090;
+    	}
+    	.midright{
+    		display: inline-block;
+    		border-left: 1px solid #ebebeb;
+    	}
+    	#foot{
+    		width: 100%;
+    		position: fixed;
+    		bottom: -224px;
+    		height: 280px;
+    		background: #fff;
+    		z-index: 1000;
+    	}
+    	#foot ul{
+    		width: 100%;
+    		height: 214px;
+    		overflow: scroll;
+    	}
+    	#foot ul li{
+    		float: left;
+    		width: 9%;
+    		height: 30px;
+    		background: #9696a3;
+    		margin:5% 0 0 6.5%;
+    		text-align: center;
+    		line-height: 20px;
+    		border-radius: 5px;
+    		color: #fff;
+    		line-height: 30px;
+    	}
+    	#mid{
+    		margin-bottom: 70px;
+    	}
+    	.bg{
+    		position: fixed;
+    		left: 0;
+    		top: 0;
+    		width: 100%;
+    		height: 100%;
+    		background: #000;
+    		opacity: 0.3;
+    		display: none;
+    		z-index: 100;
+    	}
+    	
+    	#ipt,#texta{
+    		width: 90%;
+    		height: 200px;
+    		display: block;
+    		margin: 5px auto;
+    		border: 1px solid #666;
+    		padding: 5px;
+    		resize: none;
+    		outline: none;
+    		margin-bottom: 60px;
+    	}
+    	#ipt{
+    		height: 120px;
+    	}
+
+    	.Judg{
+    		width: 50%;
+    		margin: 10px auto;
+    		margin-top: 30px;
+    		overflow: hidden;
+    		text-align: center;
+    	}
+    	.Judg span{
+    		width: 35px;
+    		height: 35px;
+    		border-radius: 100%;
+    		float: left;
+    		text-align: center;
+    		line-height: 37px;
+    		font-size: 14px;
+    		color: #333;
+    	}
+    	#titles{
+    		display: inline-block;
+			width: 100px;
+			overflow: hidden;/*溢出隐藏*/
+			text-overflow: ellipsis;/*文本溢出修剪,显示省略号*/
+			white-space: nowrap;/*使文字不换行*/
+    	}
+    	.Judg li{
+    		width: auto;
+    		float: left;
+    		text-indent: 5px;
+    	}
+    	.Judg li:nth-child(2){
+    		float: right;
+    		margin-left: 30px;
+    	}
+    		#submitAlert{
+    		overflow: hidden;
+    		z-index: 1000;
+    		position: absolute;
+    		top: 160px;
+    		left: 7%;
+    		width: 82%;
+    		height: auto;
+    		border: 1px solid #ebebeb;
+    		display: none;
+    		background: #fff;
+    		border-radius: 5px;
+    		text-align: center;
+    	}
+    	#submitAlertdiv{
+    		width: 100%;
+    		height: 40px;
+    		text-align: center;
+    		line-height: 40px;
+    		font-size: 16px;
+    		border-radius: 5px;
+    		background: #eb3e2e;
+    	}
+    	#submitAlerts{
+    		padding: 15px 5px;
+    	}
+    </style>
+</head>
+<body id="body" style="display: none;">
+	<div id="wrap">		
+		<div class="top">
+			<span class="num"></span>
+			<span>:</span>
+			<span class="num"></span>
+			<span>:</span>
+			<span class="num"></span>
+		</div>
+		<div id="main">			
+			<div id="mid">
+				
+			</div>
+			
+		</div>
+		<div id="foot">
+			<div class="bottom">
+				<span class="mid bottomspan" id="left">上一题<img class="left" src="../../icon/left.png" alt="" /></span>
+				<span id="questions" class="bottomspan"><span class="qus">1</span>/<span class="qus"></span></span>
+				<span class="midright bottomspan" id="right">下一题<img class="right" src="../../icon/redRight.png" alt="" /></span>
+			</div>
+			<ul id="ul">
+				
+			</ul>
+		</div>	
+	</div>
+	<div class="bg"></div>
+	<div id="submitAlert">
+		<span id="submitAlerts"></span>
+		<div id="submitAlertdiv">确定</div>
+	</div>
+</body>
+<script id="scriptDiv1" type="text/html">
+	<%if(list.Type == 2){%>
+	<div class="con">
+		<span class="left">第<%=list.SortNo%>题(多选题)、<%=list.Content%></span>
+		<img class="imgs" id="imgs" src="../../icon/collection.png" alt="" onclick="cancelOrNo('<%=list.QuestionId%>')" />
+	</div>
+	<ul class="choose" id="choose">
+		<%for(var i = 0;i < list.Options.length;i++){%>
+			<li>
+				<input class="circle square" type="checkbox" />
+				<span class="seclect"><%=list.ABCD[i]%>&nbsp、<%=list.Options[i]%></span>
+			</li>
+		<%}%>
+	</ul>
+	<%}else if(list.Type == 1){%>
+	<div class="con">
+		<span class="left">第<%=list.SortNo%>题(单选题)、<%=list.Content%></span>
+		<img class="imgs" id="imgs" src="../../icon/collection.png" alt="" onclick="cancelOrNo('<%=list.QuestionId%>')" />
+	</div>
+	<ul class="choose" id="choose">
+		<%for(var i = 0;i < list.Options.length;i++){%>
+		<li>
+			<input class="circle" type="radio" name="1"/>
+			<span class="seclect"><%=list.ABCD[i]%>&nbsp、<%=list.Options[i]%></span>
+		</li>
+		<%}%>
+	</ul>
+	<%}else if(list.Type == 4){%>
+	<div class="con">
+		<span class="left">第<%=list.SortNo%>题(问答题)、<%=list.Content%></span>
+		<img class="imgs" id="imgs" src="../../icon/collection.png" alt="" onclick="cancelOrNo('<%=list.QuestionId%>')" />
+	</div>
+	<textarea name="" rows="" cols="" value="" id="texta" placeholder="请输入我的答案">
+		
+	</textarea>
+	<div style="height: 1px;width: 100%;"></div>
+	<%}else if(list.Type == 0){%>
+	<div class="con">
+		<span class="left" style="display: block;"><span style="float: left;">第<%=list.SortNo%>题(填空题)、<%=list.Content%></span>
+			
+	    </span>		
+		<img class="imgs" id="imgs" src="../../icon/collection.png" alt="" onclick="cancelOrNo('<%=list.QuestionId%>')" />
+	</div>
+	<textarea id="ipt" name="" rows="" cols="" value="" placeholder="请输入我的答案"></textarea>
+	<%}else if(list.Type == 3){%>
+	<div class="con">
+		<span class="left" style="display: block;"><span style="float: left;">第<%=list.SortNo%>题(判断题)、<%=list.Content%></span></span>
+		<img class="imgs" id="imgs" src="../../icon/collection.png" alt="" onclick="cancelOrNo('<%=list.QuestionId%>')" />
+	</div>
+	<div class="Judg" id="choose">
+		<li>
+			<input class="circle" type="radio" />错误
+		</li>
+		<li>
+			<input class="circle" type="radio" />正确
+		</li>		
+	</div>
+	<%}%>
+</script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/login.js"></script>
+<script>
+	var submitUseTime = 0;
+	var now = new Date();
+	var nowarr =  now+"arr";/***这个数组保存将要提交的答案*/
+	nowarr  = [];
+	var allResult = [];
+	var _index = 0;
+	var res;
+	var results = [];
+	var circles;
+	var TotalScore = 0;
+	var rets; /*****这个变量保存上个页面传过来的Testid*********/
+	var arr = [];/***这个数组保存将要提交的答案*/
+	var lis;
+	var abcd = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q"];
+	var ABCD = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q"];
+	apiready = function(){
+		//从课程学习结束过来的考试  需要把课程学习这一页关掉////
+		api.closeWin({
+        	name: 'news'
+    	});
+		dialogBox = api.require('dialogBox');
+		rets = api.pageParam;
+		api.showProgress();
+        var obj = {      	
+            TestId : rets.TestId     
+        };       
+        ajaxGet(startexam,obj,function(ret,err) {
+            if (ret) {
+            	if(isBlack(ret)){
+					mui.toast("暂无数据！");
+					return;
+				}
+            	if(ret.ExamStartId == -4||ret.ExamStartId == -3||ret.ExamStartId == -2||ret.ExamStartId == -1|ret.ExamStartId == 0){
+            		toast(ret.Message);
+            		setTimeout(function(){
+            			closeWin();
+            		},1000)
+            		return;
+            	}
+            	
+            	submitUseTime = ret.UseTime;
+            	api.hideProgress();
+            	res = ret;
+            	/*****判断是否需要考试倒计时****/
+            	if (res.Time > 0) {
+            		timeDown();
+            	}else if(res.Time <= 0) {
+            		document.getElementsByClassName("num")[0].innerHTML = "不";
+					document.getElementsByClassName("num")[1].innerHTML = "限";
+					document.getElementsByClassName("num")[2].innerHTML = "时";
+            	}
+            	allResult[res.Data] = res.Data;
+            	results = allResult[res.Data];
+            	var lastNum = 0;
+				for(var i = 0; i < results.length;i++){		
+					var objs = {};
+					objs.Answer = results[i].MyAnswer;
+					objs.Score = results[i].Score;
+					objs.QuestionId = results[i].QuestionId;
+					arr[i] = objs;
+					if(isNotBlack(results[i].MyAnswer)){
+						lastNum++;
+					}
+				}
+				
+            	num = allResult[res.Data].length;
+            	for (var i = 0; i < num;i++) {
+					document.getElementById("ul").innerHTML += "<li>"+(i+1)+"</li>";
+					results[i].notice = 0;
+					TotalScore += parseInt(results[i].Score);
+				} 
+				lis = document.getElementById("ul").querySelectorAll("li");	
+//				document.getElementById("titles").innerHTML = ret.ExamName;
+				document.getElementsByClassName("qus")[1].innerHTML = num;
+				/*****判断是否需要定时提交保存答案****/
+				if (ret.KsSavePaper != 1) {
+					api.execScript({
+			            name: 'researchRadio',
+			            script: "deletesButton()"
+			        });
+				}else if(ret.KsSavePaper == 3){
+					var timesSubmit = (ret.KsCycle)*60*1000;/****定时保存试卷***/
+					setInterval(function(){
+						submits(3);
+					},timesSubmit);
+				}
+				
+				for(var i = 0; i　< results.length;i++){
+					if(results[i].MyAnswer){
+						lis[i].style.background = "#85ba6a";
+					}
+				}
+				circles = document.getElementsByClassName("circle");
+				
+//					if (ret.KsSavePaper != 1 && lastNum != 0) {
+//		                dialogBox = api.require('dialogBox');
+//					    dialogBox.alert ({
+//					        texts: {
+//					            title: "温馨提示",
+//					            content:"是否恢复考试?",
+//					            leftBtnTitle: "否",
+//					            rightBtnTitle: "是"
+//					        },
+//					        tapClose:true,
+//					        styles:{
+//					            bg: '#fff',
+//					            w: api.winWidth *0.8,
+//					            corner: 0,
+//					
+//					            title:{
+//					                marginT : 20,
+//					                titleSize : 18,
+//					                corner: 1,
+//					                titleColor : '#eb3e2e'
+//					            },
+//					            content:{
+//					                color: '#000',
+//					                size: 14
+//					            },
+//					            left:{
+//					                marginB: 0,
+//					                marginL: 0,
+//					                w: api.winWidth *0.8*0.5,
+//					                h: 43,
+//					                color:'#000000',
+//					                corner: 0,
+//					                bg: '#E8E8E8',
+//					                size: 16
+//					            },
+//					            right:{
+//					                marginB: 0,
+//					                marginL: 0,
+//					                w: api.winWidth *0.8*0.5,
+//					                h: 43,
+//					                corner: 1,
+//					                bg: '#eb3e2e',
+//					                size: 16,
+//					                color:'#ffffff'
+//					            }
+//					        }
+//					    },function(ret){
+//					        if (ret.eventType == 'left') {
+//					        	for(var i = 0; i < results.length;i++){		
+//									arr[i].Answer = "";
+//									results[i].MyAnswer = "";
+//									lis[i].style.background = "#9696a3";
+//								}
+//					        	addDataToHtml(res);
+//				               	document.getElementById("body").style.display = "block";
+//					            dialogBox.close ({
+//					                dialogName: 'alert'
+//					            });
+//					        }else{
+				               	addDataToHtml(res);
+				               	document.getElementById("body").style.display = "block";
+//					            dialogBox.close ({
+//					                dialogName: 'alert'
+//					            });
+//					        }
+//					    });
+//	               }
+//					else{
+//	               		addDataToHtml(res);
+//				        document.getElementById("body").style.display = "block";
+//	               }
+//             }
+//              loadShow();
+            } else {
+             	toast("未知错误！")
+            }
+        })		             
+	};
+	
+	
+	/******考试时间倒计时*************/
+	function timeDown(){
+		var starttime = res.Time;
+    	var tim = setInterval(function(){
+    		var oHour = Math.floor(starttime/(60*60));
+			var _oHour = starttime%(60*60);
+			var oMinutes = Math.floor(_oHour/(60));
+			var _oMinutes = _oHour%(60);
+			var oSecond = Math.floor(_oMinutes);
+			starttime--;
+			submitUseTime++;
+			if (starttime < 0) {
+				clearInterval(tim);
+	        dialogBox.alert ({
+	            texts: {
+	                title: '温馨提示',
+	                content:'考试已经结束，点击确定提交试卷！',
+	                rightBtnTitle: '确定'
+	            },
+	            styles:{
+	                bg: '#fff',
+	                w: 300,
+	                title:{
+	                    marginT : 20,
+	                    titleSize : 18,
+	                    corner: 1,
+	                    titleColor : '#eb3e2e'
+	                },
+	                content:{
+	                    color: '#000',
+	                    size: 16
+	                },
+	                right:{
+	                    w: 300,
+	                    h: 40,
+	                    marginL: 0,
+	                    marginB: 0,
+	                    corner: 1,
+	                    bg: '#eb3e2e',
+	                    size: 18,
+	                    color:'#ffffff'
+	                }
+	            }
+        },function(ret){
+        	if (ret.eventType == 'right') {
+                var dialogBox = api.require('dialogBox');                        	         		            
+	                dialogBox.close ({
+	                    dialogName: 'alert'
+	                });	  
+	                submits(1);
+	           		closeWin();
+                }
+             });	
+		}
+			document.getElementsByClassName("num")[0].innerHTML = oHour;
+			document.getElementsByClassName("num")[1].innerHTML = oMinutes;
+			document.getElementsByClassName("num")[2].innerHTML = oSecond;
+    	},1000)
+	};
+	
+	function reloadHtml(){
+        apiready();
+    };
+    
+	
+	/***********用于把每一条试题组装上去************/
+	function addDataToHtml() {	
+		num = results.length;
+		results[_index].ABCD = ABCD;
+		var data = {list: results[_index]};
+		var html = template('scriptDiv1',data);
+		document.getElementById('main').innerHTML = html;
+		var imgsChange = document.getElementById("imgs");/****点击收藏**/
+		
+		if(results[_index].Type == 1 || results[_index].Type == 3 || results[_index].Type == 2){
+			circles = document.getElementById("choose").querySelectorAll("li");	
+				for(var i = 0; i < circles.length;i++ ){
+					var arr3 = [];
+					circles[i].onclick = function(){						
+						for(var i = 0; i < circles.length;i++){
+							if(results[_index].Type == 1 || results[_index].Type == 3){
+								var isSelected = this.getAttribute("datatype");
+								
+								if (circles[i] == this) {
+									this.setAttribute("datatype","selected");
+									this.querySelector(".circle").checked = "checked";
+//									this.querySelector(".circle").style.background = "#ec6a6a";
+								} else{
+									circles[i].removeAttribute("datatype");	
+									circles[i].querySelector(".circle").checked = false;
+//									circles[i].querySelector(".circle").style.background = "#676060";
+								}
+							}else if(results[_index].Type == 2){
+								var isSelected = this.getAttribute("datatype");
+								if (circles[i] == this) {
+									if (!isSelected) {
+										
+										this.setAttribute("datatype","selected");
+										this.querySelector(".circle").checked = "checked";
+//										this.querySelector(".circle").style.background = "#ec6a6a";
+									} else{
+										this.removeAttribute("datatype");
+										circles[i].querySelector(".circle").checked = false;
+//										this.querySelector(".circle").style.background = "#676060";
+									}							
+								}
+							}				
+						}
+					}
+			    }
+		    }
+			var MyAnswers = results[_index].MyAnswer;
+			if(results[_index].Type == 2 || results[_index].Type == 1){
+				
+				for(var j = 0; j < abcd.length;j++ ){
+					if(MyAnswers.indexOf(abcd[j]) != -1){
+						circles[j].setAttribute("datatype","selected");
+						circles[j].querySelector(".circle").checked = "checked";
+//						circles[j].querySelector(".circle").style.background = "#ec6a6a";
+					}
+				}
+			}else if(results[_index].Type == 0){
+				document.getElementById("ipt").value = MyAnswers;
+			}else if(results[_index].Type == 3){
+				if (MyAnswers) {
+					circles[MyAnswers].setAttribute("datatype","selected");
+					circles[MyAnswers].querySelector(".circle").checked = "checked";
+//					circles[MyAnswers].querySelector(".circle").style.backgroundColor = "#ec6a6a";
+				}			
+			}else if(results[_index].Type == 4){
+				document.getElementById("texta").value = MyAnswers;
+			}
+			results[_index].MyAnswer = "";/****清空服务器上返回的该条数据   避免跟本地组装的答案冲突***/
+	    };
+	
+	
+	/*****************点击下一题/上一题*****************/
+	var leftRight = "left";
+	document.getElementById("left").onclick = function (){
+		if(flag == 1){
+			down();
+		}
+		leftRight = "left";			
+		agains();
+	};
+	
+	document.getElementById("right").onclick = function (){
+		if(flag == 1){
+			down();
+		}
+		leftRight = "right";	
+		agains();
+	};
+	
+	
+/****************保存上一题或者下一题的答案************/
+	function agains(id){
+		var lastIndex = _index;//保存上一题的索引值
+
+		if (leftRight == "left") {
+			if (_index <= 0) {
+				return;
+			}
+			_index--;
+		}else if (leftRight == "right"){
+			
+			if(_index >= num-1){
+				return;
+			}
+			_index++;
+		}else if(leftRight == "bottoms"){
+			_index = id;
+		}
+		
+		if (results[lastIndex].Type == 2){
+			var arr3 = [];
+			var answers = "";
+			var s = 0;
+			var objs = {};
+			for(var i = 0; i < circles.length;i++ ){
+				var isSelected = circles[i].getAttribute("datatype");
+				if (isSelected) {
+					answers += abcd[i]
+					objs.Answer = answers;
+					objs.Score = results[lastIndex].Score;
+					objs.QuestionId = results[lastIndex].QuestionId;
+					arr[lastIndex] = objs;
+					lis[lastIndex].style.background = "#85ba6a";
+				}
+				if (!isSelected) {
+					s++;
+					if(ss == circles.length){
+						arr[lastIndex].Answer = "";
+						lis[lastIndex].style.background = "#9696a3";
+					}
+				}
+			}	
+			if(results[lastIndex].notice == 1){
+	        	 lis[lastIndex].style.background = "#ec6a6a";        	        
+			}
+			 //上面是保存上一题的答案
+			 
+			 //下面是显示下一题的答案
+			 if (leftRight == "left" || leftRight == "right" || leftRight == "bottoms") {
+			 	commens();
+			 }
+			
+		} else if(results[lastIndex].Type == 1) {
+			var objs = {};
+			var s = 0;
+			for(var i = 0; i < circles.length;i++ ){
+				var isSelected = circles[i].getAttribute("datatype");
+				if (isSelected) {
+					
+					objs.Answer = abcd[i];
+					objs.Score = results[lastIndex].Score;
+					objs.QuestionId = results[lastIndex].QuestionId;
+					lis[lastIndex].style.background = "#85ba6a";
+					arr[lastIndex] = objs;
+				}else{
+					s++;
+					if(ss == circles.length){
+						arr[lastIndex].Answer = "";
+						lis[lastIndex].style.background = "#9696a3";
+					}
+				}
+			}			
+			if(results[lastIndex].notice == 1){
+	        	 lis[lastIndex].style.background = "#ec6a6a";        	        
+			}
+			 //下面是显示下一题的答案
+			if (leftRight == "left" || leftRight == "right" || leftRight == "bottoms") {
+			 	commens();
+			 }
+			
+		}else if(results[lastIndex].Type == 4) {
+			
+			if (document.getElementById("texta").value != "") {
+				
+				var	answess = document.getElementById("texta").value;	
+				var objs = {};				
+				objs.Answer = answess;
+				objs.Score = results[lastIndex].Score;
+				objs.QuestionId = results[lastIndex].QuestionId;
+				arr[lastIndex] = objs;
+				lis[lastIndex].style.background = "#85ba6a";
+				 //下面是显示下一题的答案				
+			}else{
+				arr[lastIndex].Answer = "";
+				lis[lastIndex].style.background = "#9696a3";
+			}
+			
+			if(results[lastIndex].notice == 1){
+	        	 lis[lastIndex].style.background = "#ec6a6a";        	        
+			}
+			if (leftRight == "left" || leftRight == "right" || leftRight == "bottoms") {
+			 	commens();
+			 }
+		}else if(results[lastIndex].Type == 0) {
+			if (document.getElementById("ipt").value != "") {
+				var	answes = document.getElementById("ipt").value;	
+				var objs = {};			
+				objs.Answer = answes;
+				objs.Score = results[lastIndex].Score;
+				objs.QuestionId = results[lastIndex].QuestionId;
+				arr[lastIndex] = objs;
+				lis[lastIndex].style.background = "#85ba6a";
+			}else{
+				arr[lastIndex].Answer = "";
+				lis[lastIndex].style.background = "#9696a3";
+			}
+			if(results[lastIndex].notice == 1){
+	        	 lis[lastIndex].style.background = "#ec6a6a";        	        
+			}
+			 //下面是显示下一题的答案
+			if (leftRight == "left" || leftRight == "right" || leftRight == "bottoms") {
+			 	commens();
+			 }
+		}else if(results[lastIndex].Type == 3) {			
+			var answes;
+			var s = 0;
+			for(var i = 0; i < circles.length;i++ ){
+				var isSelected = circles[i].getAttribute("datatype");
+				if (isSelected) {
+					answes = i;
+					var objs = {};
+					objs.Answer = answes;
+					objs.Score = results[lastIndex].Score;
+					objs.QuestionId = results[lastIndex].QuestionId;
+					arr[lastIndex] = objs;
+					lis[lastIndex].style.background = "#85ba6a";	
+				}else {
+					s++;
+					if(ss == 2){
+						arr[lastIndex].Answer = "";
+						lis[lastIndex].style.background = "#9696a3";
+					}
+				}
+			}
+			if(results[lastIndex].notice == 1){
+	        	 lis[lastIndex].style.background = "#ec6a6a";        	        
+			}
+			 //下面是显示下一题的答案
+			if (leftRight == "left" || leftRight == "right" || leftRight == "bottoms") {
+			 	commens();
+			 }
+		}
+	}
+	
+	/******信息回显************/
+	function commens(){
+		document.getElementsByClassName("qus")[0].innerHTML = _index+1;
+			addDataToHtml(res);
+			if (results[_index].Type == 2 || results[_index].Type == 1) {
+				if(isNotBlack(arr)){
+					
+					if (arr[_index].Answer) {
+						var MyAnswers = arr[_index].Answer;
+						for(var j = 0; j < abcd.length;j++ ){
+							if(MyAnswers.indexOf(abcd[j]) != -1){
+								circles[j].setAttribute("datatype","selected");
+								circles[j].querySelector(".circle").checked = "checked";
+//								circles[j].querySelector(".circle").style.background = "#ec6a6a";
+							}
+						}				
+					}
+				}
+			}else if(results[_index].Type == 4){
+				if(isNotBlack(arr)){
+					if (arr[_index].Answer) {
+						var answer = arr[_index].Answer;
+						document.getElementById("texta").value = answer;	
+					}
+				}							
+			}else if(results[_index].Type == 3){
+				
+				if(isNotBlack(arr)){
+					var answer = parseInt(arr[_index].Answer);
+					if (arr[_index].Answer === 0 || arr[_index].Answer === 1) {
+						circles[answer].setAttribute("datatype","selected");
+						circles[answer].querySelector(".circle").checked = "checked";
+					}
+				}							
+			}else if(results[_index].Type == 0){
+				if(isNotBlack(arr)){
+					if (arr[_index].Answer) {
+						var answer = arr[_index].Answer;
+						document.getElementById("ipt").value = answer;
+					}
+				}									
+			}			
+					
+			if(results[_index].notice == 1){
+				document.getElementById("main").querySelector("img").src = "../../icon/haveCollect.png";
+			}
+	}
+</script>
+<script>
+	/************点击取消或者收藏*****************/	
+	function cancelOrNo(id){
+			
+		if(results[_index].notice == 0){
+        	 results[_index].notice = 1;
+        	 lis[_index].style.background = "#ec6a6a";
+             document.getElementById("main").querySelector("img").src = "../../icon/haveCollect.png";	           	        
+		}else if(results[_index].notice == 1){
+    	 	 results[_index].notice = 0;
+    	 	 lis[_index].style.background = "#85ba6a";
+         	 document.getElementById("main").querySelector("img").src = "../../icon/collection.png";
+        } 
+	};
+
+	/*************点击弹出框弹出**************/
+	var flag = 0;
+	var ss;/******保存底部导航的索引值**/
+	document.getElementById("questions").onclick = function(){
+		lis = document.getElementById("ul").querySelectorAll("li");
+		if (flag == 0) {
+			if (results[_index].Type == 2) {
+			for(var i = 0; i < circles.length;i++ ){
+					var isSelected = circles[i].getAttribute("datatype");
+					if (isSelected) {
+						lis[_index].style.background = "#85ba6a";
+					}
+				}	
+				if(results[_index].notice == 1){
+		        	 lis[_index].style.background = "#ec6a6a";        	        
+				}
+			} else if(results[_index].Type == 1) {
+				for(var i = 0; i < circles.length;i++ ){
+					var isSelected = circles[i].getAttribute("datatype");
+					if (isSelected) {
+						lis[_index].style.background = "#85ba6a";				
+					}
+				}
+				if(results[_index].notice == 1){
+		        	 lis[_index].style.background = "#ec6a6a";        	        
+				}
+			}else if(results[_index].Type == 4) {
+				if (document.getElementById("texta").value != "") {
+					lis[_index].style.background = "#85ba6a";
+				}else{
+					lis[_index].style.background = "#9696a3";
+				}
+				if(results[_index].notice == 1){
+		        	 lis[_index].style.background = "#ec6a6a";        	        
+				}
+			}else if(results[_index].Type == 0) {
+				if (document.getElementById("ipt").value != "") {
+					lis[_index].style.background = "#85ba6a";
+				}
+			}else if(results[_index].Type == 3) {			
+				for(var i = 0; i < circles.length;i++ ){
+					var isSelected = circles[i].getAttribute("datatype");
+					if (isSelected) {
+						lis[_index].style.background = "#85ba6a";				
+					}
+				}	
+				if(results[_index].notice == 1){
+		        	 lis[_index].style.background = "#ec6a6a";        	        
+				}
+			}			
+			for(var i = 0;i < lis.length;i++){
+				lis[i].onclick = function(){
+					for(var s = 0;s < lis.length;s++){
+						if (lis[s] == this) {
+							down();
+							ss = s;
+							leftRight = "bottoms";
+							
+							agains(ss);							
+							document.getElementsByClassName("qus")[0].innerHTML = _index+1;
+						}							
+					}
+				}
+			}
+			var i = -240;
+			var Opacity = 0;
+			var timer;
+			document.getElementsByClassName("bg")[0].style.display = "block";
+			timer = setInterval(function(){
+				if (i >= 0) {
+					i = 0;
+					flag = 1;
+					Opacity = 1;
+					clearInterval(timer);
+				} else{
+					i = i + 40;
+					Opacity += 1/8;
+					document.getElementById("ul").style.opacity = Opacity;
+					document.getElementById("foot").style.bottom = i + "px";
+				}	
+			})
+		} else{
+			down();
+		}				
+	};
+	
+	/********弹出框消失******************/
+	function down(){
+		var timers;/********计时器****/
+		var i = 0;
+		var Opacity = 1;
+		document.getElementsByClassName("bg")[0].style.display = "none";
+		timers = setInterval(function(){
+			i = i-40;
+			Opacity -= 1/6;
+			if (i <= -224) {
+				i = -224;
+				flag = 0;
+				Opacity = 0;
+				clearInterval(timers);
+//			} else{
+				
+			}	
+			document.getElementById("ul").style.opacity = Opacity;
+			document.getElementById("foot").style.bottom = i + "px";
+		})
+	};
+	
+	document.getElementsByClassName("bg")[0].onclick = function(){
+		down();
+	}
+</script>
+<script>
+	/*************点击提交试卷+临时保存试卷*************/
+	function submits(type){/*****提交试卷的时候  把刚刚答的这道题的答案  保存起来  放进数组  一起提交*****/
+		api.showProgress();
+		var TotalScore = 0;/****申明一个新的变量  用于最终提交试卷的试卷总分***/
+		leftRight = "Submit";/*****避免进入addHtmlData（）   提交的时候不需要加载下一题的试题****/
+		agains();		
+//		var arr1 = [];
+//		for(var i = 0;i < arr.length;i++){
+//			if (isNotBlack(arr[i]) && isNotBlack(arr[i].Answer)) {
+//				arr1.push(arr[i]);
+//				if (arr[i].Answer === 0) {
+//					arr1.push(arr[i]);
+//				}
+//			}
+//		}
+//		for(var i = 0;i < arr.length;i++){
+//			if (arr[i].Answer === 0) {
+//				arr1.push(arr[i]);
+//			}
+//		}
+		
+		for(var i = 0;i < arr.length;i++){
+			TotalScore += parseFloat(arr[i].Score);
+		}
+		if(rets.notice == "all"){
+			for(var i = 0;i < arr.length;i++){
+				if(isBlack(arr[i].Answer)){
+					toast("请答完题目在提交！")
+					api.hideProgress();
+					return;
+				}
+			}
+		}
+		TotalScore = TotalScore.toFixed(2);
+		var myDate = new Date().format("yyyy-MM-dd hh:mm");
+		var parms = {}
+		parms.TestId = rets.TestId;
+		parms.MyAnswer = arr;
+		parms.ExamStartId = res.ExamStartId;
+		parms.SubmitTime = myDate;
+		parms.TotalScore = TotalScore;
+		parms.UseTime = submitUseTime;
+//		alert(JSON.stringify(parms))
+		if (type == 1) {
+			var urls = submitpaper;
+			showDialog("","温馨提示","您确定要提交试卷吗？","取消","确定",function(){
+				ajaxGet(urls,parms,function(ret,err) {
+		            if (ret) { 
+		               api.hideProgress();
+		 			   if (type == 1) {
+				   		    var msg = "交卷成功!";
+		 			   		msg = ret.Message||msg;
+		 			   		setTimeout(function(){
+		 			   			document.getElementsByClassName("bg")[0].style.display = "block";
+			 			   		document.getElementById("submitAlerts").innerHTML = msg;
+			 			   		document.getElementById("submitAlert").style.display = "block"; 
+		 			   		},300)
+				   		    api.execScript({
+				                name: 'test',
+				                frameName:'test_body',
+				                script: 'reloadHtml()'
+				            });
+				            api.execScript({
+				                name: 'imitateTest',
+				                frameName:'imitateTest_body',
+				                script: 'reloadHtml()'
+				            });
+				            api.execScript({
+				                name: 'research',
+				                frameName:'research_body',
+				                script: 'reloadHtml()'
+				            });
+				            api.execScript({
+				                name: 'research',
+				                frameName:'researched_body',
+				                script: 'reloadHtml()'
+				            });
+				            api.execScript({
+				                name: 'personnel',
+				                frameName:'personnel_body',
+				                script: 'reloadHtml()'
+				            });
+				            api.execScript({
+				                name: 'personnel',
+				                frameName:'personneled_body',
+				                script: 'reloadHtml()'
+				            });
+				            api.closeWin({
+		                    	name: 'formalTest'
+		                });
+					   } else if (type == 2){
+						  toast("保存成功!")
+					}
+		              
+		            } else {
+		             	toast("未知错误!")
+		            }
+		        })
+			})
+			return;
+		} else if (type == 2 || type == 3){
+			var urls = savepaper;
+		}
+		ajaxGet(urls,parms,function(ret,err) {
+            if (ret) { 
+               api.hideProgress();
+ 			   if (type == 1) {
+		   		    var msg = "交卷成功!";
+ 			   		msg = ret.Message||msg;
+ 			   		setTimeout(function(){
+ 			   			document.getElementsByClassName("bg")[0].style.display = "block";
+	 			   		document.getElementById("submitAlerts").innerHTML = msg;
+	 			   		document.getElementById("submitAlert").style.display = "block"; 
+ 			   		},300)
+		   		    api.execScript({
+		                name: 'test',
+		                frameName:'test_body',
+		                script: 'reloadHtml()'
+		            });
+		            api.execScript({
+		                name: 'imitateTest',
+		                frameName:'imitateTest_body',
+		                script: 'reloadHtml()'
+		            });
+		            api.execScript({
+		                name: 'research',
+		                frameName:'research_body',
+		                script: 'reloadHtml()'
+		            });
+		            api.execScript({
+		                name: 'research',
+		                frameName:'researched_body',
+		                script: 'reloadHtml()'
+		            });
+		            api.execScript({
+		                name: 'news',
+		                script: 'closeWins()'
+		            });
+		            api.execScript({
+		                name: 'personnel',
+		                frameName:'personnel_body',
+		                script: 'reloadHtml()'
+		            });
+		            api.execScript({
+		                name: 'personnel',
+		                frameName:'personneled_body',
+		                script: 'reloadHtml()'
+		            });
+		            api.closeWin({
+                    	name: 'formalTest'
+                	});
+                	
+                	///以下刷新从考试页面过来的参与考试的页面//
+            		api.execScript({
+				        name: 'chooseCourse',
+				        frameName:'onCourse_body',
+				        script: 'reloadHtml()'
+				    });
+				    api.execScript({
+				        name: 'chooseCourse',
+				        frameName:'haveCourse_body',
+				        script: 'reloadHtml()'
+				    });
+				    
+				    api.execScript({
+				        name: 'studyCourse',
+				        frameName:'studyCourse_body',
+				        script: 'reloadHtml()'
+				    });
+				    api.execScript({
+				        name: 'studyCourse1',
+				        frameName:'activity01',
+				        script: 'reloadHtml()'
+				    });
+				    api.execScript({
+				        name: 'studyCourse',
+				        frameName:'studyCourRight_body',
+				        script: 'reloadHtml()'
+				    });
+				    api.execScript({
+				        name: 'study',
+				        frameName:'study1_body',
+				        script: 'reloadHtml()'
+				    });
+				    //以上是刷新从课程页面进来参与考试的页面//
+                	api.closeWin({
+                    	name: 'news'
+                	});
+			   } else if (type == 2){
+				  toast("保存成功!")
+			}
+              
+            } else {
+             	toast("未知错误!")
+            }
+        })
+	};
+	
+	document.getElementById("submitAlertdiv").onclick = function(){
+		document.getElementsByClassName("bg")[0].style.display = "none";
+   		document.getElementById("submitAlert").style.display = "none";
+   		closeWin();
+	}
+</script>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>在线练习</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css"/>
+    <style>
+    	.top{
+    		width: 100%;
+    		height: 56px;
+    		text-align: center;
+    		padding-top: 20px;
+    		padding-bottom: 5px;
+    		font-size: 16px;
+    	}
+    	.topspan{
+    		display: block;
+    		color: #666;
+    		margin-top: 10px;
+    		font-size: 12px;
+    	}
+    	.mid{
+    		width: 98%;
+    		margin: 0 auto;
+    		height: 10px;
+    		background: #efefef;
+    	}
+    	.con2,.con{
+    		width: 92%;
+    		margin: 0 auto;
+    		margin-top:10px;
+    		height: 115px;
+    		color: #666;
+    	}
+    	.con2 .uls .spans{
+    		display: inline-block;
+    	}
+    	.title_3,.title_2,.title{
+    		width: 100%;
+    		height: 46px;
+    		border-bottom: 1px solid #fa331e;
+    		background: url(../../icon/img_01.png) 0 22px no-repeat;
+    		background-size: 14px 18px;
+    		text-indent: 12px;
+    	}
+    	.title_2{  		
+    		background: url(../../icon/write.png) 0 20px no-repeat;
+    		background-size: 18px 20px;
+    	}
+    	
+    	.title_3{  		
+    		background: url(../../icon/money_02.png) 0 21px no-repeat;
+    		background-size: 18px 18px;
+    	}
+    	
+    	.title_3 span,.title_2 span,.title span{
+    		display: inline-block;
+    		margin-top: 23px;
+    		font-size: 14px;
+    		color: #fa331e;
+    	}	
+    	.uls{
+    		width: 100%;
+    		margin-top: 20px;
+    		line-height: 25px;
+    		color: #656565;
+    		font-size: 14px;
+    	}
+    	.uls .spans{
+    		display: inline-block;
+    		width: 100px;
+    	}
+    	
+    	#foot{
+    		position: fixed;
+    		overflow: hidden;
+    		bottom: 5px;
+    		left: 3.5%;
+    		width: 93%;
+    		height: 44px;
+    		line-height: 44px;
+    		text-align: center;
+    		color: #fff;
+    		font-size: 18px;
+    		margin: 0 auto;
+    		border-radius: 5px;
+    	}
+    	#foot .cancel{
+    		float: left;
+    		width: 31.33%;
+    		background: #fa331e;
+    		border-radius: 5px;
+    	}
+    	#foot .next{
+    		float: left;
+    		width: 31.33%;
+    		background: #fa331e;
+    		border-radius: 5px;
+    		margin-left: 3%;
+    	}
+    	#foot .mids{
+    		float: left;
+    		width: 31.33%;
+    		background: #fa331e;
+    		border-radius: 5px;
+    		margin-left: 3%;
+    	}
+    </style>
+</head>
+<body id="body" style="display:;">
+	<div id="wrap">
+		<div id="topbar">
+		    <div id="leftButton" onclick="closeWin()">
+		        <img src="../../icon/GroupBack.png">
+		    </div>
+	    	<div>在连练习</div>
+		</div>
+		<div id="main">
+			<div class="top">
+				<div id="Name">销售经理入职模拟考试</div>
+			</div>
+			<div class="mid"></div>
+			<div class="con">
+				<div class="title">
+					<img src="" alt="" />
+					<span class="spans">练习内容</span>
+				</div>
+				<ul class="uls">
+					<li>
+						<span class="spans">答题次数:</span>
+						<span id="QuestionCount">题</span>
+					</li>
+					<li>
+						<span class="spans">答题数量:</span>
+						<span id="Time">分钟</span>
+					</li>
+				</ul>
+			</div>
+			<div class="con2" style="margin-top: 0;">
+				<div class="items">
+					<div class="title_2">
+						<span class="spans" style="text-indent: 18px;">练习结果</span>
+					</div>
+				</div>
+				<ul class="uls">
+					<li>
+						<span class="spans" id="Score">分满分</span>
+					</li>
+					<li>
+						<span class="spans" id="PassScore">分及格</span>
+					</li>
+				</ul>
+			</div>			
+		</div>
+		<div id="foot" >
+			<span class="cancel" onclick="cancels()">放弃题库</span>
+			<span class="mids" onclick="rode()">重置题库</span>
+			<span class="next" onclick="practice()">进入练习</span>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/message.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script type="text/javascript">
+	var TestId = {};
+	var results;
+	var ress = {};
+	apiready =function (){
+		results = api.pageParam;	
+		if (isBlack(results)) {
+			return;
+		}
+		document.getElementById("Name").innerHTML = results.Name;
+		document.getElementById("Time").innerHTML = results.DoNumber + "题";
+		document.getElementById("QuestionCount").innerHTML =results.Times+"题";
+		document.getElementById("Score").innerHTML = "正确数量:" +"&nbsp;"+ results.RightNumber + "题";
+		document.getElementById("PassScore").innerHTML = "正确率:" +"&nbsp;" + results.Accuracy;
+	}
+	
+	function practice (){
+		openNewWindow("practice","../user/practice.html",{id:results.Id})
+	}
+	
+	function signUp(id){
+        var obj = {      	
+            Type : 1,
+           	TestId: id
+        };       
+		ajaxGet(applyexam,obj,function(ret,err) {
+            if (ret) {
+				toast("报名成功,请注意考试时间!");
+				setTimeout(function(){
+					openNewWindow("test.html")
+				},800)
+            } else {
+             	toast("未知错误!")
+            }
+        })
+	}
+
+	
+	function cancels(){
+		showDialog("","温馨提示","您真的要放弃这个题库吗？","取消","确定",function(){
+	       	var obj = {
+				QuestionCategoryId : results.Id
+			}
+			ajaxGet(giveupesercisetk,obj,function(ret,err) {
+	            if (ret) {
+					toast("成功放弃该题库!");
+		            api.execScript({
+		                name: 'choosePractice',
+		                frameName:'onlinePractice_body',
+		                script: 'reloadHtml()'
+		            });
+					setTimeout(function(){
+						closeWin()
+					},600)
+	            } else {
+	             	toast("未知错误!")
+	            }
+	        })
+        });
+	}
+	
+	
+	function rode(){
+		showDialog("","温馨提示","您真的要重置这个题库吗？","取消","确定",function(){
+			var obj = {
+				QuestionCategoryId : results.Id
+			}
+			ajaxGet(redoexercisetk,obj,function(ret,err) {
+	            if (ret) {
+					toast("成功重置该题库!")
+	            } else {
+	             	toast("网络不给力!")
+	            }
+	        })
+		})
+	}
+</script>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>学员须知</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css"/>
+    <style>
+    	html,body{
+    		background: #efefef;
+    	}
+    	.con{
+    		background: #fff;
+    		width: 100%;
+    		margin-top: 10px;
+    		padding-bottom: 6px;
+    	}
+    	.title{
+    		font-size: 14px;
+    		padding-left: 15px;
+    		margin-top: 18px;
+    		color: #010101;
+    	}
+    	p{
+    		padding:15px;
+    		color: #343434;
+    		font-size: 12px;
+    		line-height: 20px;
+    		position: relative;
+    	}
+    	#time{
+    		position: absolute;
+    		bottom: -10px;
+    		right: 15px;
+    		font-size: 10px;
+    		color: #969696;
+    	}
+    	#con{
+    		width: 90%;
+    		height: auto;
+    		margin: 10px auto;
+    		color: #909090;
+    	}
+    	#buttons{
+    		position: fixed;
+    		width: 90%;
+    		height: 40px;
+    		font-size: 16px;
+    		text-align: center;
+    		line-height: 40px;
+    		background: #eb3e2e;
+    		color: #fff;
+    		bottom: 5px;
+    		left: 5%;
+    		border-radius: 5px;
+    	}
+    </style>
+</head>
+<body id="body" style="display: ;">
+	<div id="topbar">
+	    <div id="leftButton" onclick="closeWin()">
+	        <img src="../../icon/GroupBack.png">
+	    </div>
+    	<div>学员须知</div>
+	</div>
+	<div id="main">
+		<div id="con">
+			
+		</div>
+	</div>	
+	<div id="buttons" onclick="applications()">立即报名</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/message.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script type="text/javascript">
+	var retss;
+	apiready = function(){
+		api.showProgress();
+		var rets = api.pageParam;
+		retss = rets;
+		var obj = {
+			StudyClassId : rets.StudyClassId
+		}
+	    ajaxGet(GetPlanDescription,obj,function(ret,err) {
+	    	api.hideProgress();
+	        if (ret) {
+	        	if(isBlack(ret)){
+					toast("暂无数据！");
+					return;
+				}
+	        	if (ret.Description) {
+	        		document.getElementById("con").innerHTML = ret.Description;
+	        	}else{
+	        		document.getElementById("con").innerHTML = "暂无简介!";
+	        	}
+	        } else {
+	         	toast("未知错误!")
+	        }
+	    }) 
+    }
+    
+    function applications(){
+		if (retss.Price > 0) {
+			showDialog("","温馨提示","点击确认将加入购物车！","取消","确定",function(){
+				addCart();
+			})  
+		}else{
+			showDialog("","温馨提示","点击确认将提交报名申请！","取消","确定",function(){
+		        signUps();
+	       });	
+		}
+	};
+	
+	function signUps(){
+        var objss = {      	
+           	StudyClassId:retss.StudyClassId                             
+        };       
+		ajaxGet(applyclass,objss,function(ret,err) {
+            if (ret&&ret.Result == 1) {
+                toast("恭喜你报名成功！") 
+				setTimeout(function(){
+					closeWin();
+				},1000)
+           } else if(ret.Result == 0){
+             	toast(ret.Message);
+           }else{
+            	toast("未知错误!");         	
+            }
+        })
+	}
+/***************点击报名学习任务**************/
+
+
+/***************点击加入购物车**************/
+	function addCart(){
+		var  Price = parseFloat(retss.Price);
+		Price = Price.toFixed(2);
+		Price = Number(Price);
+		var objss = {      	
+	       	Id : retss.StudyClassId,
+	       	Type : 1,
+	       	Price : Price,
+	       	Name : retss.Name			       	
+	   };  
+		ajaxGet(addshoppingcart,objss,function(ret,err) {
+			if(ret && ret.Result == 1){
+				toast("已加入购物车,请到购物车够购买!")
+			}else{
+				toast("已加入购物车,请到购物车够购买!")
+			}
+	   })
+	};
+</script>
+</html>

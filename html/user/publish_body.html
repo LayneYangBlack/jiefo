@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title>帮助</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <link rel="stylesheet" href="../../css/mui.picker.all.css" />
+    <link rel="stylesheet" href="../../css/mui.poppicker.css" />
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css"/>
+    <style>
+        body{font-family:"黑体";}
+        html{height: auto;width: 100%;background: #fff;}
+        input{outline: none;line-height: normal;}
+        .r_icon_b{background: url("../../icon/r_arrow1.png")no-repeat;background-size: cover;}
+        .border{width: 95%;margin-left: 5%;height: 55px; border-bottom: 1px solid #ebebeb;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align: center;
+		  /* 12版 */
+		  -webkit-align-items: center;
+		  -moz-align-items: center;
+		  -ms-align-items: center;
+		  -o-align-items: center;
+		  align-items: center;justify-content: space-between;}
+        .mage{line-height:55px;text-align: left;display: block;width: 22%;height: 100%;outline: none !important;border:none  !important;}
+        .size{width: 43px;height: 43px;float: left;}
+        .border input {width:60%;margin-right: auto;height: 40px;float: left;}
+        .text{height: 100px;width: 100%;background: #fff;float: left;}
+        .text textarea{width: 83%;margin:0 5%;background: #fff;height: 70%;outline: none;resize: none;line-height: normal;font-size: 14px;letter-spacing: 0.5px; border:1px solid #ebebeb;padding: 3%;-webkit-appearance: none;border-radius: 5px;}
+
+        .rewarded_bj{width: 100%;height: 55px;float: left;background: #f6f6f6;}
+        .rewarded{width: 90%;margin: 0 5%;height: 100%;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align: center;
+		  /* 12版 */
+		  -webkit-align-items: center;
+		  -moz-align-items: center;
+		  -ms-align-items: center;
+		  -o-align-items: center;
+		  align-items: center;justify-content: space-between}
+        .left{float: left;width: 25%;}
+        .right{float: right;display: block;line-height: 55px;}
+        .right input{width: 60px;float: left;height: 25px;;border: 1px solid #ccc;background: #fff;margin-top: 12.5px; border-radius:8px;line-height: normal;padding-left: 5px;}
+        .right span:first-child{float: left;}
+        .add_bj{width: 100%;float: left;background: #fff;padding-bottom: 20px}
+        .add{width: 100%;height: 90%;}
+        #camre{float: left;width:20%;height:4.5rem;margin-left:4%;margin-top:10px;}
+        .imgc{width:auto;height:auto;overflow: hidden;float:left;}
+        .imgc>div{width:20%;height:4.5rem;margin-left: 4%;overflow: hidden;}
+        .imgc>div>img{height:100%;}
+        .image{float: left;margin-top: 10px;}
+        .add>div>img{width:100%;height:100%;}
+        .mui-picker{background: #fff}
+        .mui-poppicker-title{color:#06c1ae;}
+        .mui-poppicker-bottom-right{background: #06c1ae;}
+        li{list-style: none;text-decoration: none;}
+        .r_icon_b{background: url("../../icon/r_arrow1.png")no-repeat;background-size: cover;}
+        .border{width: 95%;margin-left: 5%;height: 55px; border-bottom: 1px solid #ebebeb;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;align-items: center;justify-content: space-between;font-size: 16px;}
+        .mage{line-height:55px;text-align: left;display: block;width:50px;height: 100%;}
+        .size{width: 43px;height: 43px;float: left;}
+        .border input {width:60%;margin-right: auto;height: 40px;}
+        .none{border-bottom:none;}
+        .tab_bj{width: 100%;height: 95px;float: left;background: #fff;}
+        .tab{width: 90%;height: 95px;margin:0 5%;}
+        .tab li:first-child{line-height: 3rem;color: #909090;font-size: 15px;}
+        .tab li{height: 40%;}
+        .choice{margin-top: 10px;}
+        .waysspan{font-size: 14px;}
+        .ways{display: block;width: 18px;height: 18px; float: left;margin-right: 5px;margin-top: -1px }
+        .mui-pciker-rul{width:38%;}
+        .mui-dtpicker-title{width:100%;}
+        input{outline:none}
+        .mui-poppicker-bottom-right{background: #06c1ae;}
+        #money-text{width:65px;}
+        .title{width: 100%;height: 100px;float: left;margin: 10px 0;border-bottom: 1px solid #eaeaea;}
+        .title textarea{resize: none;width: 90%;height: 80px;  margin-top:10px;margin-left: 5%;line-height: normal; }
+        .main{width: 100%;height: 100px;float: left;margin:0;}
+        .main textarea{resize: none;width: 90%;height: 80px;  margin-top:10px;margin-left: 5%; line-height: normal;}
+        .user{width: 100%;height: auto;float: left;}
+        .face{width: 35px;height: 35px;
+            display: block;margin: 5px auto 0 auto;  border-radius: 50%;    }
+        .face img{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;;
+        }
+        .user li{width: 20%;height: 60px;float: left;position: relative;}
+        .user li div{width: 15px;height: 15px;position: absolute;background: red;top: 0;right: 5px;
+                background: url("../../icon/selected.png")no-repeat;background-size: cover;   }
+        .show{display: block}
+        .hide{
+            display: none;;
+        }
+        .user li span{display: block;width: 100%;float: left;height:20px; text-align: center;font-size: 12px;color: #9296a3;
+            line-height: 20px; }
+        .please{width: 95%;margin-left:5%;height: 1rem;line-height: 1rem;color: #9296a3;text-align: left;float: left;
+            font-size: 14px;margin-bottom: 10px;  }
+        .item9{width: 100%;float: left;position: relative;margin:0 15px;float: right;overflow: hidden;}
+        
+        #file{width: 40px;height: 40px;border: 1px solid red;float: left;}
+        textarea{border: 1px solid #f1f2f3;}
+        #imgs img{width: 60px;height: 50px;margin-left: 5px;}
+    </style>
+</head>
+<body>	
+    <div id="main">
+        <div class="title">
+            <textarea id="value" placeholder="请输入标题"></textarea>
+        </div>
+        <div class="main">
+            <textarea  id="content" placeholder="请输入内容"></textarea>
+        </div>
+        <div class="item9">
+        	<div style="float: left;margin-left: 30px;width: 75%;" id="imgs"></div>
+        	<div style="float: right;height: 30px;">
+        		<img style="width: 30px;height: 30px;position: absolute;top: 0;right: 0;" src="../../image/chatBox_add2.png" alt="" />
+        		<input type="file" id="file" name="file" accept="image/*" multiple="multiple" style="border: 1px solid red;opacity: 0;position: absolute;top: 0;right: 15px;  display:inline;">
+        	</div>       	
+        </div>
+        <div class="please">请选择您要提问对象:</div>
+
+        <div class="user" id="user">
+            <ul>
+
+            </ul>
+        </div>
+    </div>
+
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/message.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script type="text/html" id="scriptDiv">
+    <%for(var i = 0;i< list.length;i++){%>
+    <li><i class="face" ><img src="<%=list[i].ImgUrl%>" alt="" /></i><span><%=list[i].Name%></span> <div class="hide"></div></li>
+    <%}%>
+</script>
+<script>
+	var data = {};
+	var arr = [];
+	var publishFlag = true;		
+	var param = getItemData("params");
+    var data = {list: param.MangerList};
+    var html = template('scriptDiv',data);
+    document.getElementById('user').innerHTML = html;
+    var  user =  document.getElementById("user");
+    var count =  user.querySelectorAll("li");
+    for(var i = 0;i< count.length;i++){
+        count[i].onclick = function(){
+            if(this.querySelector("div").className == "hide"){
+                this.querySelector("div").className = "show"
+            }else{
+                this.querySelector("div").className = "hide"
+            }
+        }
+    }
+
+    function commits(){
+    	if (publishFlag == true) {
+    		publishFlag = false;
+	    	api.showProgress();
+	        var title = document.getElementById("value").value;
+	        var content = document.getElementById("content").value;
+	        if(isBlack(title)){
+	            toast("你还没有输入标题");
+	            return;
+	        }
+	        if(isBlack(content)){
+	             toast("你还没有输入标题");
+	            return;
+	        }
+	        var data = {};
+	        data.BoardId = param.Topics[0].BoardId;
+	        data.Title = title;
+	        data.Content = content;
+	        data.Time = new Date().format("yyyy-MM-dd hh:mm:ss");
+	        data.Pics = arr;
+	
+	        var listList = document.getElementById("user").querySelectorAll("li");
+	        var mangerIdList = "";
+	        for(var i = 0;i < listList.length;i++){
+	            if(listList[i].querySelector("div").className == "show"){
+	                mangerIdList = mangerIdList + param.MangerList[i].Id;
+	                if(i < listList.length-1){
+	                    mangerIdList = mangerIdList+",";
+	                }
+	            }
+	        }
+	        data.Invitees = mangerIdList;
+	        ajaxGet(CreateUploadTopic,data,function(ret,err){
+	        	api.hideProgress();
+	            if(ret && ret.Result == 1){
+	                toast("发帖成功");
+		        	api.execScript({
+		        		name : 'forumtopic',
+			            frameName: 'forumtopic_body',
+			            script: "relaodHtml()"
+			        });
+	                setTimeout(function(){
+	                 	closeWin();
+	                },500)                                               
+	            }else if(ret.Result == 0){
+	                 toast(ret.Message);
+	            }
+	        })
+	    }else{
+	    	return;
+	    }
+    }
+    
+    window.onload = function() { 
+        var input = document.getElementById("file");
+        input.addEventListener('change', readFile, false);
+
+        function readFile() {
+            for (var i = 0; i < this.files.length; i++) {
+                if (!input['value'].match(/.jpg|.gif|.png|.bmp/i)) {//判断上传文件格式
+                    return alert("上传的图片格式不正确，请重新选择")
+                }
+//              var suffix = this.files[i].name.substring(this.files[i].name.lastIndexOf(".")+1);
+                var reader = new FileReader();
+                reader.readAsDataURL(this.files[i]);
+
+                reader.onload = function (e) {
+                   commit(this.result);
+                }
+            }
+        }
+    }
+    
+///****************提交信息**************/
+	function commit(result){	
+		var obj = {};
+		obj.Picture = result;
+ 	    arr.push(obj);
+		var imagess = document.createElement("img");
+		imagess.setAttribute("src",result)
+        document.getElementById("imgs").innerHTML += '<img src='+result+' alt="" />';              
+    }
+</script>
+</body>
+</html>

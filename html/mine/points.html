@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>选修课 </title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.css"/>
+    <style>
+        body,html{
+    		background: #efefef;
+    	} 	
+    	.top{
+			background: #fff;
+			height: 44px;
+			width: 100%;
+			line-height: 44px;
+			color: #333;
+			font-size: 14px;
+			overflow: hidden;
+			border-bottom: 1px solid #ebebeb;
+		}
+		.top li{
+			float: left;
+			width: 33.33%;
+			text-align: center; 
+		}
+		.topColor{
+			color: #fa331e;
+		}
+		.move{
+			width: 25%;
+			height: 2px;
+			position: absolute;
+			bottom: 1px;
+			left: 4.15%;
+			background: #fa331e;
+		}
+		#topbar input{width: 70%;height: 31px;
+	    	border-radius: 20px;
+	    	font-size: 16px;
+	    	border: none;background: #d43122 url(../../icon/search.png) 15px 7px no-repeat;
+	    	background-size: 15px;
+	    	outline:none;text-indent: 36px;line-height: 30px;margin-top: 9px;line-height: normal;
+    	}
+    	#topbar span{position: absolute;top: 4px;right: 10px;font-size: 16px;}
+    	body,html{
+    		background: #efefef;
+    	} 		
+        .item_bj{width: 100%;background: #fff;height: 120px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align: center;
+		  /* 12版 */
+		  -webkit-align-items: center;
+		  -moz-align-items: center;
+		  -ms-align-items: center;
+		  -o-align-items: center;
+		  align-items: center;border-bottom: 1px solid #ebebeb;}
+        .mp_10{margin-top: 0;}
+        .item{width: 90%;margin:0 5%;height: 85px;display: block;}
+        .item div:first-child{height: 100%;width: 25%;float: left;}
+        .item div:last-child{height: 100%;width: 74%;float: right;}
+        .item img{height: 100%;width: 100%;;}
+        .mage{margin-left: auto;font-size: 14px;color: #9296a3;}
+        .mages{overflow: hidden;}
+        .mages span{width: 100%;height: auto;line-height: 1.2rem;float: left;padding: 0 0 0 10px;;}
+        .mages span:first-child{font-size: 14px;padding-bottom: 10px;width: auto;}
+        .mages span:nth-child(2){font-size: 12px;color: #9296a3;}
+        .mages span:nth-child(3){font-size: 12px;color: #9296a3;display: block;}
+        .mages span:nth-child(4){overflow: hidden; font-size: 12px;color: #9296a3;display: block;float: left;width: auto;}
+        /*.mages span:nth-child(5){font-size: 12px;color: #9296a3;display: block;float: left;}*/   
+   		.mages .times{margin-right:5px;width: 13px;height: 13px;float: left;}
+    	.rightTop_01{
+	   		display: inline-block;
+			width: 95%;
+			overflow: hidden;/*溢出隐藏*/
+			text-overflow: ellipsis;/*文本溢出修剪,显示省略号*/
+			white-space: nowrap;/*使文字不换行*/
+	   	}
+	   	 #main .color{
+	   		color: #fff;
+	   		font-size: 35px;
+	   		width: 100%;
+	   		height: 100%;
+	   		line-height: 85px;
+	   		text-align: center;
+	   		display: block;
+	   		background: #fc4e4f;
+	   	}
+	   	#main .icon1{   		
+    		background: #fcb44e;
+    	}
+    	#main .icon2{   		
+    		background: #00bafc;
+    	}
+    	#seachKey{
+    		width: 100%;
+    		height: auto;
+    	}
+    </style>
+</head>
+<body>
+	<div id="topbar" style="line-height: 44px;">
+	    <div id="leftButton" onclick="closeWin()">
+	        <img src="../../icon/GroupBack.png">
+	    </div>
+    	<div>积分兑换</div>
+	</div>
+	<div id="seachKey">		
+		<div style="position: relative;">
+			<ul class="top">
+				<li onclick="switchFrameGroupIndex(0)">我能兑换</li>
+				<li class="topColor" onclick="switchFrameGroupIndex(1)">所有礼品</li>
+				<li onclick="switchFrameGroupIndex(2)">兑换记录</li>
+			</ul>
+			<div class="move"></div>
+		</div>
+		<div id="main">
+			
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/login.js"></script>
+<script src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script>
+    var window_width;
+    apiready = function(){
+        window_width = api.winWidth;
+        var user = api.pageParam.user;
+        api.openFrameGroup ({
+            name: 'HomeWorkDetailGroup1',
+            background:'#fff',
+            scrollEnabled:true,
+            rect : {
+                x : 0,
+                y : 95,
+                w : 'auto',
+                h : api.winHeight-95
+            },
+            index:0,
+            frames: [{
+            	name: 'points02_body',
+                url: './points02_body.html',       
+                bgColor :'rgba(246,246,246,1)',
+                pageParam:{type:0,user:user}
+            },{
+                name: 'points01_body',
+                url: './points01_body.html',
+                bgColor :'rgba(246,246,246,1)',
+                pageParam:{type:1,user:user}
+            },{
+                name: 'points03_body',
+                url: './points03_body.html',
+                bgColor :'rgba(246,246,246,1)',
+                pageParam:{type:2,user:user}
+            }
+            ]
+        }, function(ret, err){
+            switchFrameCallback(ret.index);
+        });
+    };
+    function switchFrameGroupIndex(index){
+        _index = index;
+        api.setFrameGroupIndex({
+            name : "HomeWorkDetailGroup1",
+            index : index,
+            scroll : true,
+            reload : true//来回刷新
+        });
+    }
+
+    
+    function switchFrameCallback(index){
+        var width = (window_width / 3) * index;
+        var spans=document.querySelector(".top").querySelectorAll("li");
+        $api.css(document.getElementsByClassName("move")[0], "-webkit-transform:translate(" + width + "px,0)");
+        for(var i = 0;i < spans.length;i++){
+            if(i == index){
+            	spans[i].style.color="#fa331e";
+                
+            }else{
+                spans[i].style.color="#333";
+            }
+        }
+    }
+
+   
+</script>
+</html>

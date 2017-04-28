@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>在线考试</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+        body,html{
+            background-color:rgba(255,255,255,0)
+        }
+        .back{width: 36px;height:36px;}
+    </style>
+    <title></title>
+</head>
+<body>
+<img onclick="closeWin()" id="close" class="back" src="../../icon/back.png"/>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script>
+    function changeImge(index){
+        if(index == 1){
+            document.getElementById("close").style.display="block";
+            document.getElementById("back").style.display="none";
+        }else{
+            document.getElementById("back").style.display="block";
+            document.getElementById("close").style.display="none";
+        }
+    }
+
+</script>
+</body>
+
+</html>

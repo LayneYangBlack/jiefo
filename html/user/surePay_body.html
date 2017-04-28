@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>确认支付</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+    	.payWay{
+			width: 100%;
+			height: 50px;
+			line-height: 50px;
+			color: #666;  
+			text-indent: 12px;  
+			font-size: 14px;		
+    	}
+    	.choose{
+    		margin-left: 11px;
+    		overflow: hidden;
+    		height: 52px;
+    	}
+    	.choose li{
+    		width: 38.5%;
+    		height: 50px;
+    		float: left;
+    	}
+    	.choose li:nth-child(1){
+    		background: url(../../icon/Alipay.png) 0 0 no-repeat;
+    		background-size: 100% 100%;
+    	}
+    	#main .choose_01{
+    		background: url(../../icon/Alipay_01.png) 0 0 no-repeat;
+    		background-size: 100% 100%;
+    	}
+    	#main .choose_02{
+    		background: url(../../icon/weixin_01.png) 0 0 no-repeat;
+    		background-size: 100% 100%;
+    	}
+    	.choose li:nth-child(2){
+    		margin-left:18px;
+    		background: url(../../icon/weixin.png) 0 0 no-repeat;
+    		background-size: 100% 100%;
+    	} 
+    	.money{
+    		margin-top:60px;
+    		text-indent: 12px;
+    		color: #666; 
+    		font-size: 16px;
+    	}  
+    	.money span{
+    		color:#f88127;
+    	} 	
+    	#pays{
+    		width: 94.67%;
+    		height: 42px;
+    		text-align: center;
+    		line-height: 42px;
+    		font-size: 18px;
+    		color: #fff;
+    		background: #ff7e00;
+    		margin: 0 auto;
+    		margin-top: 18px;
+    	}
+    	#foot{
+    		padding-top: 9px;
+    		font-size: 12px;
+    		position: relative;
+    		text-indent: 30px;
+    	}
+    	#foot input{
+    		position: absolute;
+    		top: 10px;
+    		left: 12px;
+    		width: 12px;
+    		height: 12px;
+    		
+    	}
+    	#foot span{
+    		text-indent: 0;
+    		color: #fa331e;
+    	}
+    </style>
+</head>
+<body id="body" style="display: none;">
+	<div id="wrap">
+		<div id="main">
+			<div class="payWay">支付方式</div>
+			<ul class="choose">
+				<li class="sdas"></li>
+				<li></li>
+			</ul>
+			<div class="money">
+				实付金额:<span id="numPrices">￥198.00</span>
+			</div>
+			<div id="pays" onclick="selectPay()">
+			         立即支付
+			</div>
+			<div id="foot">
+				<input type="checkbox" />
+				我已经阅读并同意<span>《杰佛课程用户付费协议》</span>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/login.js"></script>
+<script type="text/javascript" src="../../script/pay.js"></script>
+<script>
+	var arr = [];
+	apiready = function(){
+		var res = api.pageParam;
+//		alert(JSON.stringify(res))
+		for(var i = 0;i < res.shoppingResults.length;i++){
+			var obj = {};
+			obj.CommodityId = res.shoppingResults[i].CommodityId;
+			obj.Name = res.shoppingResults[i].Name;
+			obj.Price = res.shoppingResults[i].Price;
+		}
+		arr.push(obj);
+		document.getElementById("numPrices").innerHTML = '￥'+ res.NumPrice;
+		document.getElementById("body").style.display = "block";
+	}
+/****************点击切换支付方式********************/
+	var lis = document.getElementsByTagName("li");
+	var _index = 0;/******默认选择支付宝***********/
+	lis[0].onclick = function(){
+		_index = 0;
+		lis[0].className = "";
+		lis[1].className = "";		
+	};
+	
+	lis[1].onclick = function(){
+		_index = 1;
+		lis[1].className = "choose_02";
+		lis[0].className = "choose_01";
+	}
+	
+	function selectPay(){
+		api.showProgress();
+//		alert(JSON.stringify(arr))
+		ajaxGet(alipayorder,{arr},function(ret,err){
+			api.hideProgress();
+			if (ret) {	        	
+	        	if(isNotBlack(ret)){
+					var parmsa = {};
+					payType = "alipay";
+					parmsa.orderId = ret.orderId;
+					pay(payType,parmsa,orderPayParamUrl,function(re){
+//						alert(4545455)
+//						alert(JSON.stringify(re))
+					})
+				}
+	        } else {
+	         	toast("网络出错了s!")
+	        }
+		})	
+	}
+</script>
+</html>

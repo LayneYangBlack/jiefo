@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>查看成绩</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+    	.top{
+    		width: 100%;
+    		height: 56px;
+    		text-align: center;
+    		padding-top: 20px;
+    		padding-bottom: 5px;
+    		font-size: 16px;
+    	}
+    	.topspan{
+    		display: block;
+    		color: #666;
+    		margin-top: 12px;
+    		font-size: 12px;
+    	}
+    	.mid{
+    		width: 98%;
+    		margin: 0 auto;
+    		height: 10px;
+    		background: #efefef;
+    	}
+    	.con2,.con{
+    		width: 92%;
+    		margin: 0 auto;
+    		margin-top:10px;
+    		height: 130px;
+    	}
+    	.con2 .uls .spans{
+    		display: inline-block;
+    		width: 50px;
+    	}
+    	.title_2,.title{
+    		width: 100%;
+    		height: 46px;
+    		border-bottom: 1px solid #fa331e;
+    		background: url(../../icon/img_01.png) 0 22px no-repeat;
+    		background-size: 14px 18px;
+    		text-indent: 12px;
+    	}
+    	.title_2{  		
+    		background: url(../../icon/write.png) 0 18px no-repeat;
+    		background-size: 20px 24px;
+    	}
+    	
+    	.title_2 span,.title span{
+    		display: inline-block;
+    		margin-top: 22px;
+    		font-size: 14px;
+    		color: #fa331e;
+    	}	
+    	.uls{
+    		width: 100%;
+    		margin-top: 20px;
+    		line-height: 25px;
+    		color: #656565;
+    		font-size: 14px;
+    	}
+    	.uls .spans{
+    		display: inline-block;
+    		width: 110px;
+    	}
+    	#foot{
+    		position: fixed;
+    		bottom: 5px;
+    		left: 4%;
+    		width: 92%;
+    		height: 44px;
+    		line-height: 44px;
+    		background: #fa331e;
+    		text-align: center;
+    		color: #fff;
+    		font-size: 18px;
+    		margin: 0 auto;
+    		border-radius: 5px;
+    	}
+    </style>
+</head>
+<body id="body" style="display: none;">
+	<div id="wrap">
+		<div id="main">
+			<div class="top">
+				<div id="Title"></div>
+			</div>
+			<div class="mid"></div>
+			<div class="con">
+				<div class="title">
+					<img src="" alt="" />
+					<span class="spans">考试时间</span>
+				</div>
+				<ul class="uls">
+					<li>
+						<span class="spans">开考时间:</span>
+						<span id="Time"></span>
+					</li>
+					<li>
+						<span class="spans" id="Time">结束时间:</span>
+						<span id="EndTime"></span>
+					</li>
+				</ul>
+			</div>
+			<div class="con2">
+				<div class="items">
+					<div class="title_2">
+						<span class="spans" style="text-indent: 18px;">答题情况</span>
+					</div>
+				</div>
+				<ul class="uls">
+					<li>
+						<span class="spans">总分:</span>
+						<span style="text-indent: -12px;" id="allScore"></span>
+					</li>
+					<li>
+						<span class="spans">得分:</span>
+						<span id="Score" style="text-indent: -12px;">80</span>
+					</li>
+					<li style="margin-top: 10px;">
+						<div id="ExamResult"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="foot" onclick="details()">
+			查看答卷
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/message.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script type="text/javascript">
+	var rets;
+	apiready = function(){
+		var Type = $api.getStorage("notice");
+		rets = api.pageParam;
+		document.getElementById("Title").innerHTML = rets.Title;
+		api.showProgress();
+        var obj = {      	
+            ClerkKscjId : rets.ClerkKscjId       
+        };  
+        ajaxGet(getmyanswerdetail,obj,function(ret,err) {
+            api.hideProgress();
+            if (ret) {
+                showValues(ret);
+                document.getElementById("body").style.display = "block";
+            } else {
+             	toast("未知错误!")
+            }
+        })
+	};
+	
+	function showValues(results,rets){
+		
+		if (isBlack(results)) {
+			return;
+		}
+		document.getElementById("Time").innerHTML = results.StartTime;	
+		document.getElementById("EndTime").innerHTML = results.EndTime;	
+		document.getElementById("Score").innerHTML = results.Score+"分";
+		document.getElementById("allScore").innerHTML = results.TotalScore+"分";	
+		if (isNotBlack(results.ExamResult)) {
+			document.getElementById("ExamResult").innerHTML = results.ExamResult;
+		}
+	}
+
+	function details(id){
+		openNewWindow("investigation","./investigation.html",{notice:rets.ClerkKscjId,Title:rets.Title,index:rets.index});
+	}
+
+</script>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>在线考试</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+ <style>
+    	body,html{
+    		background: #efefef;
+    	}
+    	.con li{
+    		background: #fff;
+    		height: 72px;
+    		width: 100%;
+    		margin-top: 12px;
+    		position: relative;
+    	}
+    	.icon{
+    		float: left;
+    		width: 50px;
+    		height: 50px;
+    		margin-left: 20px;
+    		padding-top: 11px;
+    	}
+    	.con li div{
+    		margin-top: 14px;
+    		width: 60%;
+    		height: 50px;
+    		margin-left: 15px;
+    		float: left;
+    		display: inline-block;
+    		line-height: 22px;
+    		font-size: 16px;
+    		color: #666;
+    	}
+    	.status{
+    		color: #919191;
+    		font-size: 12px;
+    		display: block;
+    	}
+    	.statusa{
+    		color: #919191;
+    	}
+    	.right{
+    		position: absolute;
+    		right:5px;
+    		top: 26px;
+    		width: 20px;
+    		height: 20px;
+    	}
+    	.color{
+	   		color: #fff;
+	   		font-size: 25px;
+	   		line-height: 50px;
+	   		width: 100%;
+	   		height: 100%;
+	   		text-align: center;
+	   		display: block;
+	   		background: #fc4e4f;
+	   	}
+	   	.icon1{   		
+    		background: #fcb44e;
+    	}
+    	.icon2{   		
+    		background: #00bafc;
+    	}
+    	.cons span{
+    		display: block;
+    	}
+    </style>
+</head>
+<body id="body" style="">
+	<div id="wrap">
+		<div id="main">
+			<ul class="con" id="uls">
+			
+			</ul>
+		</div>
+	</div>
+</body>
+<script id="scriptDiv1" type="text/html">
+	<% for (var i = 0; i < list.length; i++) { %>
+		<%if(list[i].AllowSeePaper == 1){%>					
+		<li onclick="gradeDeatail('<%=list[i].ClerkKscjId%>')">
+			<span class="icon">
+				<%if(i%3 == 0){%>
+					<span class="color"><%=list[i].keys%></span>
+				<%}else if(i%3==1){%>
+					<span class="color icon1"><%=list[i].keys%></span>
+				<%}else if(i%3==2){%>
+					<span class="color icon2"><%=list[i].keys%></span>
+				<%}%>	
+			</span>
+			<div>
+				<span style="display: block;"><%=list[i].Title%></span>
+				<span class="status">成绩:<%=list[i].Score%>分</span>
+			</div>
+			<img class="right" src="../../icon/right.png" alt="" />
+		</li>
+		<%}else if(list[i].AllowSeePaper == 0) {%>
+			<li onclick="nitices()">
+			<span class="icon">
+				<%if(i%3 == 0){%>
+					<span class="color"><%=list[i].keys%></span>
+				<%}else if(i%3==1){%>
+					<span class="color icon1"><%=list[i].keys%></span>
+				<%}else if(i%3==2){%>
+					<span class="color icon2"><%=list[i].keys%></span>
+				<%}%>	
+			</span>
+			<div class="cons">
+				<span style="display: block;"><%=list[i].Title%></span>
+				<span class="status">成绩:<%=list[i].Score%>分</span>
+			</div>
+			<img class="right" src="../../icon/right.png" alt="" />
+		</li>
+		<%}%>
+	<%}%>
+</script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/message.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script type="text/javascript">
+	var taskAlert;
+	apiready = function(){
+		taskAlert = getItemData("taskAlert");
+		api.showProgress();
+        var obj = {      	
+            Type : 1        
+        };       
+        ajaxGet(listmyexamresult,obj,function(ret,err) {
+            api.hideProgress();
+            if (ret) {
+            	if (taskAlert == 1){
+            		if(isBlack(ret)){
+	            		toast("暂无数据!");
+	            		return;
+	            	}
+            	}
+                addDataToHtml(ret);
+                document.getElementById("body").style.display = "block";
+            } else {
+             	toast("未知错误!")
+            }
+        })		
+	};
+	var allResult = {}; 
+	function addDataToHtml(results) {
+		var reg= /^[A-Za-z]+$/;
+		for(var i = 0;i < results.length;i++){
+			allResult[results[i].ClerkKscjId] = results[i];
+			if((/[\u4e00-\u9fa5]+/).test((results[i].Title).substr(0,1))){
+				results[i].keys =(results[i].Title).substr(0,1);
+			}else if(!isNaN((results[i].Title).substr(0,1))||reg.test((results[i].Title).substr(0,1))){
+				results[i].keys =(results[i].Title).substr(0,1);
+			}else{
+				results[i].keys =(results[i].Title).substr(1,1);
+			}
+		}
+		var data = {list: results};
+		var html = template('scriptDiv1',data);
+		document.getElementById('uls').innerHTML = html;
+	};
+	
+	/*******点击查看成绩详情页****************/
+	function gradeDeatail(id){		
+		$api.setStorage("notice", 1);
+		allResult[id].index = 1;
+		openNewWindow('viewGrades','./viewGrades.html',allResult[id],{reload:true});
+	}
+	
+	/*******提示不能查看试题**************/
+	function nitices(){
+		toast("抱歉,您不能查看此答卷!")
+	}
+</script>
+</html>

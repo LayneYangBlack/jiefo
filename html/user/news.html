@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <title>消息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <style>
+        body{font-family:"黑体";}
+        video{width: 100%;height: 220px;float: left;object-fit:cover;}
+        .back{position: fixed;top: 13px;left: 8px;width: 36px;height:36px;}
+        .h{width: 12px;height: 12px;float: left;background:url("../../icon/class/path.png")no-repeat;background-size: 12px 12px}
+        .h1{width: 12px;height: 12px;float: left;background:url("../../icon/class/path1.png")no-repeat;background-size: 12px 12px}
+        .hh{width: 20px;height: 20px;float: left;background:url("../../icon/class/path1.png")no-repeat;background-size: 20px 20px}
+        .hh1{width: 20px;height: 20px;float: left;background:url("../../icon/class/path.png")no-repeat;background-size: 20px 20px}
+        .side li i {float: left; }
+
+        .side li{height: 30px;width: 100%;float: left;padding-left: 20px;line-height: 30px;}
+        .side li:nth-child(2){display: flex; justify-content: flex-start;align-items: center;}
+        .side li:nth-child(3){border-bottom: 1px solid #eaeaea;}
+        .user{width: 12px;height: 12px;float: left;background:url("../../icon/class/user.png")no-repeat;background-size: 12px 12px}
+        .down{width: 15px;height: 20px;float: right; margin-right: 9%; background:url("../../icon/class/down.png")no-repeat;background-size: 15px 20px;margin-top: 17.5px;}
+        .nav{border-bottom: 1px solid #ebebeb; width: 100%;height: 45px;float: left;}
+        .nav li{width: 33.33%;text-align:center;height: 100%;float: left;line-height: 45px;}
+        .nr{width: 100%;height: auto;min-height: 250px;background: #efefef;float: left;}
+        .nr ul{height: auto;width: 100%;min-height: 250px;}
+        .show{padding:3% 3% 0 3%;display: block;height: auto;  overflow: hidden; text-overflow: ellipsis;display: -webkit-box;
+            -webkit-line-clamp: 3;-webkit-box-orient: vertical;line-clamp: 3;}
+        .show2{padding:3% 3% 0 3%;display: block;height: auto;  overflow: hidden; text-overflow: ellipsis;display: -webkit-box;
+           -webkit-box-orient: vertical;}
+        #nr1 .tip{ height: 40px;line-height: 40px;width: 97%;margin-left: 3%;float: left;border-bottom: 1px solid #ebebeb;font-size: 16px;}
+        #nr1 .main{ height:auto;line-height: 20px;width: 100%;padding: 3%;float: left;color: #9296a3;font-size: 14px;}
+
+       
+        #nr2 li:first-child{height: 30px;width: 100%;float: left;padding-left: 3%;line-height: 30px;background: #e6e6e6;
+                  border-bottom: none;margin-left: 0;color: #9296a3;}
+        .head{height: 80px;width: 90%;float: left;padding:5% 5% 10px 5%;}
+         .img{width: 60px;height: 60px;float: left;background: url("../../icon/class/jiefo.png");border-radius: 50%;background-size: 60px 60px;}
+        .list{width: 70%;height: 80px;float: left;padding: 5px 0 15px 15px;}
+        .list li{width: 100%;height:50%;float: left;background: none;color: #9296a3;}
+        .list li span{display: block;float: left;}
+        .conter{height: 175px;width: 100%;float: left;padding-top: 20px;}
+        .conter li{height: 40px;width: 100%;float: left;text-align: center;line-height: 40px;display: flex;
+              align-items: center;  justify-content: center;}
+        .conter li span i{margin-left: 5px;}
+        .bottom li{width: 50%;height: 54px;float: left;text-align: center;}
+    	.right{background: #dd2726;line-height: 54px;color: #fff;}
+    	.left{background: url(../../icon/buy.png) center 0 no-repeat;line-height: 85px;background-size: 35px;color: #fa331e;font-size: 14px;}
+    	.bottom img{width: 40px;display: block;}
+    	.bottom{position: fixed;bottom: 0;left: 0;width: 100%;border-top: 1px solid #ebebeb;}
+    	.move{
+			width: 25%;
+			height: 2px;
+			position: absolute;
+			bottom: 0;
+			left: 4%;
+			background: #fa331e;
+		}
+        #Title{min-height: 40px;padding:25px 10px 25px 10px;line-height: 18px;}
+    </style>
+</head>
+<body>
+    <div id="main">
+        
+    </div>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script id="scriptDiv" type="text/html">
+    <div style="height:220px; " id="playid" onclick="openPlay(0)">
+        <img width="100%" style="width: 100%;height: 220px;" src="<%=list.ImgUrl%>">
+    </div>
+    <img onclick="closeWins()" class="back" src="../../icon/back.png"/>
+    <div class="side">
+        <li id="Title"><%=list.Name%></li>
+        <!--<li><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i class="h1"></i>  <span id="MemberCount"><%=list.StudentCourse%><span id="persons">人在学</span></span></li>-->
+       <%if(list.Price >0 ){%>
+        <li style="color: red" id="pay">￥<%=list.Price%></li>
+        <%}%>
+    </div>
+
+    <div class="nav" id="bq" style="position: relative;">
+        <%if(list.TestId){%>
+        <li class="jian" style="width: 25%" onclick="switchFrameGroupIndex(0)">简介</li>
+        <li class="mu" style="width: 25%" onclick="switchFrameGroupIndex(1)">目录</li>
+        <li class="ping" style="width: 25%" id="test" onclick="switchFrameGroupIndex(2)">课后考试</li>
+        <li class="ping" style="width: 25%" onclick="switchFrameGroupIndex(3)">评价(<%=list.RemarkCount%>)</li>
+       	<div class="move" style="width: 18%;"></div>
+       <%}else{%>
+        <li class="jian" onclick="switchFrameGroupIndex(0)">简介</li>
+        <li class="mu" onclick="switchFrameGroupIndex(1)">目录</li>
+        <li class="ping" onclick="switchFrameGroupIndex(2)">评价(<%=list.RemarkCount%>)</li>
+        <div class="move"></div>
+        <%}%>
+        
+    </div>
+</script>
+<script>
+	var window_width;
+    var frame = [];
+    var param = {};
+    var courseList =[];
+    var testData;
+    var playModule;
+    var moveIndex = 3;
+    var fullFlag = true;
+    var unFunllFlag = false;
+    var browser;
+    var examInfo;
+	apiready = function(){
+		browser = api.require('webBrowser');
+		var res = api.pageParam;
+		var objs = {
+			CourseId : res.id
+		};
+        playModule = api.require('playModule');
+        playModule.init({
+            buffering: "加载中",
+            logo: "widget://res/cklogo.png",
+            fullBtnPlan: 1,
+            
+        },function(ret){
+
+        })
+
+		ajaxGetWithProgress(getcourseinfo,objs,function(ret,err) {
+            if (ret) {
+                param = ret;
+                var yparam = 315;
+                if(ret.Price > 0 ){
+                    yparam = 345;
+                }
+                ajaxGet(getcourseexam,objs,function(ret,err){
+                    if(ret && ret.Joinable == 1){
+                        var obj ={
+                            name: 'formalTest1',
+                            url: './formalTest_body.html',
+                            bgColor :'rgba(246,246,246,1)',
+                            pageParam:{id:res.id,type:2}
+
+                        };
+                        examInfo = ret;
+                        moveIndex = 4;
+                        examInfo.moveIndex = moveIndex;
+                        param.TestId = ret.TestId;
+                        var signUp = $api.getStorage("signUp");
+                        frame.push(obj);
+                    }
+                    testData = ret;
+                    ajaxGetWithProgress(listcourseware,objs,function(ret,err){
+                        if(ret){
+                        	if (moveIndex == 4) {
+                        		frame =  [{
+	                                name: 'introduction',
+	                                url: './introduction_body.html',
+	                                bgColor :'rgba(246,246,246,1)',
+	                                pageParam:{id:res.id,type:0,param:param}
+	                            },{
+	                                name: 'Catalog',
+	                                url: './Catalog_body.html',
+	                                bgColor :'rgba(246,246,246,1)',
+	                                pageParam:{id:res.id,type:1,Name:param.Name,param:ret}
+	                            },{
+	                                name: 'examInfo',
+	                                url: './examInfo.html',
+	                                bgColor :'rgba(246,246,246,1)',
+	                                pageParam:{id:res.id,type:2,examInfo:examInfo}
+	                            },{
+	                                name: 'reted',
+	                                url: './rated.html',
+	                                bgColor :'rgba(246,246,246,1)',
+	                                pageParam:{id:res.id,type:3,param:param}
+	                            }
+	                            ];
+                        	}else{
+                        		 frame =  [{
+	                                name: 'introduction',
+	                                url: './introduction_body.html',
+	                                bgColor :'rgba(246,246,246,1)',
+	                                pageParam:{id:res.id,type:0,param:param}
+	                            },{
+	                                name: 'Catalog',
+	                                url: './Catalog_body.html',
+	                                bgColor :'rgba(246,246,246,1)',
+	                                pageParam:{id:res.id,type:1,Name:param.Name,param:ret}
+	                            },{
+	                                name: 'reted',
+	                                url: './rated.html',
+	                                bgColor :'rgba(246,246,246,1)',
+	                                pageParam:{id:res.id,type:2,param:param}
+	                            }
+	                            ];
+                        	}
+                           
+                            courseList = ret;
+                            window_width = api.winWidth;
+                            api.openFrameGroup ({
+                                name: 'HomeWorkDetailGroup',
+                                background:'#fff',
+                                scrollEnabled:true,
+                                rect : {
+                                    x : 0,
+                                    y :yparam,
+                                    w : 'auto',
+                                    h: api.winHeight-yparam
+                                },
+                                index:0,
+                                frames:frame
+                            }, function(ret, err){
+                                switchFrameCallback(ret.index);
+                                setInterval(function(){
+                                    playModule.isFullScreen(function(ret, err) {
+                                        if(ret && ret.status && fullFlag){
+                                            api.setFrameGroupAttr({
+                                                name: 'HomeWorkDetailGroup',
+                                                hidden: true
+                                            });
+                                            fullFlag = false;
+                                            unFunllFlag = true;
+                                        }else if(ret && !ret.status && unFunllFlag){
+                                            fullFlag = true;
+                                            unFunllFlag = false;
+                                            api.setFrameGroupAttr({
+                                                name: 'HomeWorkDetailGroup',
+                                                hidden: false
+                                            });
+                                        }
+                                    });
+                                },100)
+                            });
+                            var data = {list: param,isShow:param.TestId};
+                            var html = template('scriptDiv',data);
+                            document.getElementById('main').innerHTML = html;
+                        }
+
+                    });
+                })
+            } else {
+             	toast("未知错误!")
+            }
+        });
+
+        api.addEventListener({
+            name: 'keyback'
+        }, function (ret, err) {
+            playModule.isFullScreen(function(ret, err) {
+                if(ret && ret.status){
+                    playModule.unfull(function(ret, err) {
+
+                    });
+                }else{
+                    closeWin();
+                }
+            });
+
+        });
+	};
+	
+	function switchFrameGroupIndex(index){
+		_index = index;
+		api.setFrameGroupIndex({
+			name : "HomeWorkDetailGroup",
+			index : index,
+			scroll : true,
+			reload : true
+		});
+	};
+	
+	function switchFrameCallback(index){
+		var width = (window_width / moveIndex) * index;
+		var spans = document.querySelector(".nav").querySelectorAll("li");
+		$api.css(document.getElementsByClassName("move")[0], "-webkit-transform:translate(" + width + "px,0)");
+		for(var i = 0;i < spans.length;i++){
+			if(i == index){
+				spans[i].style.color="#fa331e";
+
+			}else{
+				spans[i].style.color="#333";
+			}
+		}
+	};
+    //把所有的资源组装成一个字符串，然后判断字符串中是否包含后缀
+
+	var fullFlag = true;
+	var unFunllFlag = false;
+    var videoString = "mp4,flv,wmv,rmvb";
+    var pdfString = "pdf";
+    var PDFString = "PDF";
+    var playIndex = 0;
+    var flag = true;
+    var time;
+    function  openPlay(index,ids){
+    	var nums = 60;
+    	clearInterval(time);
+        if(isNotBlack(courseList)){
+            var suffix = courseList[index].PlaySrc.substring(courseList[index].PlaySrc.lastIndexOf(".")+1);
+            if(videoString.indexOf(suffix) != -1){
+                //打开视频播放
+                if(flag){
+                    playModule.play({
+                        pageType:'Window',
+                        rect:
+                        {   x: 0,
+                            y : 0,
+                            w : api.winWidth,
+                            h: 250
+                        },
+                        title:  courseList[index].Title,
+                        url:encodeURI(courseList[index].PlaySrc),
+                        defaultBtn: true,
+                        enableFull : false,
+                        isTopView : false
+                    }, function(ret, err) {
+                        openReturnVideo();
+       /**********开始的时候从这个页面能取到“index”为：0  也即是第一个，从另外一个页面传过来的是“CoursewareId”  这时候要取这个值*/
+                        var idss = ids||courseList[index].CoursewareId;
+                        var objs = {
+		                	CoursewareId : idss
+		                };
+                        ajaxGet(startPlay,objs,function(ret,err) {
+				            if (ret) {	
+				                time = setInterval(function(){		                	
+				                	var obj1 = {
+					                	PlayId : ret.PlayId,
+					                	Time :nums
+					                };					                
+				                	ajaxGet(submitlearningtime,obj1,function(ret,err) {
+							            if (ret) {
+							            } else {
+							             	toast("未知错误!");
+							            }
+							        })
+				                	nums+=60;
+				                },60000)
+				            } else {
+				             	toast("网络出错了!");
+				            }
+				        });
+					    isFull();
+                    });
+                    flag = false;
+                }else{
+                    playModule.playUrl({
+                        title: courseList[index].Title,
+                        url:encodeURI(courseList[index].PlaySrc),
+                        defaultBtn: true
+                    }, function(ret, err) {              
+						var idss = ids||courseList[index].CoursewareId;
+                        var objs = {
+		                	CoursewareId : idss
+		                };
+                        ajaxGet(startPlay,objs,function(ret,err) {
+				            if (ret) {	
+				                time = setInterval(function(){		                	
+				                	var obj1 = {
+					                	PlayId : ret.PlayId,
+					                	Time : nums
+					                };					                
+				                	ajaxGet(submitlearningtime,obj1,function(ret,err) {
+							            if (ret) {
+							            } else {
+							             	toast("未知错误!");
+							            }
+							        })
+				                	nums += 60;
+				                	api.execScript({
+								        name: 'chooseCourse',
+								        frameName:'onCourse_body',
+								        script: 'reloadHtml()'
+								    });
+								    api.execScript({
+								        name: 'chooseCourse',
+								        frameName:'haveCourse_body',
+								        script: 'reloadHtml()'
+								    });
+								    api.execScript({
+								        name: 'chooseCourse_01',
+								        frameName:'onCourse_body',
+								        script: 'reloadHtml()'
+								    });
+								    api.execScript({
+								        name: 'chooseCourse_01',
+								        frameName:'haveCourse_body',
+								        script: 'reloadHtml()'
+								    });
+								    
+								    api.execScript({
+								        name: 'studyCourse',
+								        frameName:'studyCourse_body',
+								        script: 'reloadHtml()'
+								    });
+								    api.execScript({
+								        name: 'studyCourse1',
+								        frameName:'activity01',
+								        script: 'reloadHtml()'
+								    });
+								    api.execScript({
+								        name: 'studyCourse',
+								        frameName:'studyCourRight_body',
+								        script: 'reloadHtml()'
+								    });
+								    api.execScript({
+								        name: 'study',
+								        frameName:'study1_body',
+								        script: 'reloadHtml()'
+								    });
+				                },60000)
+				            } else {
+				             	toast("未知错误!");
+				            }
+				        })
+                        isFull();
+                    });
+                }
+
+            }else if(pdfString.indexOf(suffix) != -1||PDFString.indexOf(suffix) != -1){
+	            if(api.systemType == 'ios') {	
+		        	browser.open({
+					    url: encodeURI(courseList[index].PlaySrc)
+					});
+					//pdf闪退的问题   修改计划   都用上面的这个方法试试
+		        }else{
+					var pdfReader = api.require('pdfReader');
+	                pdfReader.open({
+	                    path: encodeURI(courseList[index].PlaySrc)
+	                });
+		        }
+            }else{
+                openNewWindow("playDetail","./playDetail.html");
+            }
+        }
+    }
+
+	function isFull(){
+		var fullScreen = api.fullScreen;
+		setInterval(function(){
+			playModule.isFullScreen(function(ret, err) {
+				if(ret && ret.status && fullFlag){
+					api.setFrameGroupAttr({
+						name: 'HomeWorkDetailGroup',
+						hidden: true
+					});
+					if(api.systemType == 'ios') {									
+			        }else{
+						api.setFrameAttr({
+							name: 'returnVideo',
+							hidden: true
+						});
+			        }
+					fullFlag = false;
+					unFunllFlag = true;
+				}else if(ret && !ret.status && unFunllFlag){
+					fullFlag = true;
+					unFunllFlag = false;	
+					api.setFrameGroupAttr({
+						name: 'HomeWorkDetailGroup',
+						hidden: false
+					});
+					if(api.systemType == 'ios') {
+			        	openReturnVideo()
+			        }else{						        
+						api.setFrameAttr({
+							name: 'returnVideo',
+							hidden: false
+						});
+			        }								
+				}
+			});
+		},100)
+	}
+	
+	
+    function openReturnVideo(){
+        var xValue = 8;
+        api.openFrame({
+            name : "returnVideo",
+            url : "./returnVideo.html",
+            pageParam : {},
+            rect : {
+                x : xValue,
+                y : 13,
+                w : 36,
+                h :36
+            },
+            bounces : false,
+            opaque : false,
+            //bgColor:'#EDEDED',
+            bgColor : 'rgba(0 , 0, 0, 0)',
+            allowEdit : true,
+            vScrollBarEnabled : true,
+            showProgress : false,
+            hScrollBarEnabled : false,
+            reload:true
+        });
+    }
+
+function changeVideoFull(){
+    playModule.isFullScreen(function(ret, err) {
+        if(ret && ret.status){
+            playModule.unfull(function(ret, err) {
+
+            });
+        }else{
+            closeWin();
+        }
+    });
+}
+
+
+	function closeWins(){
+		api.execScript({
+	        name: 'chooseCourse',
+	        frameName:'onCourse_body',
+	        script: 'reloadHtml()'
+	    });
+	    api.execScript({
+	        name: 'chooseCourse',
+	        frameName:'haveCourse_body',
+	        script: 'reloadHtml()'
+	    });
+	    api.execScript({
+	        name: 'chooseCourse_01',
+	        frameName:'onCourse_body',
+	        script: 'reloadHtml()'
+	    });
+	    api.execScript({
+	        name: 'chooseCourse_01',
+	        frameName:'haveCourse_body',
+	        script: 'reloadHtml()'
+	    });
+	    api.execScript({
+	        name: 'studyCourse',
+	        frameName:'studyCourse_body',
+	        script: 'reloadHtml()'
+	    });
+	    api.execScript({
+	        name: 'studyCourse1',
+	        frameName:'activity01',
+	        script: 'reloadHtml()'
+	    });
+	    api.execScript({
+	        name: 'studyCourse',
+	        frameName:'studyCourRight_body',
+	        script: 'reloadHtml()'
+	    });
+	    api.execScript({
+	        name: 'study',
+	        frameName:'study1_body',
+	        script: 'reloadHtml()'
+	    });
+	    setTimeout(function(){
+	    	closeWin();
+	    },600)
+	}
+</script>
+</body>
+</html>

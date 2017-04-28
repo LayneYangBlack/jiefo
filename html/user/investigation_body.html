@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>我的调查</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+       	html,body{
+    		background: #efefef;
+    	}
+    	.top{    		
+    		width: 100%;
+    		text-align: center;
+    		font-size: 12px;
+    		color: #323232;
+    		padding: 11px 0;
+    		border-bottom: 1px solid #ebebeb;
+    		background: #fff;
+    	}
+    	.num{
+    		display: inline-block;
+    		width: 18px;
+    		height: 18px;
+    		background: red;
+    		border-radius: 5px;
+    		text-align: center;
+    		line-height: 18px;
+    	}	
+    	.con{
+    		padding: 15px;
+    		border-bottom: 1px solid #ebebeb;
+    		overflow: hidden;
+    		background: #fff;
+    		color:#939393;
+    	}
+    	.imgs{
+    		float: left;
+    		width: 22px;
+    		height: 22px;
+    		display: inline-block;
+    		margin-left: 5px;
+    	}
+    	.left{
+    		float: left;
+    		display: inline-block;
+    		width: 90%;
+    	}
+    	.choose{
+    		padding:15px 30px;
+    		line-height: 40px;   		
+    	}
+    	.choose li{
+    		width: 100%;
+    		overflow: hidden;
+    		color: #909090;
+    		line-height: normal;
+    		padding-top: 10px;
+    	}
+    	
+    	.circle{
+    		display: inline-block;
+    		width: 21px;
+    		height: 21px;
+    		border-radius: 100%;
+    		background: #676060;
+    		float: left;
+    		margin-top: 1px;
+    	}
+    	.square{
+    		width: 18px;
+    		height: 18px;
+    		margin-top: 3px;
+    		border-radius: 0;
+    	}
+    	.seclect{
+    		float: left;
+    		margin-left: 10px;
+    		width: 85%;
+    	}
+    	.bottom{
+    		width: 100%;
+    		height: 56px;   		
+    		overflow: hidden; 
+    		background: #fff;	
+    		line-height: 56px;
+    		text-align: center;
+    		border-bottom: 1px solid #ebebeb;
+    	}
+    	.bottom img{
+    		width: 25px;
+    		height: 25px;
+    		position: absolute;
+    		right: 6px;
+    		top: 15px;
+    	}
+    	.bottom .left{
+    		left: 6px;
+    	}
+    	.bottomspan{
+    		display: inline-block;
+    		line-height: 25px;
+    		height: 25px;
+    		width: 31.5%;
+    		margin-top: 15px;
+    		text-align: center;
+    	}
+    	.bottom .mid{
+    		display: inline-block;
+    		border-right: 1px solid #ebebeb;
+    		color: #909090;
+    	}
+    	.midright{
+    		display: inline-block;
+    		border-left: 1px solid #ebebeb;
+    	}
+    	#foot{
+    		width: 100%;
+    		position: fixed;
+    		bottom: -224px;
+    		height: 280px;
+    		background: #fff;
+    		z-index: 1000;
+    	}
+    	#foot ul{
+    		width: 100%;
+    		height: 214px;
+    		overflow: scroll;
+    	}
+    	#foot ul li{
+    		float: left;
+    		width: 9%;
+    		height: 30px;
+    		background: #9696a3;
+    		margin:5% 0 0 6.5%;
+    		text-align: center;
+    		line-height: 20px;
+    		border-radius: 5px;
+    		color: #fff;
+    		line-height: 30px;
+    	}
+    	#mid{
+    		margin-bottom: 70px;
+    	}
+    	.bg{
+    		position: fixed;
+    		left: 0;
+    		top: 0;
+    		width: 100%;
+    		height: 100%;
+    		background: #000;
+    		opacity: 0.3;
+    		display: none;
+    		z-index: 100;
+    	}
+    	.answer{
+    		color: #323232;
+    		margin: 40px 0 0 30px;
+    		font-size: 14px;
+    	}
+    	#ipt,#texta{
+    		width: 90%;
+    		height: 200px;
+    		display: block;
+    		margin: 5px auto;
+    		border: 1px solid #666;
+    		padding: 5px;
+    		text-indent: 10px;
+    		resize: none;
+    		margin-bottom: 60px;
+    		outline: none;
+    	}
+    	#ipt{
+    		height: 120px;
+
+    	}
+    	.Judg{
+    		width: 50%;
+    		margin: 10px auto;
+    		margin-top: 30px;
+    		overflow: hidden;
+    		text-align: center;
+    	}
+    	.Judg span{
+    		width: 35px;
+    		height: 35px;
+    		border-radius: 100%;
+    		float: left;
+    		text-align: center;
+    		line-height: 37px;
+    		font-size: 14px;
+    		color: #333;
+    	}
+    	#titles{
+    		display: inline-block;
+			width: 100px;
+			overflow: hidden;/*溢出隐藏*/
+			text-overflow: ellipsis;/*文本溢出修剪,显示省略号*/
+			white-space: nowrap;/*使文字不换行*/
+    	}
+    	.Judg li{
+    		width: auto;
+    		float: left;
+    		text-indent: 5px;
+    	}
+    	.Judg li:nth-child(2){
+    		float: right;
+    		margin-left: 30px;
+    	}
+    	.answers{
+    		color: #323232;
+    		margin: 15px;
+    		font-size: 14px;
+    	}
+    	.analysis{
+    		color: #323232;
+    		margin: 15px;
+    		font-size: 13px;
+    	}
+    </style>
+</head>
+<body id="body" style="display: none;">
+	<div id="wrap">
+		<div id="main">
+			<div id="mid">
+				<div class="con">
+					
+				</div>
+				<ul class="choose" id="choose">
+				
+				</ul>
+			</div>
+		</div>
+		<div id="foot">
+			<div class="bottom">
+				<span class="mid bottomspan" id="left">上一题<img class="left" src="../../icon/left.png" alt="" /></span>
+				<span id="questions" class="bottomspan"><span class="qus">1</span>/<span class="qus"></span></span>
+				<span class="midright bottomspan" id="right">下一题<img class="right" src="../../icon/redRight.png" alt="" /></span>
+			</div>
+			<ul id="ul">
+				
+			</ul>
+		</div>
+		
+	</div>
+	<div class="bg"></div>
+</body>
+<script id="scriptDiv1" type="text/html">
+	<%if(list.Type == 2){%>
+	<div class="con">
+		<span class="left">第<%=list.SortNo%>题(多选题)、<%=list.Content%></span>
+	</div>
+	<ul class="choose" id="choose">
+		<%for(var i = 0;i < list.Options.length;i++){%>
+			<li>
+				<input class="circle square" type="checkbox" disabled />
+				<span class="seclect"><%=list.ABCD[i]%>&nbsp、<%=list.Options[i]%></span>
+			</li>
+		<%}%>
+	</ul>
+	<%if(list.notice == 1){%>
+		<div class="answers">正确答案：<%=list.Answer%></div>
+		<div class="analysis">
+			<%=list.Analyze%>
+		</div>
+	<%}%>
+	
+	<%}else if(list.Type == 1){%>
+	<div class="con">
+		<span class="left">第<%=list.SortNo%>题(单选题)、<%=list.Content%></span>
+	</div>
+	<ul class="choose" id="choose">
+		<%for(var i = 0;i < list.Options.length;i++){%>
+		<li>
+			<input class="circle" type="radio" disabled />
+			<span class="seclect"><%=list.ABCD[i]%>&nbsp、<%=list.Options[i]%></span>
+		</li>
+		<%}%>
+	</ul>
+	<%if(list.notice == 1){%>
+		<div class="answers">正确答案：<%=list.Answer%></div>
+		<div class="analysis">
+			<%=list.Analyze%>
+		</div>
+	<%}%>
+	<%}else if(list.Type == 4){%>
+	<div class="con">
+		<span class="left">第<%=list.SortNo%>题(问答题)、<%=list.Content%></span>
+	</div>
+	<textarea name="" rows="" cols="" value="" id="texta" readonly>
+		
+	</textarea>
+	<%if(list.notice == 1){%>
+		<div class="answers">正确答案：<%=list.Answer%></div>
+		<div class="analysis">
+			<%=list.Analyze%>
+		</div>
+	<%}%>
+	<%}else if(list.Type == 0){%>
+	<div class="con">
+		<span class="left" style="display: block;"><span style="float: left;">第<%=list.SortNo%>题(填空题)、<%=list.Content%></span>
+			
+	</span>
+	</div>
+	<textarea name="" rows="" cols="" id="ipt" readonly></textarea>
+	<%if(list.notice == 1){%>
+		<div class="answers">正确答案：<%=list.Answer%></div>
+		<div class="analysis">
+			<%=list.Analyze%>
+		</div>
+	<%}%>
+	<%}else if(list.Type == 3){%>
+	<div class="con">
+		<span class="left" style="display: block;"><span style="float: left;">第<%=list.SortNo%>题(判断题)、<%=list.Content%></span></span>
+	</div>
+	<div class="Judg" id="choose">
+		<li>
+			<input class="circle" type="radio" disabled />错误
+		</li>
+		<li>
+			<input class="circle" type="radio" disabled />正确
+		</li>		
+	</div>
+	<%if(list.notice == 1){%>
+		<div class="answers">正确答案：<%=list.Answer%></div>
+		<div class="analysis">
+			<%=list.Analyze%>
+		</div>
+	<%}%>
+	<%}%>
+</script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/login.js"></script>
+<script>
+	var arr = [];/***这个数组保存将要提交的答案*/
+	var arr2 = [];
+	var allResult = [];/*****把试题从返回的数据之中取出来*****/
+	var _index = 0;/******题目的索引值*****/
+	var res;/*****用于组装每一条试题****/
+	var results = [];
+	var circles;/*****选择题的选项***/
+	var TotalScore = 0;/****申明一个新的变量  用于最终提交试卷的试卷总分***/
+	var lis;/***底部导航**/
+	var rets; /*****这个变量保存上个页面传过来的Testid  用于新的请求*********/
+	var abcd = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q"];
+	var ABCD = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q"];
+	apiready = function(){
+		rets = api.pageParam;
+		api.showProgress();
+        var obj = {      	
+            ClerkKscjId : rets.notice     
+        };  
+       if (rets.index == 0) {
+			var urls = getmyinvestresult/***问卷调查的接口**/
+		}else if (rets.index == 1){
+			var urls = getmyanswerdetail/***正式考试和模拟考试**/
+		}else{
+			var urls = getmyhrtestresult//人才评测
+		}
+          ajaxGet(urls,obj,function(ret,err) {
+            if (ret) {
+            	api.hideProgress();
+            	if(isBlack(ret)){
+					toast("暂无数据！");
+					return;
+				}
+            	res = ret;
+
+            	allResult[res.Data] = res.Data;
+            	results = allResult[res.Data];
+
+            	num = allResult[res.Data].length;
+            	for (var i = 0; i < num;i++) {
+					document.getElementById("ul").innerHTML += "<li>"+(i+1)+"</li>";
+					TotalScore += parseInt(results[i].Score);
+				} 
+				lis = document.getElementById("ul").querySelectorAll("li");	
+				document.getElementsByClassName("qus")[1].innerHTML = num;
+				
+				for(var i = 0; i　< results.length;i++){
+					if(isNotBlack(results[i].MyAnswer)){
+						lis[i].style.background = "#85ba6a";
+					}
+				}
+                addDataToHtml();
+                document.getElementById("body").style.display = "block";
+            } else {
+             	toast("未知错误!")
+            }
+       })	    
+	};
+	
+	function reloadHtml(){
+        apiready();
+    };
+    
+	/***********用于把每一条试题组装上去************/
+	function addDataToHtml() {	
+		num = results.length;
+		results[_index].ABCD = ABCD;
+		results[_index].notice = rets.index;
+		var data = {list: results[_index]};
+		var html = template('scriptDiv1',data);
+		document.getElementById('main').innerHTML = html;
+		var imgsChange = document.getElementById("imgs");/****点击收藏**/
+		
+		if(results[_index].Type == 1 || results[_index].Type == 3 || results[_index].Type == 2){
+			circles = document.getElementById("choose").querySelectorAll("li");	
+				
+		}
+			var MyAnswers = results[_index].MyAnswer;
+			if(results[_index].Type == 2 || results[_index].Type == 1){
+				for(var j = 0; j < abcd.length;j++ ){
+					if(MyAnswers.indexOf(abcd[j]) != -1){
+						circles[j].querySelector(".circle").checked = "checked";
+					}
+				}
+			}else if(results[_index].Type == 0){
+				document.getElementById("ipt").value = MyAnswers;
+			}else if(results[_index].Type == 3){
+				if (MyAnswers) {
+					circles[MyAnswers].querySelector(".circle").checked = "checked";
+				}			
+			}else if(results[_index].Type == 4){
+				document.getElementById("texta").value = MyAnswers;
+			}
+			
+	    };
+	
+	
+	/*****************点击下一题/上一题*****************/
+	var leftRight = "left";
+	document.getElementById("left").onclick = function (){
+		if(flag == 1){
+			down();
+		}
+		leftRight = "left";			
+		agains();
+	};
+	
+	document.getElementById("right").onclick = function (){
+		if(flag == 1){
+			down();
+		}
+		leftRight = "right";	
+		agains();
+	};
+	
+	
+	/****************保存上一题或者下一题的答案************/
+	function agains(id){
+		var lastIndex = _index;//保存上一题的索引值
+
+		if (leftRight == "left") {
+			
+			if (_index <= 0) {
+				return;
+			}
+			_index--;
+		}else if (leftRight == "right"){
+			
+			if(_index >= num-1){
+				return;
+			}
+			_index++;
+		}else if(leftRight == "bottoms"){
+			_index = id;
+		}
+		
+		if (results[lastIndex].Type == 2) {
+			var arr3 = [];
+			var answers = "";
+			for(var i = 0; i < circles.length;i++ ){
+				var isSelected = circles[i].getAttribute("datatype");
+				if (isSelected) {					
+					var anserIndex = i + 1;
+					arr3.push(anserIndex);					
+					answers += abcd[i]					
+					var objs = {};
+					arr[lastIndex] = objs;
+					arr[lastIndex].agains = arr3;
+					arr[lastIndex].Answer = answers;
+					arr[lastIndex].Score = results[lastIndex].Score;
+					arr[lastIndex].QuestionId = results[lastIndex].QuestionId;
+					lis[lastIndex].style.background = "#85ba6a";									
+				}
+			}	
+			 //上面是保存上一题的答案
+			 
+			 //下面是显示下一题的答案
+			 if (leftRight == "left" || leftRight == "right" || leftRight == "bottoms") {
+			 	commens();
+			 }
+			
+		} else if(results[lastIndex].Type == 1) {
+			var answes;
+			for(var i = 0; i < circles.length;i++ ){
+				var isSelected = circles[i].getAttribute("datatype");
+				if (isSelected) {
+					var answers;
+					var agains;/*****为信息回显  保存索引值***/
+					answers = abcd[i]
+					agains = i+1;
+					var objs = {};
+					arr[lastIndex] = objs;
+					arr[lastIndex].agains = agains;
+					arr[lastIndex].Answer = answers;
+					arr[lastIndex].Score = results[lastIndex].Score;
+					arr[lastIndex].QuestionId = results[lastIndex].QuestionId;
+					lis[lastIndex].style.background = "#85ba6a";				
+				}
+			}			
+			
+			 //下面是显示下一题的答案
+			if (leftRight == "left" || leftRight == "right" || leftRight == "bottoms") {
+			 	commens();
+			 }
+			
+		}else if(results[lastIndex].Type == 4) {
+			
+			if (document.getElementById("texta").value != "") {
+				
+				var	answess = document.getElementById("texta").value;	
+				var objs = {};				
+				objs.Answer = answess;
+				objs.Score = results[lastIndex].Score;
+				objs.QuestionId = results[lastIndex].QuestionId;
+				arr[lastIndex] = objs;
+				lis[lastIndex].style.background = "#85ba6a";
+				 //下面是显示下一题的答案				
+			}
+			if (leftRight == "left" || leftRight == "right" || leftRight == "bottoms") {
+			 	commens();
+			 }
+		}else if(results[lastIndex].Type == 0) {
+			if (document.getElementById("ipt").value != "") {
+				var	answes = document.getElementById("ipt").value;	
+				var objs = {};			
+				objs.Answer = answes;
+				objs.Score = results[lastIndex].Score;
+				objs.QuestionId = results[lastIndex].QuestionId;
+				arr[lastIndex] = objs;
+				lis[lastIndex].style.background = "#85ba6a";
+			}
+			 //下面是显示下一题的答案
+			if (leftRight == "left" || leftRight == "right" || leftRight == "bottoms") {
+			 	commens();
+			 }
+		}else if(results[lastIndex].Type == 3) {			
+			var answes;
+			for(var i = 0; i < circles.length;i++ ){
+				var isSelected = circles[i].getAttribute("datatype");
+				if (isSelected) {
+					answes = i;
+					var objs = {};
+					arr[lastIndex] = objs;
+					arr[lastIndex].Answer = answes;
+					arr[lastIndex].Score = results[lastIndex].Score;
+					arr[lastIndex].QuestionId = results[lastIndex].QuestionId;
+					lis[lastIndex].style.background = "#85ba6a";				
+				}
+			}			
+			 //下面是显示下一题的答案
+			if (leftRight == "left" || leftRight == "right" || leftRight == "bottoms") {
+			 	commens();
+			 }
+		}
+	}
+	
+	/******信息回显************/
+	function commens(){
+		document.getElementsByClassName("qus")[0].innerHTML = _index+1;
+			addDataToHtml(res);
+			if (results[_index].Type == 2) {
+				var arrs = [];
+				if(isNotBlack(arr)){
+					if (arr[_index]) {
+						var answer = arr[_index].agains;
+						for(var i = 0; i < answer.length;i++){
+							var flag_index = answer[i];
+							circles[flag_index-1].querySelector(".circle").style.backgroundColor = "#ec6a6a";
+						}					
+					}
+				}
+			}else if(results[_index].Type == 1){
+				if(isNotBlack(arr)){
+					if (arr[_index]) {
+						var flag_index = arr[_index].agains;
+						circles[flag_index-1].querySelector(".circle").style.backgroundColor = "#ec6a6a";
+					}
+				}			
+			}else if(results[_index].Type == 4){
+				if(isNotBlack(arr)){
+					if (arr[_index]) {
+						var answer = arr[_index].Answer;
+						document.getElementById("texta").value = answer;	
+					}
+				}							
+			}else if(results[_index].Type == 0){
+				if(isNotBlack(arr)){
+					if (arr[_index]) {
+						var answer = arr[_index].Answer;
+						document.getElementById("ipt").value = answer;
+					}
+				}									
+			}else if(results[_index].Type == 3){
+				if(isNotBlack(arr)){
+					if (arr[_index]) {
+						var flag_index = arr[_index].Answer;
+
+						circles[flag_index].querySelector(".circle").style.backgroundColor = "#ec6a6a";
+					}
+				}									
+			}
+	}
+</script>
+<script>
+	
+	/*************点击弹出框弹出**************/
+	var flag = 0;
+	var ss;/******保存底部导航的索引值**/
+	document.getElementById("questions").onclick = function(){
+		lis = document.getElementById("ul").querySelectorAll("li");
+		if (flag == 0) {
+			if (results[_index].Type == 2) {
+			for(var i = 0; i < circles.length;i++ ){
+					var isSelected = circles[i].getAttribute("datatype");
+					if (isSelected) {
+						lis[_index].style.background = "#85ba6a";
+					}
+				}			
+			} else if(results[_index].Type == 1) {
+				for(var i = 0; i < circles.length;i++ ){
+					var isSelected = circles[i].getAttribute("datatype");
+					if (isSelected) {
+						lis[_index].style.background = "#85ba6a";				
+					}
+				}			
+			}else if(results[_index].Type == 4) {
+				if (document.getElementById("texta").value != "") {
+					lis[_index].style.background = "#85ba6a";
+				}
+			}else if(results[_index].Type == 0) {
+				if (document.getElementById("ipt").value != "") {
+					lis[_index].style.background = "#85ba6a";
+				}
+			}else if(results[_index].Type == 3) {			
+				for(var i = 0; i < circles.length;i++ ){
+					var isSelected = circles[i].getAttribute("datatype");
+					if (isSelected) {
+						lis[_index].style.background = "#85ba6a";				
+					}
+				}			
+			}
+			
+			for(var i = 0;i < lis.length;i++){
+				lis[i].onclick = function(){
+					for(var s = 0;s < lis.length;s++){
+						if (lis[s] == this) {
+							down();
+							ss = s;
+							leftRight = "bottoms";
+							
+							agains(ss);
+							
+							document.getElementsByClassName("qus")[0].innerHTML = _index+1;
+						}							
+					}
+				}
+			}
+			var i = -220;
+			var timer;
+			document.getElementsByClassName("bg")[0].style.display = "block";
+			timer = setInterval(function(){
+				if (i >= 0) {
+					i = 0;
+					flag = 1;
+					clearInterval(timer);
+				} else{
+					i = i+6;
+					document.getElementById("foot").style.bottom = i + "px";
+				}	
+			})
+		} else{
+			down();
+		}				
+	};
+	
+	/********弹出框消失******************/
+	function down(){
+		var timers;/********计时器****/
+		var i = 0;
+		document.getElementsByClassName("bg")[0].style.display = "none";
+		timers = setInterval(function(){
+			if (i <= -224) {
+				i = -220;
+				flag = 0;
+				clearInterval(timers);
+			} else{
+				i = i-9;
+				document.getElementById("foot").style.bottom = i + "px";
+			}	
+		})
+	};
+	
+	document.getElementsByClassName("bg")[0].onclick = function(){
+		down();
+	}
+</script>
+<script>
+	/*************点击提交试卷+临时保存试卷*************/
+	function submits(type){/*****提交试卷的时候  把刚刚答的这道题的答案  保存起来  放进数组  一起提交*****/
+		leftRight = "Submit";/*****避免进入addHtmlData（）   提交的时候不需要加载下一题的试题****/
+		agains();
+		
+		var arr1 = [];
+		for(var i = 0;i < arr.length;i++){
+			if (arr[i]!=""&&arr[i]!="null"&&arr[i]!="undefined") {
+				arr1.push(arr[i]);
+			}
+		}
+		var myDate = new Date().format("yyyy-MM-dd hh:mm");
+		var parms = {}
+		parms.TestId = rets.TestId;
+		parms.MyAnswer = arr;
+		parms.ExamStartId = res.ExamStartId;
+		parms.SubmitTime = myDate;
+		parms.TotalScore = TotalScore;
+		
+		if (type == 1) {
+			var urls = submitpaper;
+		} else if (type == 2 || type == 3){
+			var urls = savepaper;
+		}
+		ajaxGet(urls,parms,function(ret,err) {
+            if (ret) {           	 
+ 			   if (type == 1) {
+ 			   		toast("交卷成功!")
+ 			   		setTimeout(function(){
+		             	closeWin();
+		            },1000)
+			    } else if (type == 2){
+				    toast("保存成功!")
+			    }
+            } else {
+             	toast("未知错误!")
+            }
+        })
+	};
+</script>
+</html>

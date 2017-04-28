@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <link rel="stylesheet" href="../../script/dist/css/swiper.min.css">
+    <style>
+        body{font-family:"黑体";background: #f2f2f2;}
+        html{background: #fff;height: auto;}
+        .conter_bj{background: #fff;width: 100%;height: 185px;float: left;}
+        .conter{width: 95%;;height:180px;;float: left; margin-left: 2.5%;background: #fff;}
+        .conter div{width: 20%;height: 46%;float: left;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack: center;
+		  /* 12版 */
+		  -webkit-justify-content: center;
+		  -moz-justify-content: center;
+		  -ms-justify-content: center;
+		  -o-justify-content: center;
+		  justify-content: center; -webkit-box-orient: vertical;
+		  /* 12版 */
+		  -webkit-flex-direction: column;
+		  -moz-flex-direction: column;
+		  -ms-flex-direction: column;
+		  -o-flex-direction: column;
+		  flex-direction: column;
+          margin-top: 2%; -webkit-box-align: center;
+		  /* 12版 */
+		  -webkit-align-items: center;
+		  -moz-align-items: center;
+		  -ms-align-items: center;
+		  -o-align-items: center;
+		  align-items: center;}
+        .conter div a{display: block;height: 1.5rem;font-size: 12px;width: 100%;text-align: center; font-weight: 300;padding-top: 5px;color: #333;}
+        .icon1{width: 40px;height: 40px;display: block;
+              background: url("../../icon/key.png")no-repeat;background-size: 40px 40px;}
+        .item_bj{width: 100%;background: #fff;height: 120px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex; -webkit-box-align: center;
+ 		 /* 12版 */
+		  -webkit-align-items: center;
+		  -moz-align-items: center;
+		  -ms-align-items: center;
+		  -o-align-items: center;
+		  align-items: center;}
+        .mp_10{margin-top: 0;}
+        .item{width: 90%;margin:0 5%;height: 85px;display: block;}
+        .item div:first-child{height: 100%;width: 45%;float: left;}
+        .item div:last-child{height: 100%;width: 55%;float: right;}
+        .item img{height: 100%;width: 100%;;}
+        .mage{margin-left: auto;font-size: 14px;color: #9296a3;}
+        .mages{overflow: hidden;}
+        .mages span:first-child{font-size: 14px;padding-bottom: 10px;width: 80%;
+        	display: inline-block;
+			width: 80%;
+			overflow: hidden;/*溢出隐藏*/
+			text-overflow: ellipsis;/*文本溢出修剪,显示省略号*/
+			white-space: nowrap;/*使文字不换行*/
+        }
+        .mages span{width: 100%;height: auto;line-height: 1.2rem;float: left;padding: 0 0 0 10px;}
+
+        .mages span:nth-child(2){font-size: 12px;color: #9296a3;}
+        .mages span:nth-child(3){font-size: 12px;color: #9296a3;display: block;}
+        .mages span:nth-child(4){font-size: 12px;color: #9296a3;display: block;float: left;width: auto;}
+        .mages span:nth-child(5){font-size: 12px;color: #9296a3;display: block;float: left;}
+        
+        .l_icon0{font-style: normal;margin-left: 17px;font-size: 15px;}
+        .r_icon{background: url("../../icon/r_arrow1.png")no-repeat;background-size: cover;}
+        .write{float: left;display: block;width: 18px;height: 18px;margin-top: -3px;}
+        .write img{width: 100%;height: 100%;}
+        .write1{float: right;display: block;width: 30px;height: 30px;margin-top: -12px;}
+        .write1 img{width: 100%;height: 100%;}
+        .xuan{background: url("../../icon/home/choice.png")no-repeat;background-size: cover;}
+        .xue{background: url("../../icon/home/stutask.png")no-repeat;background-size: cover;}
+        .kao{background: url("../../icon/home/olexam.png")no-repeat;background-size: cover;}
+        .mo{background: url("../../icon/home/analogexam.png")no-repeat;background-size: cover;}
+        .tong{background: url("../../icon/home/notice.png")no-repeat;background-size: cover;}
+        .lian{background: url("../../icon/home/olexercise.png")no-repeat;background-size: cover;}
+        .zhi{background: url("../../icon/home/knowledge.png")no-repeat;background-size: cover;}
+        .wei{background: url("../../icon/home/forum.png")no-repeat;background-size: cover;}
+        .wen{background: url("../../icon/home/question.png")no-repeat;background-size: cover;}
+        .gang{background: url("../../icon/home/gang.png")no-repeat;background-size: cover;}
+        
+        .rencai{background: url("../../icon/home/shouye_04.png")no-repeat;background-size: cover;}
+        .plans{background: url("../../icon/home/shouye_03.png")no-repeat;background-size: cover;}
+        .shapan{background: url("../../icon/home/shouye_01.png")no-repeat;background-size: cover;}
+        .mui-slider-item{height: 100%;}
+    </style>
+</head>
+<body id="body" style="">
+
+<div id="slider" class="mui-slider" >
+    
+</div>
+
+    <div id="main">
+       
+    </div>
+
+<script id="scriptDiv1" type="text/html">
+	<%if( list.topAction.length>10){%>
+	<div class="box mui-slider mui-slider2" style="margin-top: 10px; padding-bottom: 12px; border-bottom: 1px solid #f4f4f4;">
+	    <div class="mui-slider-group" id="iconList">
+			<div class="mui-slider-item">
+		        <div class="conter_bj">
+                    <div class="conter" >
+                        <%for(var i =0;i< list.topAction.length; i++){%>
+                        <%if(i>=10){%>
+                            <%break;%>
+                        <%}%>
+                        <div class="" onclick="openWin('<%=list.topAction[i].id%>')" ><i class="icon1 <%=list.topAction[i].class%>"></i><a><%=list.topAction[i].name%></a></div>
+                        <%}%>
+                    </div>
+                </div>
+		    </div>
+		    <%if(list.topAction.length >10){%>
+		    <div class="mui-slider-item">
+		        <div class="conter_bj">
+                    <div class="conter">
+                        <%for(var i =10;i< list.topAction.length; i++){%>
+                        <div class="" onclick="openWin('<%=list.topAction[i].id%>')" ><i class="icon1 <%=list.topAction[i].class%>"></i><a><%=list.topAction[i].name%></a></div>
+                        <%}%>
+                    </div>
+                </div>
+		    </div>
+		    <%}%>	
+	    </div>
+	   <div class="mui-slider-indicator">
+	        <div class="mui-indicator mui-active"></div>
+	        <div class="mui-indicator"></div>
+	    </div>
+	</div>
+    <%}else{%>
+    <div class="box mui-slider mui-slider2" style="margin-top: 10px; padding-bottom: 12px; border-bottom: 1px solid #f4f4f4;">
+	    <div class="mui-slider-group" id="iconList">
+			<div class="conter_bj">
+		        <div class="conter" >
+		            <%for(var i =0;i< list.topAction.length; i++){%>
+		            <div class="" onclick="openWin('<%=list.topAction[i].id%>')" ><i class="icon1 <%=list.topAction[i].class%>"></i><a><%=list.topAction[i].name%></a></div>
+		            <%}%>
+		        </div>
+		    </div>
+	    </div>
+	</div>
+    <%}%>
+    <%if(list.MyNewClass && list.MyNewClass != null && list.MyNewClass.StudyClassId != null){%>
+    <div class="li_42" onclick="openLearningTaskss()">
+        <i class="l_icon0">当前活动</i>
+        <span class="mage">更多</span>
+        <i class="r_icon"></i>
+    </div>
+    <div class="item_bj mp_10" id="newDiv" onclick="openLearningTasks('<%=list.MyNewClass.StudyClassId%>')">
+        <div class="item">
+            <div><img src="../../icon/images0.png"></div>
+            <div class="mages">
+                <span><%=list.MyNewClass.Title%></span>
+                <span>课程共计:<%=list.MyNewClass.CourseCount%>课</span>
+                <span class="desc">达标分数:<%=list.MyNewClass.SumCredithour%>分</span>
+                <span style="width: 100%;background: #e1e3e0;height:3px;margin-top: 9px;margin-left: 10px;padding: 0;">
+                <%if(list.MyNewClass.SumCredithour != 0){%>
+                	<div style="width: <%=(list.MyNewClass.Credithour/list.MyNewClass.SumCredithour)*100%>%;height:3px;background: #eb3e2e;position: relative;float: none; margin-top: 0px;">
+                <%}%>
+                <div id="progress"></div>
+
+                </div>
+                </span>
+            </div>
+        </div>
+    </div>
+    <%}%>
+	<%if(list.MyNewBoard && list.MyNewBoard !=null && list.MyNewBoard.BoardId !=null){%>
+    <div class="li_42" style="" onclick="openForum()">
+        <i class="l_icon0">热门问答</i>
+        <span class="mage">更多</span>
+        <i class="r_icon"></i>
+    </div>
+    <div class="item_bj mp_10" id="newDiv" onclick="openForumTopic('<%=list.MyNewBoard.BoardId%>')">
+        <div class="item">
+            <div><img src="../../icon/goodnew.png"></div>
+            <div class="mages">
+                <span><%=list.MyNewBoard.Title%></span>
+                <span><%=list.MyNewBoard.Introduction%></span>
+                <span><p style="color: #49c0aa;float: left;">主贴:<%=list.MyNewBoard.Count%>　</p><p style="color: #97c53f;float: left;">回帖:<%=list.MyNewBoard.ReplyCount%></p></span>
+                <!--<span>发布时间:2016.11.11</span>-->
+            </div>
+        </div>
+    </div>
+
+	<%}%>
+    <%if(list.MyNewExam && list.MyNewExam != null && list.MyNewExam.TestId != null && list.MyNewExam.TestId != ""){%>
+        <div class="li_42" style="" onclick="openTest()">
+            <i class="l_icon0">在线考试</i>
+            <span class="mage">更多</span>
+            <i class="r_icon"></i>
+        </div>
+        <div class="item_bj mp_10" id="newDiv" onclick="openTestDetail('<%=list.MyNewExam.TestId%>','<%=list.MyNewExam.Price%>')">
+            <div class="item">
+                <div><img src="../../icon/exam.png"></div>
+                <div class="mages">
+                    <span><%=list.MyNewExam.Title%></span><i class="write"><img src="../../icon/write.png"> </i>
+                    <span>总分数:<%=list.MyNewExam.Score%>分　时长:<%=list.MyNewExam.Time%>分钟</span>
+                    <span>考试次数:<%=list.MyNewExam.JoinTimes%>/<%=list.MyNewExam.TotalTimes%></span>
+                    <span>开考时间:<%=list.MyNewExam.StartTime%></span>
+                </div>
+            </div>
+        </div>
+    <%}%>
+    <%if(list.MyNewWaitCourse && list.MyNewWaitCourse != null && list.MyNewWaitCourse.CourseId != null&& list.MyNewWaitCourse.CourseId != ""){%>
+    <div class="li_42" style="" onclick="openChoose()">
+        <i class="l_icon0">热门课程</i>
+        <span class="mage">更多</span>
+        <i class="r_icon"></i>
+    </div>
+    <div class="item_bj mp_10" id="newDiv" onclick="openChooseDetail('<%=list.MyNewWaitCourse.CourseId%>','<%=list.MyNewWaitCourse.Price%>')">
+        <div class="item">
+            <div><img src="../../icon/stu.png"></div>
+            <div class="mages">
+                <span><%=list.MyNewWaitCourse.Title%></span>
+                <span>课程时长:<%=list.MyNewWaitCourse.StandardTime%>分钟</span>
+                <span>课程分数:<%=list.MyNewWaitCourse.Credithour%>分</span>
+                <%if(list.MyNewWaitCourse.Price != 0){%>
+                	<span style="color: red;font-size: 15px;">￥<%=list.MyNewWaitCourse.Price%></span><i class="write1"><img src="./icon/icar.png"> </i>
+                <%}%>
+            </div>
+        </div>
+    </div>
+    <%}%>
+
+<%if(list.MyNewInvest.JoinTimes > list.MyNewInvest.TotalTimes){%>   
+    <%if(list.MyNewInvest && list.MyNewInvest != null){%>
+    <div class="li_42" style="" onclick="openResearch()">
+        <i class="l_icon0">问卷调查</i>
+        <span class="mage">更多</span>
+        <i class="r_icon"></i>
+    </div>
+    	
+    <div class="item_bj mp_10" id="newDiv" onclick="openResearch('<%=list.MyNewInvest.TestId%>')">
+        <div class="item">
+            <div><img src="../../icon/say.png"></div>
+            <div class="mages">
+                <span><%=list.MyNewInvest.Title%></span>
+                <span>奖励积分：<%=list.MyNewInvest.Credithour%></span>
+                <span>参与次数:<%=list.MyNewInvest.JoinTimes%>/<%=list.MyNewInvest.TotalTimes%></span>
+                <span><%=list.MyNewInvest.StartTime%>-<%=list.MyNewInvest.EndTime%></span>
+
+            </div>
+        </div>
+    </div>
+    <%}%>
+<%}%>
+</script>
+<script id="carouselDiv" type="text/html">
+    <div class="mui-slider-group mui-slider-loop">
+        <div class="mui-slider-item mui-slider-item-duplicate">
+            <span onclick="openNewIframe('<%=list[list.length-1].LinUrl%>')">
+                <img style="height: 105px;" src="<%=list[list.length-1].LinkImg%>">
+            </span>
+        </div>
+        <%for(var i = 0;i < list.length; i++){%>
+
+        <!-- 第一张 -->
+        <div class="mui-slider-item">
+            <span onclick="openNewIframe('<%=list[i].LinUrl%>')">
+
+                <img  style="height: 105px;" src="<%=list[i].LinkImg%>">
+            </span>
+        </div>
+        <%}%>
+        <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+        <div class="mui-slider-item mui-slider-item-duplicate">
+            <span onclick="openNewIframe('<%=list[0].LinUrl%>')">
+                <img style="height: 105px;" src="<%=list[0].LinkImg%>">
+            </span>
+        </div>
+    </div>
+    <div class="mui-slider-indicator">
+        <div class="mui-indicator mui-active"></div>
+        <%for(var i = 0;i < list.length-1; i++){%>
+        <div class="mui-indicator"></div>
+        <%}%>
+    </div>
+</script>
+<script id="carouselDiv_01" type="text/html">
+    <div class="mui-slider-item mui-slider-item-duplicate">
+        <a onclick="openNewIframe('<%=list[0].LinUrl%>')">
+            <img style="height: 105px;width: 100%;" src="<%=list[0].LinkImg%>">
+        </a>
+    </div>
+</script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script src="../../script/dist/js/swiper.min.js"></script>
+<script src="../../script/mui.min.js"></script>
+<script type="text/javascript">
+    var carouselList = [];
+    var topAction  = [];
+    var allActionJson = {};
+    var browser;
+    apiready = function () {
+    	
+    	browser = api.require('webBrowser');
+        api.setRefreshHeaderInfo({
+            visible: true,
+            bgColor: 'rgba(246,246,246,1)',
+            textColor: '#666',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...'
+        }, function (ret, err) {
+            ajaxGetWithProgress(getmainpage,{},function(ret,err){
+	            if(ret){
+	                $api.setStorage("menuConfig",ret);
+	                var initInfo = $api.getStorage("initInfo");
+				    var menuConfig = $api.getStorage("menuConfig");
+			        carouselList = menuConfig.MyBannerList;
+			        setDataItem("params",menuConfig);
+			        if(carouselList && carouselList.length > 0){
+			            addCarouselToHtml(carouselList);
+			        }
+			
+			        topAction = [];
+			        var topActions = [];
+			        for(var i = 0;i < menuConfig.TopMenu.length;i++){
+			        	topActions[menuConfig.TopMenu[i].Id] = menuConfig.TopMenu[i];
+			        	initInfo[menuConfig.TopMenu[i].Id].name = topActions[menuConfig.TopMenu[i].Id].Name;
+			        	
+			            topAction.push(initInfo[menuConfig.TopMenu[i].Id]);
+			            var action = initInfo[menuConfig.TopMenu[i].Id];
+			            allActionJson[menuConfig.TopMenu[i].Id] = action;
+			        }
+			        menuConfig.topAction = topAction;
+			        addDataToHtml(menuConfig);
+			        var num = menuConfig.WRNoticCount;
+				    if(num > 0){
+				    	document.getElementsByClassName("tong1")[0].innerHTML = "<div style='width:20px;text-align:center;height:16px;line-height:16px;color:#fff;float:right;margin-top:-2px;margin-right:-2px;background:#eb3e2e;border-radius:60%;'>"+num+"</div>";
+				    }
+	                api.refreshHeaderLoadDone();
+	            }else{
+//	            	toast("暂无数据");
+					api.refreshHeaderLoadDone();
+	            }
+	        });
+			
+        });
+        api.refreshHeaderLoading();
+    };
+
+	
+	function reloadHtmls(){
+	    ajaxGetWithProgress(getmainpage,{},function(ret,err){
+            if(ret){
+                $api.setStorage("menuConfig",ret);
+                var initInfo = $api.getStorage("initInfo");
+			    var menuConfig = $api.getStorage("menuConfig");
+		        carouselList = menuConfig.MyBannerList;
+		        setDataItem("params",menuConfig);
+		        if(carouselList && carouselList.length > 0){
+		            addCarouselToHtml(carouselList);
+		        }
+		
+		        topAction = [];
+		        var topActions = [];
+		        for(var i = 0;i < menuConfig.TopMenu.length;i++){
+		        	topActions[menuConfig.TopMenu[i].Id] = menuConfig.TopMenu[i];
+		        	initInfo[menuConfig.TopMenu[i].Id].name = topActions[menuConfig.TopMenu[i].Id].Name;
+		        	
+		            topAction.push(initInfo[menuConfig.TopMenu[i].Id]);
+		            var action = initInfo[menuConfig.TopMenu[i].Id];
+		            allActionJson[menuConfig.TopMenu[i].Id] = action;
+		        }
+		        menuConfig.topAction = topAction;
+		        addDataToHtml(menuConfig);
+		        var num = menuConfig.WRNoticCount;
+			    if(num > 0){
+			    	document.getElementsByClassName("tong1")[0].innerHTML = "<div style='width:20px;text-align:center;height:16px;line-height:16px;color:#fff;float:right;margin-top:-2px;margin-right:-2px;background:#eb3e2e;border-radius:60%;'>"+num+"</div>";
+			    }
+            }else{
+            	toast("暂无数据");
+            }
+        });
+	}
+	
+	function addDataToHtml(results) {
+		var data = {list: results};
+		var html = template('scriptDiv1',data);
+		document.getElementById('main').innerHTML = html;
+        var gallery2 = mui('.mui-slider2');
+	    gallery2.slider({
+	        interval: 0//自动轮播周期，若为0则不自动播放，默认为0；
+	    });
+	}
+
+//	function browsers(urls){
+//		browser.open({
+//		    url: encodeURI(urls)
+//		});	
+//	}
+	
+	
+	function reloadHtml(){
+		apiready();
+	}
+	
+    function addCarouselToHtml(results) {
+        if (results && results.length > 0) {
+            var data = {list: results};
+            if (results && results.length > 1) {
+            	var html = template('carouselDiv', data);
+            }else{
+            	var html = template('carouselDiv_01', data);
+            }
+            document.getElementById('slider').innerHTML = html;
+            if(carouselList && carouselList.length > 0) {
+            	setTimeout(function(){
+	                if(carouselList.length > 1){
+	                	var slider = mui("#slider");
+		                slider.slider({
+		                    interval: 3000
+		                });
+	                    mui.init({
+	                        swipeBack:true //启用右滑关闭功能
+	                    });
+					}
+                },600)
+            }
+        }
+    }
+    
+	function reloadHtml2(){
+		document.getElementsByClassName("tong1")[0].innerHTML = "";
+	}
+	
+    function openWin(id){
+        var action = allActionJson[id];
+        openNewWindow(action.winName,action.url,{})
+    }
+
+    //微论坛
+    function openForum(){
+        openNewWindow("forum","./forum.html",{});   
+    }
+    
+       /********直接进入当前的帖子**************/
+    function openForumTopic(id){
+    	var params = {
+    		BoardId : id
+    	}
+        openNewWindow("forumtopic","./forumtopic.html",params);
+    }
+
+	
+	function openLearningTaskss(){
+    	openNewWindow("learningTasks","./learningTasks.html");
+    }
+	
+    function openForumDetail(id){
+        openNewWindow("openPDF","./openPDF.html",{id:id});
+    }
+    /*****************点击选修课***********************/
+    function openChoose(){
+        openNewWindow("chooseCourse","../shop/chooseCourse.html",{});
+    }
+
+
+    function openChooseDetail(id,Price){
+        openNewWindow("news","../user/news.html",{id:id,Price:Price});
+    }
+   
+    /**************点击学习任务***************/
+    function openLearningTasks(id){
+        openNewWindow("activity","./activity.html",{StudyClassId:id});
+    }
+    function openLearningTasksDetail(id){
+        openNewWindow("news","./news.html",{id:id});
+    }
+
+    /********************点击在线考试*******************/
+   function openTest(){
+        openNewWindow("test","./test.html",{});
+    }
+    function openTestDetail(id,Price){
+        openNewWindow("formalTest","./formalTest.html",{TestId:id,Price:Price});
+    }
+
+    /****************点击问卷调查******************/
+    function openResearch(){
+        openNewWindow("research","../mine/research.html",{});
+    }
+    function openResearchDetail(){
+        openNewWindow("research","../mine/research.html",{});
+    }
+    
+    
+   	function openNewIframe(id){
+   		openNewWindow("iframes","iframes.html",{links:id})
+   	}
+</script>
+</body>
+</html>

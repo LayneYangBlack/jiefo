@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">.
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>通知公告</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+    	.top{
+    		height: 50px;
+    		padding: 0 15px;
+    		line-height: 50px;
+    		color:#909090;
+    		font-size: 16px;
+    		border-bottom: 1px solid #ebebeb;
+    	}
+    	.con{
+    		width: 100%;
+    		font-size: 16px;
+    		color:#666;
+    	}
+    	.con img{
+    		display: block;
+    		width: 90%;
+    		height: 150px;
+    		margin: 10px auto;
+    	}
+    </style>
+</head>
+<body id="body">
+	<div id="main">
+
+	</div>		
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script id="scriptDiv1" type="text/html">
+	<div id="topbar">
+	    <div id="leftButton" onclick="closeWin()">
+	        <img src="../../icon/GroupBack.png">
+	    </div>
+    	<div id="title"><%=list.Title%></div>
+	</div>
+</script>
+<script type="text/javascript">
+	var playModule;
+	
+	var videoString = "mp4,flv,wmv,rmvb";
+	var pdfString = "pdf";
+	var playIndex = 0;
+	var flag = true;
+	apiready = function(){
+		var resulta = {};
+		ajaxGet(getjnplan,{},function(ret,err) {
+            if (ret) {
+            	resulta = ret;            	
+            	if(isBlack(ret)){
+					toast("暂无数据！");
+					return;
+				}
+            	playModule = api.require('playModule');
+				playModule.init({
+					buffering: "加载中",
+					logo: "widget://res/cklogo.png",
+					fullBtnPlan: 2
+				},function(ret){
+					openPlay(resulta)
+				})
+            } else {
+             	toast("未知错误!")
+            }
+       })       	
+	};
+	
+	function addDataToHtml(results) {
+		var data = {list: results};
+		var html = template('scriptDiv1',data);
+		document.getElementById('main').innerHTML = html;
+
+	};
+
+
+	function openReturnVideo(){
+		var xValue = 8;
+		api.openFrame({
+			name : "returnVideo",
+			url : "./returnVideo.html",
+			pageParam : {},
+			rect : {
+				x : xValue,
+				y : 50,
+				w : 36,
+				h :36
+			},
+
+			bounces : false,
+			opaque : false,
+			//bgColor:'#EDEDED',
+			bgColor : 'rgba(0 , 0, 0, 0)',
+			allowEdit : true,
+			vScrollBarEnabled : true,
+			showProgress : false,
+			hScrollBarEnabled : false,
+			reload:true
+		});
+	}
+
+	
+	function  openPlay(result){
+		if(isNotBlack(result)){
+            var suffix = result.Url.substring(result.Url.lastIndexOf(".")+1);
+            if(videoString.indexOf(suffix) != -1){
+			//打开视频播放
+			if(flag){
+				playModule.play({
+					pageType:'Window',
+					rect:
+					{    x: 0,
+						y : 0,
+						w : api.winWidth,
+						h: 250
+					},
+					fixedOn: api.frameName,
+					title: result.Title,
+					url: result.Url,
+					defaultBtn: true,
+					enableFull : false,
+					isTopView : false
+				}, function(ret, err) {     
+					openReturnVideo();
+				});
+				flag = false;
+			}else{
+				playModule.playUrl({
+					title: result.Title,
+					url: result.Url,
+					defaultBtn: true
+				}, function(ret, err) {
+
+				});
+			}
+		}else if(pdfString.indexOf(suffix) != -1){
+			var pdfReader = api.require('pdfReader');
+			pdfReader.open({
+				path: result.Url
+			});
+			setTimeout(function(){
+				closeWin();
+			},500)
+		}else{
+			openNewWindow("playDetail","./playDetail.html",params);
+		}
+       }		
+	}
+</script>
+</html>

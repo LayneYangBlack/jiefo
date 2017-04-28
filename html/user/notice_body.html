@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>通知公告</title>
+    <link rel="stylesheet" href="../../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+    	html,body{
+    		background: #efefef;
+    	}
+    	.con{
+    		background: #fff;
+    		width: 100%;
+    		margin-top: 10px;
+    		padding-bottom: 6px;
+    	}
+    	.title{
+    		font-size: 14px;
+    		padding-left: 15px;
+    		margin-top: 18px;
+    		color: #010101;
+    	}
+    	p{
+    		padding:15px;
+    		color: #343434;
+    		font-size: 12px;
+    		line-height: 20px;
+    		position: relative;
+    	}
+    	#time{
+    		position: absolute;
+    		bottom: -10px;
+    		right: 15px;
+    		font-size: 10px;
+    		color: #969696;
+    	}
+    </style>
+</head>
+<body id="body" style="display: none;">
+	<div id="main">
+		<div class="con">
+			<span class="title">系统消息</span>
+			<p>
+				恭喜您升级到LV2.1版本，如需检查当前是否为最新版本请到设置里面进行升级查看。
+				<span id="time">sdasd</span>
+			</p>
+		</div>
+	</div>		
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/message.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script id="scriptDiv1" type="text/html">
+	<% for (var i = 0; i < list.length; i++) { %>
+		<div class="con">
+			<span class="title"><%=list[i].Title%></span>
+			<p>
+				<%=list[i].Content%>
+				<span id="time"><%=list[i].Time%></span>
+			</p>
+		</div>
+	<%}%>
+</div>
+</script>
+<script type="text/javascript">
+	apiready = function(){
+		api.showProgress();
+		api.execScript({
+			name:rootWindowName,
+	        frameName:'home',
+	        script: 'reloadHtml2()'
+	   	});
+        ajaxGet(listmynews,{},function(ret,err) {
+            api.hideProgress();
+            if (ret) {
+            	if(isBlack(ret)){
+					toast("暂无数据！");
+					return;
+				}
+                addDataToHtml(ret);
+                document.getElementById("body").style.display = "block";
+            } else {
+             	toast("未知错误!")
+            }
+        })	
+	};
+	
+	function addDataToHtml(results) {
+		var data = {list: results};
+		var k;
+        for( var j=0;j < data.list.length;j++){
+            for( var jj=0;jj<data.list.length-1;jj++ ) {
+            	var dates = new Date(data.list[jj].Time);
+            	var dateB = new Date(data.list[jj+1].Time);
+                if (dates.getTime() < dateB.getTime()) {
+                    k = data.list[jj];
+                    data.list[jj] = data.list[jj+1];
+                    data.list[jj+1] = k
+                }
+            }
+    	}
+		var html = template('scriptDiv1',data);
+		document.getElementById('main').innerHTML = html;
+	};
+</script>
+</html>

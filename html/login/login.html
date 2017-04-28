@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <style>
+        html{height: auto;width: 100%;background: #ebebeb;}
+        input{outline: none;}
+        .xian{width: 100%;height:1px;background: #f4f4f4;float: left;margin-top: 10px; }
+        .login{width: 90%;margin: 0 5%;height: 35px;border-bottom: 1px solid #f4f4f4;}
+        .login a{display: block;width: 100%;float: left;height: 100%;line-height:35px;text-align: center;}
+        .border{width: 90%;margin:0 5%;border-bottom: 1px solid #f4f4f4;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align: center;
+		  /* 12版 */
+		  -webkit-align-items: center;
+		  -moz-align-items: center;
+		  -ms-align-items: center;
+		  -o-align-items: center;
+		  align-items: center;justify-content: space-between;
+            height:55px;line-height: 55px;}
+        .l_icon_1{background: url("../../icon/3.png")no-repeat;background-size:cover;}
+        .l_icon_2{background: url("../../icon/4.png")no-repeat;background-size:cover;}
+        .size{width: 24px;height: 24px;float: left;margin-bottom: 3px;}
+        .border input {line-height: normal;width:60%;margin-right: auto;height: 30px;float: left;margin-left: 3%;}
+        .check{height: 20px;width: 20px;float: left;}
+        #check{width: 90%;margin: 0 5%;float: left;height: 40px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align: center;
+		  /* 12版 */
+		  -webkit-align-items: center;
+		  -moz-align-items: center;
+		  -ms-align-items: center;
+		  -o-align-items: center;
+		  align-items: center;justify-content: flex-start; }
+        .submit1{display: block;width: 94%;margin: 15px  3% 0 3%;float: left;height: 45px;background: #a11731;
+        border-radius: 10px;  line-height: 45px;text-align: center;color: #fff;  }
+        .logo{width: 100%;height: 250px;float: left;}
+        .logo img{margin-top: 69px;margin-left: auto;margin-right: auto;display: block;width: 92px;height: 112px;}
+        .pass{width: 95%;text-align: right;margin-right: 5%;color: #9296a3;float: left;font-size: 14px;margin-top: 10px;}
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="../../icon/logo.png">
+    </div>
+	<div style="background: #fff;width: 90%;margin: 0 5%;border-radius: 30px;display: block;height: auto;float: left;">
+	<div class="li_50">
+	    <div class="border">
+	        <i class="l_icon_1 size"></i>
+	        <input type="text" id="phone" placeholder="请输入用户名">
+	    </div>
+	</div>
+	<div class="li_50">
+	    <div class="border">
+	        <i class="l_icon_2 size"></i>
+	        <input type="password" placeholder="请输入登录密码" id="phone_pass">
+	    </div>
+	</div>
+	</div>
+	<a class="submit1" >登录</a>
+    <!--<a class="pass" >忘记密码</a>-->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/init.js"></script>
+<script type="text/javascript">
+	apiready = function(){
+		/***关闭主界面***/
+		
+		/***关闭主界面***/
+		//      setLocationValue();
+        //添加安卓退出按钮事件
+        api.addEventListener({
+            name: 'keyback'
+        }, function (ret, err) {
+            closeOnKeyBack();
+        });
+        var backButtonPress = 0;
+	    function closeOnKeyBack() {
+	        backButtonPress++;
+	        if (backButtonPress > 1) {
+	            closeApp();
+	        } else {
+	            api.toast({msg: '再按一次退出应用'});
+	        }
+	        setTimeout(function () {
+	            backButtonPress = 0;
+	        }, 1000);
+	    }
+	}
+
+    /***********************点击登录**********************************/
+    document.getElementsByClassName("submit1")[0].onclick= function (){
+    	/***关闭主界面***/
+    	api.closeWin({
+			name: "main"
+		});
+		/***关闭主界面***/
+        var tel = document.getElementById('phone').value;
+        var code = document.getElementById('phone_pass').value;
+        var obj = {};
+	    if(isBlack(tel)){
+            toast("请输入用户名!");
+            return;
+        }
+		obj.LoginName = tel;
+		
+        if(isBlack(code)){
+            toast("请输入密码!");
+            return;
+        }
+        obj.Password = code;
+        ajaxGetUser(loginUrl,obj,function(ret,err) {
+            if (ret && ret.Result == 1) {
+                setUserInfo(ret);
+                ajaxGetWithProgress(getmainpage,{},function(ret,err){
+                    if(ret){
+                    	document.getElementById('phone').value = "";
+                    	document.getElementById('phone_pass').value = "";
+                        $api.setStorage("homeInfo",ret);
+                        api.execScript({
+                            name: "root",
+                            script: "reloadHtml()"
+                        });
+                        setTimeout(function(){
+                        	closeWin();
+                        },500)
+                    }else{
+                        setUserInfo("");
+                    }
+                });
+            }else if(ret && ret.Result == 0){
+            	toast(ret.Message);
+            }
+        })
+    };
+    /***********************点击登录**********************************/
+</script>
+</html>

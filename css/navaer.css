@@ -1,0 +1,88 @@
+@charset "utf-8";
+
+#headner-main-nav {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    position: relative;
+    z-index: 10000;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    /*-moz-box-shadow: 0px -4px 1px -1px #807b7b;
+    -webkit-box-shadow: 0px -4px 1px -1px #807b7b;
+    box-shadow: 0px 1px 5px 1px #807b7b;*/
+}
+
+@media all and (min-width: 100px) {
+    .ui-header .ui-btn-inner {
+        font-size: 13px;
+    }
+}
+
+@media all and (min-width: 350px) {
+    .ui-header .ui-btn-inner {
+        font-size: 15px;
+    }
+}
+
+#headner-main-nav #scroller {
+    border: inherit;
+    width: 100%;
+    height: 100%;
+    float: left;
+    padding: 0;
+}
+
+#headner-main-nav ul {
+    /*border: inherit;*/
+    list-style: none;
+    display: block;
+    float: left;
+    width: 100%;
+    height: 100%;
+    z-index: inherit;
+}
+
+#headner-main-nav li {
+    border: inherit;
+    display: block;
+    float: left;
+    height: 100%;
+    /*background-color: #B70F0F;*/
+    z-index: inherit;
+}
+
+    #headner-main-nav li a {
+        border: inherit;
+        color: #080505;
+        text-decoration: none;
+		font-size:12px;
+        text-align: center;
+        display: block;
+        outline: none;
+        width: 100%;
+        height: 100%;
+        z-index: inherit;
+    }
+
+#headner-main-nav .ui-nav-active {
+    color: #980808;
+    -moz-box-shadow: inset 0px -4px 1px -1px #980808;
+    -webkit-box-shadow: inset 0px -4px 1px -1px #980808;
+    box-shadow: inset 0px -4px 1px -1px #980808;
+    z-index: inherit;
+}
+
+#headner-main-nav #navshadow {
+    -moz-box-shadow: 0px 0px 30px 5px #828282;
+    -webkit-box-shadow: 0px 0px 30px 5px #828282;
+    box-shadow: 0px 0px 30px 5px #828282;
+}
+
+#headner-main-nav .ui-btn-inner {
+    padding: .75em 11px .5em;
+	line-height: 30px;
+}
